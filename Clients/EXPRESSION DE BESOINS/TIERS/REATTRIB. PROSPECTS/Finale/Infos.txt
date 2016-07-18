@@ -1,0 +1,5 @@
+Marche :
+update sab139.zclienA0 set CLIENAAGE = 5411, CLIENARES = 'RR1' where CLIENACLI = 0010000;
+
+Formule :
+=CONCATENER("update sab139.zclienA0 set CLIENAAGE = ";B3;", CLIENARES = '";C3;"' where CLIENACLI = ";A3;";")

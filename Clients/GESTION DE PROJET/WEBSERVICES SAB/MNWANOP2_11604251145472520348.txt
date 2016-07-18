@@ -1,0 +1,28 @@
+MNWANOP2  /RCRC/SABFIRME  /20348          Gestion des traitements batchs           BQ FIDUCIAL       DEPT REL CLI      DRC               DEPT REL CLI       12/04/2016       11:45:44     PAGE  0001    
+______________________________________________________________________________________________________________________________________________________________________________________________________  
+ Traitement  CLIPRO01    Intégration Flux Firme Prospects          ZXMNWPRO1   ZXMNWPRO1                            ANOMALIES NON BLOQUANTES                                                            
+______________________________________________________________________________________________________________________________________________________________________________________________________  
+ Message     F  00605440              0000004  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0605440                         1013B                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00605571              0000013  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0605571                         4312B                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00605871              0000022  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0605871                         4332A                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00605919              0000032  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0605919                         5610A                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00606174              0000041  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0606174                         5630Z                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00607601              0000050  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0607601                         6820B                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00611124              0000060  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0611124                         8690A                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00611604              0000070  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0611604                         2660Z                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00613176              0000080  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0613176                         8621Z                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00617718              0000089  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0617718                         4532Z                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00617757              0000099  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0617757                         4321A                                BAS5171 - Le secteur d'activité interne est incorrect                               
+ Message     F  00620287              0000108  20140520  11530500  CLIMAJ                                                                                                                               
+                                               0620287                         4623Z                                BAS5171 - Le secteur d'activité interne est incorrect                               

@@ -1,0 +1,10 @@
+﻿Ajouter un rôle sur BFI :
+	- Créer le rôle dans security.yml au bon niveau
+	- Ajouter les règles d'accès dans security.yml
+	- (optionnel selon cas) Gérer l'affichage des liens directs (menu, liens, etc.) frontoffice /vues
+		- Profil inférieur ou égal
+	- Modifier les vues de création/modification/liste d'utilisateur  (MonitorignBundle - view user_edit et user_new et notifications + Defaultcontrollers)
+	- Gérer traitements de création/modification/liste d'utilisateur
+	- Tester sur trois niveaux :
+		- Nouveau profil
+		- Profil supérieur

@@ -1,0 +1,2 @@
+update sab139.zclienA0 set CLIENARES = 'CC1' where CLIENACLI = '0952070';
+commit;
