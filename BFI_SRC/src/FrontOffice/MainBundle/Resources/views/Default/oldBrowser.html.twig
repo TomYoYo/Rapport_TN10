@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+{% block nav %}{% endblock %}
+{% block body %}
+<div class='notice-ie'>
+    <div class="notice-ie-header">
+        <h1>Votre navigateur n'est pas adapté</h1>
+    </div>
+    <div class="notice-ie-body">
+        <p>
+            <b>Attention</b>, le navigateur que vous utilisez n'est pas adapté à cet outil et doit être mis à jour.
+        </p>
+        <p>
+            Il vous est demandé d'utiliser l'un des navigateurs adaptés :
+        </p>
+        <ul>
+            <li>Microsoft Internet Explorer (version > 9)</li>
+            <li>Google Chrome</li>
+            <li>Mozilla Firefox</li>
+        </ul>
+        <p>
+            Si vous ne disposez d'aucun de ces navigateurs, contactez un administrateur pour son installation.
+        </p>
+        <p>
+            Merci de votre compréhension.
+        </p>
+    </div>
+</div>
+{% endblock %}

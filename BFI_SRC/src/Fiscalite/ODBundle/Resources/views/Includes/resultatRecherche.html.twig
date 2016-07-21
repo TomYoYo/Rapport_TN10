@@ -1,0 +1,78 @@
+<table class="table table-condensed table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Date de saisie</th>
+            <th>Saisisseur</th>
+            <th>Identifiant</th>
+            <th>Numéro de pièce</th>
+            <th>Code opération</th>
+            <th>Code évènement</th>
+            <th>Tiers</th>
+            <th>Statut</th>
+            <th>J. Comp.</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for operation in entities %}
+            <tr>
+                <td>{{ operation.dateSai|date("d/m/Y") }}</td>
+                <td>
+                    {{ operation.profil ?: operation.statut.idStatut ? 'Automatique' : '-' }}
+                </td>
+                <td>{{ operation.numPiece }}</td>
+                <td>{{ operation.numPieceTech ?: '-' }}</td>
+                <td>{{ operation.codeOpe }}</td>
+                <td>{{ operation.codeEve }}</td>
+                <td>{{ operation.tiers ?: '-' }}</td>
+                <td>{{ operation.statut }}</td>
+                <td>{{ operation.isComplementaryDay ? 'Oui' : 'Non' }}</td>
+                <td>
+                    {% if operation.statut.idStatut == 'SAI' or operation.statut.idStatut == 'ENR' or operation.statut.idStatut == 'VAL' %}
+                        <a href="{{ path('od_edit', { 'id': operation.numPiece }) }}">
+                            <img src="{{ asset('bundles/frontofficemain/images/edit.png') }}" width="30" alt="Modifier" title="Modifier" />
+                        </a>
+                    {% else %}
+                        <img style="opacity:0.4;filter:alpha(opacity=40);" src="{{ asset('bundles/frontofficemain/images/edit.png') }}" width="30px" alt="Modification impossible" title="Modification impossible" />
+                    {% endif %}
+                    <a href="{{ path('od_show', { 'id': operation.numPiece }) }}">
+                        <img src="{{ asset('bundles/frontofficemain/images/view.png') }}" width="30" alt="Détails" title="Voir les détails" />
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagerfanta">
+    {% if entities.haveToPaginate %}
+    {{ pagerfanta(entities, 'twitter_bootstrap3', {'prev_message':'&larr; Précédente', 'next_message':'Suivante &rarr;'}) }}
+    {% endif %}
+    <div class="formNumber">
+        <form id="paginNumber" action="{{ path(app.request.attributes.get('_route')) }}" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Résultats par page</label>
+                <div>
+                    <select id="numberPagination" class="form-control input-sm" name="number">
+                        <option value="5" {% if number is defined and number == 5 %} selected="selected" {% endif %}>5</option>
+                        <option value="10" {% if number is defined and number == 10 %} selected="selected" {% endif %}>10</option>
+                        <option value="15" {% if number is defined and number == 15 %} selected="selected" {% endif %}>15</option>
+                        <option value="20" {% if number is defined and (number == '' or number == 20) %} selected="selected" {% endif %}>20</option>
+                        <option value="30" {% if number is defined and number == 30 %} selected="selected" {% endif %}>30</option>
+                        <option value="50" {% if number is defined and number == 50 %} selected="selected" {% endif %}>50</option>
+                        <option value="100" {% if number is defined and number == 100 %} selected="selected" {% endif %}>100</option>
+                        <option value="200" {% if number is defined and number == 200 %} selected="selected" {% endif %}>200</option>
+                        <option value="300" {% if number is defined and number == 300 %} selected="selected" {% endif %}>300</option>
+                        <option value="500" {% if number is defined and number == 500 %} selected="selected" {% endif %}>500</option>
+                        <option value="700" {% if number is defined and number == 700 %} selected="selected" {% endif %}>700</option>
+                        <option value="999" {% if number is defined and number == 999 %} selected="selected" {% endif %}>999</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

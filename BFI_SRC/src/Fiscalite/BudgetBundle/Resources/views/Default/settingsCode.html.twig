@@ -1,0 +1,67 @@
+{% extends 'FiscaliteBudgetBundle::layout.html.twig' %}
+
+{% block title %}Contrôle budgétaire - Paramétrage des codes budgétaires{% endblock %}
+    
+{% block content %}
+    <h3>
+        Paramétrage du module de contrôles budgétaire - Codes budgétaires
+    </h3>
+
+    <h2>Codes à paramétrer</h2>
+    <table class="table text-center table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th class="text-center" width="40%">Code budgétaire SAB</th>
+            <th class="text-center" width="40%">Code budgétaire Firme</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for code in codes_not_set %}
+            <tr>
+                <td>{{code}}</td>
+                <td>
+                    <div class="col-md-4 col-md-offset-4">
+                        <input type="text" class="form-control" placeholder="Renseignez !" id="value-{{ code|trim }}" autocomplete="off" maxlength="5">
+                    </div>
+                </td>
+                <td>
+                    <span class="click-add" ref="code" id="btn-{{ code|trim }}" style="cursor:pointer;">Ajouter</span>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun code à paramétrer</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Codes paramétrés</h2>
+    <table class="table text-center table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th class="text-center" width="40%">Code budgétaire SAB</th>
+            <th class="text-center" width="40%">Code budgétaire Firme</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="body-list">
+        {% for code in codes_set %}
+            <tr>
+                <td>{{code.valueSab}}</td>
+                <td>{{code.valueFirme}}</td>
+                <td>
+                    <a href="{{ path('fiscalite_controle_budget_settings_edit', { 'id': code.id }) }}">
+                        <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier" title="Modifier" />
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun code paramétré</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

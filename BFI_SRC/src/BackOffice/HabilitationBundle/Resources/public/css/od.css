@@ -1,0 +1,184 @@
+/*
+    Created on : 29 janv. 2014, 09:38:16
+    Edited on  : 11 fev. 2014
+    Author     : j.david
+*/
+
+a:hover{
+    text-decoration: none;
+}
+.btn:hover{
+    background-position: 0;
+}
+p.generation_cre{
+    color:#F78181;
+    font-style:italic;
+    text-align:right;
+    font-size:10px;
+}
+form#saisieOD{
+    font-size: 12px
+}
+table.bandeauSaisie{
+    margin:auto;
+    width:980px;
+}
+table.bandeauSaisie td{
+    padding:5px;
+    vertical-align:top;
+}
+table.bandeauSaisie label.control-label{
+    text-align:left;
+}
+table.bandeauSaisie input.false-field{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    cursor:default;
+}
+.tableauScrollable {
+    height:350px;
+    overflow: auto;
+}
+.tableauScrollable input{
+    width: 100%;
+}
+.tableauScrollable input.false-field{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    width: 25px;
+    cursor:default;
+}
+.tableauScrollable input.montantDeb,
+.tableauScrollable input.montantCre,
+input#totalCre,
+input#totalDeb{
+    text-align:right;
+    width:95px;
+}
+.tableauScrollable input.error{
+    border-color:#A94442;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+#tableauSaisie{
+    width: 100%;
+}
+#tableauSaisie>div {
+  display: inline-table;
+  width: 564px;
+}
+#tableauSaisie>div:first-child{
+    margin-right:7px;
+}
+#tableauSaisie>div h3{
+    margin-left: 20px
+}
+.panel-footer#totalTableDeb{
+    background-color:#F2DEDE;
+}
+.panel-footer#totalTableCre{
+    background-color:#DFF0D8;
+}
+#totalTableDeb table, #totalTableCre table{
+    background-color:transparent !important;
+}
+kbd, .key {
+    display: inline;
+    display: inline-block;
+    min-width: 1em;
+    padding: .2em .3em;
+    font: normal 25px "Lucida Grande", Lucida, Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
+    border: none;
+    cursor: default;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: rgb(250, 250, 250);
+    background: -moz-linear-gradient(top, rgb(210, 210, 210), rgb(255, 255, 255));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(210, 210, 210)), to(rgb(255, 255, 255)));
+    color:  rgb(50, 50, 50);
+    text-shadow: 0 0 2px rgb(255, 255, 255);
+    -moz-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+    -webkit-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+    box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+}
+kbd[title], .key[title] {
+    cursor: help;
+}
+.montantShow {
+    text-align:right;
+    padding-right:30px !important;
+}
+form.falseForm input[type=submit]{
+    background:transparent;
+    border:none;
+    clear: both;
+    color: #333333;
+    display: block;
+    font-weight: normal;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+}
+form.falseForm:hover{
+    background-color: #F5F5F5;
+    background-image: linear-gradient(to bottom, #F5F5F5 0px, #E8E8E8 100%);
+    background-repeat: repeat-x;
+    color: #262626;
+    text-decoration: none;
+}
+.breadcrumb{
+    margin-bottom: 10px;
+}
+.breadcrumb >  li:not(.active):after {
+  content: " /";
+  padding:0 5px;
+}
+.breadcrumb > li + li:before {
+  content: "";
+}
+.breadcrumb > .active {
+  color: #777777;
+  font-size: 28px;
+}
+.pagerfanta ul.pagination{
+    float:left;
+}
+.pagerfanta div.formNumber{
+    float:right;
+    margin:20px 0;
+}
+.pagerfanta div.formNumber .form-group{
+    margin:0;
+}
+.pagerfanta div.formNumber .form-group label{
+    width:175px;
+}
+.pagerfanta div.formNumber .form-group div{
+    width:70px;
+    float:right;
+}
+
+.ui-autocomplete {
+    max-height: 400px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+.ui-accordion-content {
+    height: 400px;
+}
+
+.accordion_small
+{
+    height: 50px;
+}

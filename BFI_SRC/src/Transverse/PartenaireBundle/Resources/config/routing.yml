@@ -1,0 +1,107 @@
+
+transverse_partenaire_spoolalert:
+    pattern:  /spoolalert
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:index }
+    requirements:
+        _method:  GET
+
+transverse_partenaire_spoolalert_consultation:
+    pattern:  /spoolalert/consultation
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:consultation }
+
+
+transverse_partenaire_spoolalert_consultation_show:
+    pattern:  /spoolalert/consultation/{id}
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:spoolshow }
+    requirements:
+            _method:  GET  
+
+        
+transverse_partenaire_spoolalert_administration:
+    pattern:  /spoolalert/administration
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:administration }
+    requirements:
+        _method:  GET
+
+
+
+transverse_partenaire_spoolalert_administration_new:
+    path:      /spoolalert/administration/new
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:new }
+ 
+            
+transverse_partenaire_spoolalert_administration_show:
+    pattern:  /spoolalert/administration/show/{id}
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:show }
+    requirements:
+            _method:  GET  
+     
+transverse_partenaire_spoolalert_administration_edit:
+    path:      /spoolalert/administration/{id}/edit
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:edit }
+ 
+
+transverse_partenaire_spoolalert_administration_delete:
+    path:      /spoolalert/administration/delete/{id}
+    defaults: { _controller: TransversePartenaireBundle:Spoolalert:delete }
+
+    
+transverse_partenaire_fluxCB:
+    path:  /fluxCB
+    defaults: { _controller: TransversePartenaireBundle:FluxCB:index }
+
+
+transverse_partenaire_fluxCB_administration:
+    pattern:  /fluxCB/administration
+    defaults: { _controller: TransversePartenaireBundle:FluxCB:administration }
+
+
+transverse_partenaire_fluxCB_administration_delete:
+    path:      /fluxCB/administration/delete/{id}
+    defaults: { _controller: TransversePartenaireBundle:FluxCB:delete }
+
+transverse_partenaire_fluxCB_test:
+    path:  /fluxCB/test
+    defaults: { _controller: TransversePartenaireBundle:FluxCB:test }
+
+
+transverse_partenaire_fluxCB_consultation:
+    path:  /fluxCB/consultation
+    defaults: { _controller: TransversePartenaireBundle:FluxCB:consultation }
+
+
+transverse_partenaire_fluxCB_consultation_show:
+    pattern:  /fluxCB/consultation/{id}
+    defaults: { _controller: TransversePartenaireBundle:FluxCB:painshow }
+    requirements:
+            _method:  GET
+
+
+transverse_partenaire_alerteImpaye:
+    path:  /OI25
+    defaults: { _controller: TransversePartenaireBundle:AlerteImpaye:index }
+
+
+transverse_partenaire_alerteImpaye_administration:
+    pattern:  /OI25/administration
+    defaults: { _controller: TransversePartenaireBundle:AlerteImpaye:administration }
+
+
+transverse_partenaire_alerteImpaye_consultation:
+    path:  /OI25/consultation
+    defaults: { _controller: TransversePartenaireBundle:AlerteImpaye:consultation }
+
+transverse_partenaire_alerteImpaye_administration_delete:
+    path:      /OI25/administration/delete/{id}
+    defaults: { _controller: TransversePartenaireBundle:AlerteImpaye:delete }
+
+transverse_partenaire_alerteImpaye_test:
+    path:  /OI25/test
+    defaults: { _controller: TransversePartenaireBundle:AlerteImpaye:test }
+
+
+transverse_partenaire_alerteImpaye_consultation_show:
+    pattern:  /OI25/consultation/{id}
+    defaults: { _controller: TransversePartenaireBundle:AlerteImpaye:show }
+    requirements:
+            _method:  GET

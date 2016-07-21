@@ -1,0 +1,22 @@
+{% set tabSort = sort|split('-', 2) %}
+
+{% if tabSort.1 is defined and tabSort.1 == "asc" %}
+    {% set sign = "&and;" %}
+    {% if tabSort.0 is defined and tabSort.0 == column %}
+        {% set sortParam = column~'-desc' %}
+    {% else %}
+        {% set sortParam = column~'-asc' %}
+    {% endif %}
+{% else %}
+    {% set sign = "&or;" %}
+    {% set sortParam = column~'-asc' %}
+{% endif %}
+
+<th>
+    {% if noSort is not defined %}<a href="{{ path(app.request.attributes.get('_route'), {'sort':sortParam}) }}">{% endif %}
+        {% if tabSort.0 is defined and tabSort.0 == column %}
+        <small>{{ sign|raw }}</small>
+        {% endif %}
+        {{ name }}
+    {% if noSort is not defined %}</a>{% endif %}
+</th>

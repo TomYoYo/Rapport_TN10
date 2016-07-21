@@ -1,0 +1,27 @@
+
+
+{% block form_row %}
+<div class="form-group">
+    {{ form_label(form, null, {'label_attr' : {'class':'col-sm-4 control-label'}}) }}
+    <div class="col-sm-7">
+        {{ form_widget(form, {'attr' : {'class':'form-control'}}) }}
+    </div>
+</div>
+{% endblock form_row %}
+
+
+{% block choice_widget %}
+    {% spaceless %}
+        <select class="form-control" {{ block('widget_attributes') }}>
+            {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('choice_widget_options') -}}
+            {% if choices|length > 0 and separator is not none -%}
+            <option disabled="disabled">{{ separator }}</option>
+            {%- endif %}
+            {%- endif -%}
+            {% set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    {% endspaceless %}
+{% endblock %}

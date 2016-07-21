@@ -1,0 +1,92 @@
+{% extends 'EditiqueMasterBundle::layout.html.twig' %}
+
+{% block content %}
+    <h3>Documents</h3>
+    <div class="panel panel-default monitoFiltre">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="text-align:center;">Rechercher un document</h3>
+        </div>
+        <div class="panel-body">
+            <form action="{{ path('editique_releves_firme_search') }}" method="POST" class="form-horizontal" role="form">
+                <table class="bandeauSaisie" style="width:95%">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Numéro client</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control input-sm" required="required" type="text" {% if datas.numClient is defined %} value="{{ datas.numClient }}" {% endif %} autocomplete="off" name="search[numClient]" placeholder="Numéro client">
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Numéro de compte</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control input-sm" type="text" {% if datas.numCpt is defined %} value="{{ datas.numCpt }}" {% endif %} autocomplete="off" name="search[numCpt]" placeholder="Numéro de compte">
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-sm">Rechercher</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    {% if entities %}
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Date de génération</th>
+                <th>Type</th>
+                <th>Numéro client</th>
+                <th>Numéro de compte</th>
+                <th>Document</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for document in entities %}
+            <tr>
+                <td>{{document.dtGeneration|date('d/m/Y')}}</td>
+                <td>{{document.typeDocToString}}</td>
+                <td>{{document.idClient}}</td>
+                <td>{{document.numCpt}}</td>
+                <td><a href="{{ path('editique_pdf', { 'id': document.id }) }}"><img src="{{ asset('bundles/backofficemonitoring/images/pdf.jpg') }}" width="25" alt="PDF" title="Télécharger le PDF" /></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {% if entities.haveToPaginate %}
+        {{ pagerfanta(entities, 'twitter_bootstrap3', {'prev_message':'&larr; Précédente', 'next_message':'Suivante &rarr;'}) }}
+        {% endif %}
+    </div>
+    {% else %}
+    <blockquote>
+        <p>Aucun document</p>
+        {% if datas %}
+        <small>Votre recherche n'a retourné aucun résultat.</small>
+        {% else %}
+        <small>Vous n'avez pas les autorisations nécessaires pour afficher des documents.</small>
+        {% endif %}
+    </blockquote>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

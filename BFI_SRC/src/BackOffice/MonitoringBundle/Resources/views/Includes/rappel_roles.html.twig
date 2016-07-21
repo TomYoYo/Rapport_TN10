@@ -1,0 +1,83 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Rappel des droits utilisateur</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-condensed table-striped table-hover" style="width:95%;margin:auto;">
+                <thead>
+                    <tr>
+                        <th style="width:35%;">Rôle</th>
+                        <th style="width:65%;">Droits accordés</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="label label-danger">Développeur</span></td>
+                        <td>
+                            <div>Il englobe l'ensemble des droits des autres groupes.</div>
+                            <div>Il a également un accès spécifique aux outils de développement.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-warning">Administrateur</span></td>
+                        <td>
+                            <div>Il englobe l'ensemble des droits des groupes inférieurs.</div>
+                            <div>Il a un accès spécifique au Back-Office.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-primary">Comptable valideur</span></td>
+                        <td>Il a les mêmes accès qu'un "comptable" mais peut aussi valider les opérations des autres collaborateurs.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-primary">Comptable</span></td>
+                        <td>Il a un accès spécifique au module OD et à la consultation des états réglementaires.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-warning">Assistance</span></td>
+                        <td>Il a les mêmes droits qu'un administrateur, modules de saisie exclus.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-primary">Contrôleur</span></td>
+                        <td>Il a un accès spécifique au module de contrôle budgétaire.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-info">DRC</span></td>
+                        <td>Il a un accès spécifique aux module éditique (consultation et génération).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-info">Réglementaire</span></td>
+                        <td>Il a un accès spécifique aux module de consultation des états réglementaires.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-info">Commercial</span></td>
+                        <td>Il a un accès spécifique aux messages commerciaux.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-success">Prestataire SAB</span></td>
+                        <td>Il a un accès spécifique aux logs SabCore.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-success">Client Firme</span></td>
+                        <td>Il a un accès spécifique à la consultation des relevés Firme.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-success">Back-Office</span></td>
+                        <td>Il a un accès spécifique aux fichiers transverses.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-default">Aucun</span></td>
+                        <td>Il n'a accès à aucune partie.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,52 @@
+{% set marginLigne = 0.3 %}
+{% set marginLeft = 160 %}
+
+<div text-align="center" margin-top="10" font-size="14pt" font-style="bold">
+    {{oCredit.titre ?: 'TITRE'}}
+</div>
+<div text-align="center" font-size="12pt" font-style="bold">
+    {{oCredit.titre2 ?: 'TITRE'}}
+</div>
+
+<div position="absolute" top="251" left="35">
+    {{oCredit.libelleTauxNominal}}
+</div>
+<div position="absolute" top="260" left="35">
+    {{oCredit.libelleTEG}}
+</div>
+
+<div margin-left="330" margin-top="-3" height="60" font-size="9pt" font-style="bold">
+    {{oCredit.denomitationComplete()}}<br/><br/>
+    {% if oCredit.adresse1|trim %}{{oCredit.adresse1}}<br/>{% endif %}
+    {% if oCredit.adresse2|trim %}{{oCredit.adresse2}}<br/>{% endif %}
+    {% if oCredit.adresse3|trim %}{{oCredit.adresse3}}<br/>{% endif %}
+    {{oCredit.codePostal}} {{oCredit.ville}}
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="24">
+    {{oCredit.idClient}} - {{oCredit.denomitationComplete}}
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="{{marginLigne}}">
+    {{oCredit.numCredit}}
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="{{marginLigne}}">
+    {{oCredit.montantPret|number_format(2, ',', ' ')}} euros
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="{{marginLigne}}">
+    {{oCredit.dureeMois}}
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="{{marginLigne}}" height="8">
+    {{oCredit.taux ?: ''}}
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="{{marginLigne}}" height="9">
+    {{oCredit.TAEG ?: ''}}
+</div>
+
+<div margin-left="{{marginLeft}}" margin-top="{{marginLigne}}">
+    {{ oCredit.dateEdition }}
+</div>

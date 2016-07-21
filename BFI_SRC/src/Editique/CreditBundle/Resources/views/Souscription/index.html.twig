@@ -1,0 +1,70 @@
+{% extends 'EditiqueMasterBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Souscription de crédit {% endblock %}
+
+{% block content %}
+    <h3>Souscription de crédit</h3>
+    <div class="panel panel-default monitoFiltre">
+        <div class="panel-heading text-center">
+            <h3 class="panel-title">Rechercher un crédit</h3>
+        </div>
+        <div class="panel-body" id="filtreLog">
+            <form id="saisieOD" action="{{ path('editique_souscription_credit') }}" method="POST" class="form-horizontal" role="form">
+                <table class="bandeauSaisie" style="width:95%">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Numéro de dossier</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control input-sm" type="text" {% if numDos is defined %} value="{{ numDos }}" {% endif %} autocomplete="off" name="numDos" placeholder="Numéro de dossier">
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    {% if numDos is not null %}
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Numéro de dossier</th>
+                    <th>Montant total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in entities %}
+                <tr>
+                    <td>{{e.numDos}}</td>
+                    <td>{{e.montantPret}}</td>
+                    <td><a href="{{ path('editique_souscription_edit', {'id' : e.id}) }}">Editer</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Aucun crédit ne correspond à vos critères de recherche.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

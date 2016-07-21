@@ -1,0 +1,94 @@
+<div class="tab-pane fade" id="fiscalite">
+    <h3 class="head text-center">Comptabilité</h3>
+    <p class="narrow text-center">
+        Le module Comptabilité vous permet d'enregistrer des opérations et des mouvements comptables pour une intégration quotidienne sur SAB, de récupérer des états réglementaires et de contrôler le budget.
+    </p>
+    
+    <div class="list-links">
+        {% if is_granted('ROLE_COMPTABLE') %}
+        <div class="col-md-6">
+            <a href="{{ path('od_new') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-edit glyphicon-lg"></span>
+                    </div>
+                    <h4>Saisie d'une Opération Diverse</h4>
+                    <p>
+                        Saisissez entièrement une Opération Diverse en y ajoutant les informations générales et les mouvements liés.
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{{ path('od_listing') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-search glyphicon-lg"></span>
+                    </div>
+                    <h4>Consultation des Opérations Diverses</h4>
+                    <p>
+                        Consultez, gérez et modifiez l'ensemble des Opérations créées sur BFI.
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{{ path('od_export') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-export glyphicon-lg"></span>
+                    </div>
+                    <h4>Export des Opérations Diverses</h4>
+                    <p>
+                        Exportez et consultez les Opérations Diverses disponibles.
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{{ path('od_rapprochement') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-random glyphicon-lg"></span>
+                    </div>
+                    <h4>Rapprochement des Opérations Diverses</h4>
+                    <p>
+                        Vérifier si les opérations BFI coïncident sur SAB
+                    </p>
+                </div>
+            </a>
+        </div>        
+        {% endif %}
+        {% if is_granted('ROLE_REGLEMENTAIRE') %}
+        <div class="col-md-6">
+            <a href="{{ path('fiscalite_etats') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-compressed glyphicon-lg"></span>
+                    </div>
+                    <h4>Consultation des Etats Réglementaires</h4>
+                    <p>
+                        Téléchargez et consultez les états réglementaires à la demande.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+        {% if is_granted('ROLE_CONTROLEUR') %}
+        <div class="col-md-6">
+            <a href="{{ path('fiscalite_controle_budget') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-usd glyphicon-lg"></span>
+                    </div>
+                    <h4>Contrôle budgétaire</h4>
+                    <p>
+                        Exportez et consultez le contrôle budgétaire à une date donnée.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>

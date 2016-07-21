@@ -1,0 +1,51 @@
+<div margin-top="213" margin-left="11" height="123">
+    {% set firstLine = 1 %}
+    {% for ligne_id in oSouscription.identification %}
+        {% if firstLine %}
+        <span font-style="bold" font-size="11">{{ ligne_id }} <br/></span>
+        {% if ligne_id != '' %}{% set firstLine = 0 %}{% endif %}
+        {% else %}
+        <span>{{ ligne_id }} <br/></span>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div margin-left="168">
+    <div margin-top="58">
+        {{ oSouscription.idDossier }}
+    </div>
+    <div margin-top="9">
+        {{ oSouscription.cptSupport }}
+    </div>
+    <div margin-top="5">
+        {{ oSouscription.montantPret.0 }} {{ oSouscription.montantPret.1 }}
+    </div>
+    <div margin-top="5">
+        {{ oSouscription.duree ?: '-' }}
+    </div>
+    <div margin-top="9">
+        {{ oSouscription.periodeInteret ?: '-'}}
+    </div>
+    <div margin-top="17">
+        {{ oSouscription.dtDerEcheance ?: '-' }}
+    </div>
+    <div margin-top="15">
+        {{ oSouscription.tauxPret ?: '-' }}
+    </div>
+    <div margin-top="15">
+        {{ oSouscription.nbEcheances ?: '-' }}
+    </div>
+    <div margin-top="10">
+        {{ oSouscription.comeng1 ?: '-' }}
+    </div>
+    <div margin-top="6" height="35">
+        {{ oSouscription.assurances.0 }} <br/>
+        {{ oSouscription.assurances.1 }} <br/>
+        {{ oSouscription.assurances.2 }} <br/>
+        {{ oSouscription.assurances.3 }} <br/>
+        {{ oSouscription.assurances.4 }}
+    </div>
+    <div margin-top="6">
+        {{ oSouscription.teg }}
+    </div>
+</div>

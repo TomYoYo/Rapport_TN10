@@ -1,0 +1,75 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+
+{% block title %} Liste des spools {% endblock %}
+
+{% block content %}
+
+    <h3>
+        Liste des spools au {{ date_format_normal }}
+    </h3>
+<form id="dateSpool" action="{{ path('transverse_partenaire_spoolalert_consultation') }}" method="POST" class="form-horizontal" role="form">    
+<div class="row">
+            <div class="form-group">
+            <label class="col-sm-4 control-label">Trouver les spools du : </label>
+                <div class="col-sm-2">
+                    <input class="form-control input-sm datepicker"  type="text"  autocomplete="off" name="search[dateSpool]"  placeholder="Date" >
+                </div>
+                <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+            </div>
+</div>  
+    
+</form>
+
+    
+{% set divloop = 'end' %}     
+{% set ok = 'no' %} 
+{% for parametrage in parametrages %}
+
+    {% for role in parametrage.roles %}
+        {% if is_granted(role.role)  %}
+            {% set ok = 'ok' %}       
+        {% endif %}
+    {% endfor %}
+    {% if ok == 'ok'  %}
+        {% for spool in parametrage.spools if spool.datespool == dateSpool %}
+            {% if loop.first %}
+                <i class="glyphicon glyphicon-chevron-down"></i>
+                <a class="" role="button" data-toggle="collapse" href="#{{ parametrage.id }}" aria-expanded="false" aria-controls="{{ parametrage.id }}">
+                <b>{{ parametrage.prefixeSpool }}</b>
+                </a><br /><div class="collapse" id="{{ parametrage.id }}"><table class="table table-striped">
+                {% set divloop = 'divok' %}  
+            {% endif %}   
+            <tr>
+                <td><a href='{{ path('transverse_partenaire_spoolalert_consultation') }}/{{ spool.id }}'>{{ spool.nomSpool }}</a></td>
+                <td>
+                    {% set bar = spool.nomSpool|split(dateSpool) %} 
+                    {% set heure = bar[1]|split(0, 1) %}
+                    {{heure[0]}}{{heure[1]}}h{{heure[2]}}{{heure[3]}} 
+                </td>           
+                {% set test = spool.nomSpool|split('', 4) %}
+            </tr>
+        {% endfor %} 
+        {% if divloop == 'divok'  %}</table></div>{% endif %}
+    {% endif %}
+    {% set ok = 'no' %}   
+    {% set divloop = 'end' %}  
+{% endfor %}
+
+    
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+
+    %}
+    <script>
+        $('.collapse').collapse();
+    </script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+

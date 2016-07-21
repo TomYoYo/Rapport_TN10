@@ -1,0 +1,65 @@
+{% extends 'FiscaliteODBundle::layout.html.twig' %}
+
+{% block title %} Saisie d'une Opération Diverse {% endblock %}
+
+{% block content %}
+    <h3>
+        Saisie d'une Opération Diverse
+        {% include 'FiscaliteODBundle:Includes:aide.html.twig' %}
+    </h3>
+
+    <p class="generation_cre">Heure de génération automatique du CRE Journalier : {{ cre_generation }}</p>
+    <form id="saisieOD" action="{{ path('od_create') }}" method="POST" class="form-horizontal" role="form">
+        {% include 'FiscaliteODBundle:Includes:bandeauSaisie.html.twig' %}
+
+        {% include 'FiscaliteODBundle:Includes:tableauSaisie.html.twig' %}
+    </form>
+
+    <!-- Modal -->
+    {% include 'FiscaliteODBundle:Includes:raccourcis.html.twig' %}
+    {% include 'FiscaliteODBundle:Includes:listeCompte.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        // Alerte si l'utilisateur quitte la page en cours de saisie
+        var formHasChanged  = false;
+        var submitted       = false;
+
+        $(document).on('change', 'form#saisieOD input, form#saisieOD select, form#saisieOD textarea', function () {
+            formHasChanged = true;
+        });
+
+        $(document).ready(function () {
+            window.onbeforeunload = function (e) {
+                if (formHasChanged && !submitted) {
+                    var message = "You have not saved your changes.", e = e || window.event;
+                    if (e) {
+                        e.returnValue = message;
+                    }
+                    return message;
+                }
+            };
+            $("form").submit(function() {
+                submitted = true;
+            });
+            $( ".datepicker" ).datepicker({
+                 dateFormat: "dd/mm/yy",
+                 dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                 dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                 dayNamesShort: [ "Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ] ,
+                 firstDay: 1,
+                 monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+                 monthNamesShort: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec" ]
+             });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+fiscalite_controle_budget:
+    path:  /controle-budgetaire
+    defaults: { _controller: FiscaliteBudgetBundle:Default:index }
+    
+fiscalite_controle_budget_submit:
+    path:  /controle-budgetaire/submit
+    defaults: { _controller: FiscaliteBudgetBundle:Default:submit }
+
+fiscalite_controle_budget_settings:
+    path:  /controle-budgetaire/settings
+    defaults: { _controller: FiscaliteBudgetBundle:Default:settings }
+
+fiscalite_controle_budget_settings_code:
+    path:  /controle-budgetaire/settings/code-budgetaire
+    defaults: { _controller: FiscaliteBudgetBundle:Default:settingsCode }
+
+fiscalite_controle_budget_settings_nature:
+    path:  /controle-budgetaire/settings/nature-budgetaire
+    defaults: { _controller: FiscaliteBudgetBundle:Default:settingsNature }
+
+fiscalite_controle_budget_settings_edit:
+    path:  /controle-budgetaire/settings/{id}/edit
+    defaults: { _controller: FiscaliteBudgetBundle:Default:settingsEdit }
+
+fiscalite_controle_budget_settings_update:
+    path:  /controle-budgetaire/settings/{id}/update
+    defaults: { _controller: FiscaliteBudgetBundle:Default:settingsUpdate }
+
+fiscalite_controle_budget_settings_add:
+    path:  /controle-budgetaire/settings/ajax/add-setting
+    defaults: { _controller: FiscaliteBudgetBundle:Default:ajaxAddSetting }

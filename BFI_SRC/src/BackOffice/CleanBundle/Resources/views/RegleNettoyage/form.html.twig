@@ -1,0 +1,45 @@
+
+{% form_theme form 'BackOfficeCleanBundle:Form:fields.html.twig' %}
+
+
+{{ form_start(form, {'attr' : {'class' : 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
+
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Origine</h4>
+            {{ form_row(form.originServer) }}
+            {{ form_row(form.originDir) }}
+        </div>
+
+        <div class="col-md-2">
+            <h4>Action</h4>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    {{ form_widget(form.action) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Conditions</h4>
+            {{ form_row(form.sousDossier) }}
+            {{ form_row(form.age) }}
+        </div>
+
+        <div class="col-md-3">
+            <h4>Destination</h4>
+            {{ form_row(form.destinationServer) }}
+            Ps : la destination reprend l'arbo de l'origine
+        </div>
+
+        {{ form_widget(form._token) }}
+
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+
+{{ form_end(form) }}
+

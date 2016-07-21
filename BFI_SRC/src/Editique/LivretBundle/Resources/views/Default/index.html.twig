@@ -1,0 +1,28 @@
+{% extends 'EditiqueMasterBundle::layout_test.html.twig' %}
+
+{% block content %}
+    <div style="margin:20px">
+        <div class="page-header">
+            <h1>Interface de test Editique Livret</h1>
+        </div>
+
+        <div class="well" style="width:50%; display: inline-block">
+            <form action="." method="post" class="form-horizontal">
+
+                <label for="file">Cas de test</label>
+                <select name="file" id="file" class="form-control">
+                    <option value="6549216554">Erreur</option>
+                    <option value="38">LVA - Fixe</option>
+                    <!--<option disabled="disabled">LVA - Progressif</option>-->
+                    <option value="46">LDD - Fixe</option>
+                    <!--<option disabled="disabled">LDD - Progressif</option>-->
+                    <option value="22">CSL - Fixe</option>
+                    <!--<option disabled="disabled">CSL - Progressif</option>-->
+                </select>
+
+                <br>
+                <button class="btn btn-primary">Go </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

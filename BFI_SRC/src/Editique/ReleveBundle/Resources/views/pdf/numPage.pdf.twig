@@ -1,0 +1,19 @@
+{% set numPageMarginLeft = 420 %}
+
+{% if numPage < 10 %} 
+    {% set numPage = '00'~numPage%}
+{% else %}
+    {% set numPage = '0'~numPage%}
+{% endif %}
+
+{% if oReleve.nbPage|length < 2 %} 
+    {% set nbPage = '00'~oReleve.nbPage%}
+{% elseif oReleve.nbPage|length < 3 %}
+    {% set nbPage = '0'~oReleve.nbPage%}
+{% else %}
+    {% set nbPage = oReleve.nbPage%}
+{% endif %}
+
+<div text-align="right" margin-top="46px">
+    Page {{numPage}} sur {{nbPage}} 
+</div>

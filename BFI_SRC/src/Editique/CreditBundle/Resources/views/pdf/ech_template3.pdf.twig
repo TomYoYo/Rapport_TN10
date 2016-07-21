@@ -1,0 +1,11 @@
+<table margin-top="55" width="100%" height="872px">
+    {% for i,echeance in tabEcheance|slice(sliceValues['start'], sliceValues['length']) %}
+        {% if colorLineOpe == '#F8E9EB' %}
+            {% set colorLineOpe = 'white'%}
+        {% else %}
+            {% set colorLineOpe = '#F8E9EB'%}
+        {% endif %}
+
+        {% include 'EditiqueCreditBundle:pdf:ech_ligne.pdf.twig' %}
+    {% endfor %}
+</table>

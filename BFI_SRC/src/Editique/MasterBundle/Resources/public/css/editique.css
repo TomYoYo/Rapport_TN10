@@ -1,0 +1,42 @@
+h1.specified{
+    display: inline-block;
+    margin: 30px 40px;
+    vertical-align: top;
+    width: 30%;
+}
+.panel.panel-danger {
+    width:50%;
+    display: inline-block;
+}
+.well.specified{
+    width:590px;
+    margin:auto;
+}
+button{
+    margin-left: 15px;
+}
+ul{
+    margin-top:20px;
+    margin-left:100px;
+}
+ul.nav-js{
+    margin-top:inherit;
+    margin-left:inherit;
+}
+table td{
+    vertical-align:middle !important;
+}
+.breadcrumb{
+    margin-bottom: 10px;
+}
+.breadcrumb >  li:not(.active):after {
+  content: " /";
+  padding:0 5px;
+}
+.breadcrumb > li + li:before {
+  content: "";
+}
+.breadcrumb > .active {
+  color: #777777;
+  font-size: 28px;
+}

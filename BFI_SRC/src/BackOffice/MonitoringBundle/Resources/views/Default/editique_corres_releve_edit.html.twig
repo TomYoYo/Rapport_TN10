@@ -1,0 +1,64 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Modification d'une correspondance de relevé{% endblock %}
+
+{% block content %}
+    <h3>Modification d'une correspondance de relevé</h3>
+    <div class="well">
+        <form action="{{ path('back_office_monitoring_editique_correspondance_releve_update', {'id':mapping.id}) }}" method="POST" class="form-horizontal" role="form">
+            <table class="bandeauSaisie" style="width:95%">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Libellé</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" type="text" placeholder="Libellé du compte" autocomplete="off" value="{{ mapping.libelle }}" name="mapping[libelle]">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Type</label>
+                            <div class="col-sm-6">
+                                <select class="form-control input-sm" name="mapping[type]">
+                                    <option></option>
+                                    <option value="COPRO" {% if mapping.type == 'COPRO' %} selected="selected" {% endif %}>Courant Pro.</option>
+                                    <option value="COPAR" {% if mapping.type == 'COPAR' %} selected="selected" {% endif %}>Courant Part.</option>
+                                    <option value="EPARG" {% if mapping.type == 'EPARG' %} selected="selected" {% endif %}>Epargne</option>
+                                    <option value="NOTRA" {% if mapping.type == 'NOTRA' %} selected="selected" {% endif %}>Non traité</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+<script>
+    $(document).ready(function(){
+        $('#addLine').click(function(e){
+            e.preventDefault();
+
+            var field = $('table tr:first');
+            var field_new = field.clone();
+
+            field_new.find('input').val('');
+            $('table').append(field_new);
+
+            return false;
+        });
+    });
+</script>
+{% endblock %}

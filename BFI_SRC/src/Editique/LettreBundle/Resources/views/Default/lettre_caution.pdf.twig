@@ -1,0 +1,13 @@
+<pdf>
+    <dynamic-page document-template="{{template}}" font-size="10">
+    {% if caution.type == "CRE_FIX" %}
+        {% include 'EditiqueLettreBundle:Default:lettre_caution_fix.pdf.twig' %}
+    {% elseif caution.type == "CRE_VAR" %}
+        {% include 'EditiqueLettreBundle:Default:lettre_caution_var.pdf.twig' %}
+    {% elseif caution.type == "OUV" %}
+        {% include 'EditiqueLettreBundle:Default:lettre_caution_ouv.pdf.twig' %}
+    {% elseif caution.type == "ENG" %}
+        {% include 'EditiqueLettreBundle:Default:lettre_caution_eng.pdf.twig' %}
+    {% endif %}
+    </dynamic-page>
+</pdf>

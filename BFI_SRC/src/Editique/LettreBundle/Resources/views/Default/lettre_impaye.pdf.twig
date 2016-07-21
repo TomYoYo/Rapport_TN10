@@ -1,0 +1,53 @@
+{% set heightAdr = '16px' %}
+
+<pdf>
+    <dynamic-page document-template="{{templates.page1}}" font-size="11">
+        <div margin-left="401px" margin-top="103px" height="88" font-size="11pt">
+            <div>
+                <div height='{{heightAdr}}' font-style="bold">
+                    {{ lettre.raisonSociale1 ?: '-' }} {{ lettre.raisonSociale2 }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ lettre.adresseFinale[0] }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ lettre.adresseFinale[1] }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ lettre.adresseFinale[2] }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ lettre.adresseFinale[3] }}
+                </div>
+            </div>
+        </div>
+
+        <div margin-left="471px" margin-top="60px">
+            <div>
+                {{ 'now'|date('d/m/Y') }}
+            </div>
+        </div>
+        
+        
+        <div margin-left="125px" margin-top="67px">
+            <table>
+                <tr>
+                    <td border-type="none" width="174px">{{ entity.numCompte }}</td>
+                    <td border-type="none">{{ entity.numDossier }} - {{ entity.numPret }}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div margin-left="463px" margin-top="124px" text-align="right" width="76px">
+            <div>
+                {{ entity.montantEch }} €,
+            </div>
+        </div>
+        
+        <div margin-left="108px">
+            <div>
+                {{ entity.dateEch }}
+            </div>
+        </div>
+    </dynamic-page>
+</pdf>

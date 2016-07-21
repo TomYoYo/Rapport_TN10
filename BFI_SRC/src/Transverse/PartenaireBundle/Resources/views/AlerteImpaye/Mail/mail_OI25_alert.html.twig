@@ -1,0 +1,125 @@
+Bonjour<br /><br />
+
+Le CMCIC a généré un fichier OI25 <b>{{ nomFichier }}</b> avec des opérations impayés
+<br /><br />
+
+Veuillez-vous connecter sur le lien ci-dessous pour visualiser le fichier :
+<br />   
+<a href='{{ url('transverse_partenaire_alerteImpaye_consultation') }}/{{ idOI25_01 }}'>{{ nomFichier }} </a>
+<br />
+<br />
+Tableau récapitulatif du fichier OI25 : <br />
+
+{% set bardate =  Oi25s.dateJourneeEchange|split('', 2) %}
+Au {{bardate[3]}}/{{bardate[2]}}/{{bardate[0]}}{{bardate[1]}} :
+
+<br />
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>typeEvenement</th>
+            <th>caracteristiqueEvenement</th>
+            <th>typeTransaction</th>
+            <th>sensEvenement</th>
+            <th>libelleMotifEvenement</th>
+            <th>numeroIsoCarte</th>
+            <th>nomPrenomPorteur</th>
+            <th>motifOppositionCarte</th>
+            <th>dateOppositionCarte</th>
+            <th>compteImpute</th>
+            <th>libelleComptable</th>
+            <th>montantImpute</th>
+            <th>typeMontantImpute</th>
+            <th>datePrelevementVirement</th>
+            <th>sensOperation</th>
+            <th>dateAchat</th>
+            <th>dateCompensation</th>
+            <th>montantAchatBrut</th>
+            <th>montantCompenseEuro</th>
+            <th>montantCommissionsBanqueInt</th>
+            <th>montantCommissionsInterchange</th>
+            <th>referenceUnique</th>
+            <th>ARN</th>
+            <th>enseigneCommercant</th>
+            <th>siretCommercant</th>
+            <th>numeroContratCommercant</th>
+            <th>referenceClient</th>
+        </tr>
+        </thead>
+        {% for oi2504 in Oi25s.oI2504s %}
+            <tr>
+                <td>{{ oi2504.typeEvenement  }}</td>
+                {% if oi2504.caracteristiqueEvenement == 'P' %}
+                    <td>Partiel</td>
+                {% elseif oi2504.caracteristiqueEvenement == 'T' %}
+                    <td>Total</td>
+                {% endif %}
+                <td>{{ oi2504.typeTransaction  }}</td>
+                {% if oi2504.sensEvenement == 'E' %}
+                    <td>Emis</td>
+                {% elseif oi2504.sensEvenement == 'R' %}
+                    <td>Reçu</td>
+                {% endif %}
+                <td>{{ oi2504.libelleMotifEvenement  }}</td>
+                <td>{{ oi2504.numeroIsoCarte  }}</td>
+                <td>{{ oi2504.nomPrenomPorteur  }}</td>
+                {% if oi2504.motifOppositionCarte == 'P' %}
+                    <td>Perte</td>
+                {% elseif oi2504.motifOppositionCarte == 'V' %}
+                    <td>Vol</td>
+                {% elseif oi2504.motifOppositionCarte == 'A' %}
+                    <td>Abusif</td>
+                {% elseif oi2504.motifOppositionCarte == 'F' %}
+                    <td>Contrefaçon</td>
+                {% elseif oi2504.motifOppositionCarte == 'X' %}
+                    <td>Non parvenue</td>
+                {% elseif oi2504.motifOppositionCarte == '' %}
+                    <td>Pas en opposition</td>
+                {% endif %}
+                {% set bar =  oi2504.dateOppositionCarte|split('', 2) %}
+                <td>{{bar[3]}}/{{bar[2]}}/{{bar[0]}}{{bar[1]}}</td>
+                <td>{{ oi2504.compteImpute  }}</td>
+                <td>{{ oi2504.libelleComptable  }}</td>
+                <td>{{ oi2504.montantImpute  }} {{ oi2504.deviseMontantImpute  }}</td>
+
+                {% if oi2504.typeMontantImpute == 'A' %}
+                    <td>Achat</td>
+                {% elseif oi2504.typeMontantImpute == 'B' %}
+                    <td>Commission Banque</td>
+                {% elseif oi2504.typeMontantImpute == 'I' %}
+                    <td>Commission Interchange</td>
+                {% elseif oi2504.typeMontantImpute == 'F' %}
+                    <td>Frais étranger</td>
+                {% endif %}
+                {% set bar =  oi2504.datePrelevementVirement|split('', 2) %}
+                <td>{{bar[3]}}/{{bar[2]}}/{{bar[0]}}{{bar[1]}}</td>
+                <td>{{ oi2504.sensOperation  }}</td>
+                {% set bar =  oi2504.dateAchat|split('', 2) %}
+                <td>{{bar[3]}}/{{bar[2]}}/{{bar[0]}}{{bar[1]}}</td>
+                {% set bar =  oi2504.dateCompensation|split('', 2) %}
+                <td>{{bar[3]}}/{{bar[2]}}/{{bar[0]}}{{bar[1]}}</td>
+                <td>{{ oi2504.montantAchatBrut  }} {{ oi2504.deviseMontantAchat  }}</td>
+                <td>{{ oi2504.montantCompenseEuro  }} {{ oi2504.deviseCompensation  }}</td>
+                <td>{{ oi2504.montantCommissionsBanqueInt  }} {{ oi2504.deviseCommissionsBanque  }}</td>
+                <td>{{ oi2504.montantCommissionsInterchange  }} {{ oi2504.deviseCommissionsBanque2  }}</td>
+
+                <td>{{ oi2504.referenceUnique  }}</td>
+                <td>{{ oi2504.ARN  }}</td>
+                <td>{{ oi2504.enseigneCommercant  }}</td>
+                <td>{{ oi2504.siretCommercant  }}</td>
+                <td>{{ oi2504.numeroContratCommercant  }}</td>
+                <td>{{ oi2504.referenceClient  }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+<br />       
+Vous-pouvez visualiser tous les OI25 en consultant cette adresse :
+<a href='{{ url('transverse_partenaire_alerteImpaye_consultation') }}'>{{ url('transverse_partenaire_alerteImpaye_consultation') }}</a>
+
+<br /><br />
+Cordialement,<br />
+BE Banque

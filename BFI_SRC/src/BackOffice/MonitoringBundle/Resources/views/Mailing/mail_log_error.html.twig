@@ -1,0 +1,7 @@
+<p>
+    Une erreur système vient d'être générée en environnement de {{ environment }}. Voici sa signature :<br/>
+    <b>Module :</b> {{ log.module }}<br/>
+    <b>Action :</b> {{ log.action }}<br/>
+    <b>Libellé :</b> {{ log.libelle }}<br/>
+    <b>Utilisateur :</b> {% if log.utilisateur %}{{ log.utilisateur.username }}{% else %}<i>Aucun</i>{% endif %}
+</p>

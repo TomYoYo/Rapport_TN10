@@ -1,0 +1,39 @@
+{% set heightAdr = '16px' %}
+
+<pdf>
+    <dynamic-page document-template="{{templates.1}}" font-size="10">
+        <div margin-left="419px" margin-top="99px" height="87" font-size="11pt">
+            <div>
+                <div height='{{heightAdr}}' font-style="bold">
+                    {{ compte.raisonSociale ?: '-' }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ compte.adresseLettre[0] }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ compte.adresseLettre[1] }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ compte.adresseLettre[2] }}
+                </div>
+                <div height='{{heightAdr}}'>
+                    {{ compte.adresseLettre[3] }}
+                </div>
+            </div>
+        </div>
+
+        <div height="1px"></div>
+
+        <div margin-left="469px" margin-top="3px">
+            <div>
+                {{ 'now'|date('d/m/Y') }}
+            </div>
+        </div>
+
+        <div margin-left="290px" margin-top="250px">
+            <div>
+                {{ compte.mdpEsab ?: '******' }}
+            </div>
+        </div>
+    </dynamic-page>
+</pdf>

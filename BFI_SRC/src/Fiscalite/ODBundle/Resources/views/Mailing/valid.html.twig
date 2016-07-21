@@ -1,0 +1,17 @@
+<p>Nous vous informons que des opérations diverses doivent être validées sur BFI pour être transmises à SAB.</p>
+<p>Les opérations en question sont les suivantes :</p>
+
+<table style='border-collapse:collapse;'>
+    <tr>
+        <td style='border:1px solid black;'>Identifiant</td>
+        <td style='border:1px solid black;'>Saisisseur</td>
+        <td style='border:1px solid black;'>Date de saisie</td>
+    </tr>
+    {% for ope in operations %}
+    <tr>
+        <td style='border:1px solid black;'>{{ope.numPiece}}</td>
+        <td style='border:1px solid black;'>{{ope.profil}}</td>
+        <td style='border:1px solid black;'>{{ope.dateSai|date('d/m/Y')}}</td>
+    </tr>
+    {% endfor %}
+</table>

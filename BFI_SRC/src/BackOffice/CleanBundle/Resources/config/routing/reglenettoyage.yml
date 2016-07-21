@@ -1,0 +1,26 @@
+
+reglenettoyage_new:
+    pattern:  /new
+    defaults: { _controller: "BackOfficeCleanBundle:RegleNettoyage:new" }
+
+reglenettoyage_create:
+    pattern:  /create
+    defaults: { _controller: "BackOfficeCleanBundle:RegleNettoyage:create" }
+    requirements: { _method: post }
+
+reglenettoyage_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackOfficeCleanBundle:RegleNettoyage:edit" }
+
+reglenettoyage_launch:
+    pattern:  /{regle}/launch
+    defaults: { _controller: "BackOfficeCleanBundle:RegleNettoyage:launch" }
+
+reglenettoyage_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackOfficeCleanBundle:RegleNettoyage:update" }
+    requirements: { _method: post|put }
+
+reglenettoyage_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackOfficeCleanBundle:RegleNettoyage:delete" }

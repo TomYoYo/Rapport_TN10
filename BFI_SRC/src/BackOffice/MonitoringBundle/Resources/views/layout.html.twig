@@ -1,0 +1,149 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Back-Office{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+        '@BackOfficeMonitoringBundle/Resources/public/css/monito.css'
+        '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+        '@FrontOfficeMainBundle/Resources/public/css/placeholder.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block nav_content %}
+    {% if is_granted('ROLE_ADMIN') %}
+    {% set route = app.request.attributes.get('_route') %}
+    <ul class="list-inline">
+        <li class="dropdown {% if route == 'back_office_monitoring_index' %}active {% endif %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Monitoring<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ path('back_office_monitoring_index') }}">Accès</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_performance') }}">Performance</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_integritefonctionnelle') }}">Intégrité</a>
+                </li>
+            </ul>
+
+        </li>
+
+        <li {% if route == "back_office_monitoring_log" or route == "back_office_monitoring_action" or route == "back_office_monitoring_editique" or route == "back_office_monitoring_taux" or route == "back_office_monitoring_od_operations" or route == "back_office_monitoring_od_actions" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultation<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ path('back_office_monitoring_log') }}">Logs</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_action') }}">Actions</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_editique') }}">Editiques</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_taux') }}">Taux interbancaires</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_p30s') }}">Fichiers P30S</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_od_operations') }}">Opérations Diverses</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_od_actions') }}">Pistes d'audit OD</a>
+                </li>
+                <li>
+                    <a href="{{ path('evolution') }}">Evolutions</a>
+                </li>
+            </ul>
+        </li>
+
+        <li {% if route == "back_office_monitoring_od_correspondance_comptes"
+                or route == "back_office_monitoring_od_correspondance_comptes_new"
+                or route == "back_office_monitoring_editique_correspondance_releve"
+                or route == "back_office_monitoring_editique_correspondance_releve_new"
+                or route == "back_office_monitoring_casa_code_operation"
+                or route == "back_office_monitoring_casa_code_operation_new" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Paramétrage<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ path('back_office_monitoring_od_correspondance_comptes') }}">Comptes externes <small>[Opérations diverses]</small></a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_editique_correspondance_releve') }}">Types de compte <small>[Relevés de comptes]</small></a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_casa_code_operation') }}">Codes opération <small>[Surveillance CASA]</small></a>
+                </li>
+            </ul>
+        </li>
+
+        <li {% if route == "back_office_monitoring_users" or route == "back_office_monitoring_user_new" or route == "back_office_monitoring_notifications" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilisateurs<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ path('back_office_monitoring_users') }}">Liste des utilisateurs</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_notifications') }}">Gestion des abonnements</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown {% if route == "back_office_tree_exchange"
+                or route == "back_office_sab_arbo"
+                or route == "back_office_sab_logs"
+                or route == "back_office_monitoring_logs_symfony"
+                or route == "back_office_monitoring_unversioned_files"
+                or route == "back_office_clean_index" %}active{% endif %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fichiers<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ path('back_office_tree_exchange') }}">Arborescence dossier exchange</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_sab_arbo') }}">Arborescence SAB Core</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_sab_logs') }}">Logs SAB</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_logs_symfony') }}">Logs Symfony</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_monitoring_unversioned_files') }}">Fichiers non versionnés</a>
+                </li>
+                <li>
+                    <a href="{{ path('back_office_clean_index') }}">Nettoyage SAB Core</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/bootstrap.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@BackOfficeMonitoringBundle/Resources/public/js/monito.js'
+        '@BackOfficeMonitoringBundle/Resources/public/js/filter_number_results.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

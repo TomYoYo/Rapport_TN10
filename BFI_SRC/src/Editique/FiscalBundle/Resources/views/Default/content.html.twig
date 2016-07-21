@@ -1,0 +1,108 @@
+<div margin-left="539" margin-top="17" font-size="10">
+    {{ year }}
+</div>
+
+<div margin-left="271" margin-right="20" margin-top="131" text-align="center">
+    <div height="9">
+        {{ foyer.admin.nom }} {{ foyer.admin.prenom }}
+    </div>
+    <div margin-top="5" height="9">
+        {{ foyer.admin.adresse1 }}
+    </div>
+    <div margin-top="6" height="9">
+        {{ foyer.admin.adresse2 }}
+    </div>
+    <div margin-top="6" height="9">
+        {{ foyer.admin.adresse3 }}
+    </div>
+    <div margin-top="5" height="9">
+        {{ foyer.admin.adresse4 }}
+    </div>
+</div>
+
+<div margin-left="172" margin-right="20" margin-top="59" text-align="center">
+    <table>
+        <tr>
+            <td border-type="none" width="97" height="24" vertical-align="middle">{{ year }}</td>
+            <td border-type="none" padding-left="182" vertical-align="middle">{{ foyer.admin.dateNaissance ?: foyer.admin.siret }}</td>
+        </tr>
+        <tr margin-top="2">
+            <td border-type="none" width="97" height="10" vertical-align="middle">00001</td>
+            <td border-type="none" padding-left="182" vertical-align="middle">{{ foyer.admin.communeNaissance }}</td>
+        </tr>
+        <tr margin-top="2">
+            <td border-type="none" width="97" height="10" vertical-align="middle">{{ foyer.numCompte }}</td>
+            <td border-type="none" padding-left="182" vertical-align="middle">{{ foyer.admin.nomCommuneNaissance }}</td>
+        </tr>
+        <tr margin-top="3">
+            <td border-type="none" height="23" width="97" vertical-align="middle"></td>
+            <td border-type="none" padding-left="182">
+                <table>
+                    <tr>
+                        <td border-type="none" height="10" vertical-align="middle">{{ foyer.admin.departementNaissance }}</td>
+                    </tr>
+                    <tr margin-top="3">
+                        <td border-type="none" height="10" vertical-align="middle">{{ foyer.admin.nomMarital }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr margin-top="3">
+            <td border-type="none" height="23" width="97">
+                <table>
+                    <tr>
+                        <td border-type="none" height="15" vertical-align="middle"></td>
+                    </tr>
+                    <tr margin-top="4">
+                        <td border-type="none" height="15" vertical-align="middle"></td>
+                    </tr>
+                </table>
+            </td>
+            <td border-type="none" padding-left="182" vertical-align="middle"></td>
+        </tr>
+        <tr margin-top="3">
+            <td border-type="none" width="97" height="23" vertical-align="middle"></td>
+            <td border-type="none" padding-left="182" vertical-align="middle">{{ foyer.compteur.ee21 }}</td>
+        </tr>
+        <tr margin-top="3">
+            <td border-type="none" width="97" height="25" vertical-align="middle">{{ foyer.compteur.ifmpv }}</td>
+        </tr>
+    </table>
+</div>
+
+<div margin-left="90" margin-top="59" font-style="bold" font-size="9">
+    {{ foyer.numCompte }}
+</div>
+
+<div margin-left="478" margin-right="20" margin-top="27" text-align="center">
+    <div height="11" vertical-align="middle">
+        {{ foyer.compteur.ee22 }}
+    </div>
+    <div margin-top="2" height="23" vertical-align="middle">
+        {{ foyer.compteur.dc2 }}
+    </div>
+    <div margin-top="2" height="10" vertical-align="middle"></div>
+    <div margin-top="3" height="10" vertical-align="middle">
+        {{ foyer.compteur.tr2}}
+    </div>
+    <div margin-top="3" height="10" vertical-align="middle">
+        {{ foyer.compteur.bh2 }}
+    </div>
+    <div margin-top="3" height="10" vertical-align="middle">
+        {{foyer.compteur.ca2 }}
+    </div>
+    <div margin-top="3" height="10" vertical-align="middle"></div>
+    <div margin-top="3" height="10" vertical-align="middle"></div>
+    <div margin-top="3" height="10" vertical-align="middle">
+        {{ foyer.compteur. ck2 }}
+    </div>
+    <div margin-top="37" height="10" vertical-align="middle">
+        {{ foyer.compteur. vg3 }}
+    </div>
+    <div margin-top="3" height="10" vertical-align="middle">
+        {{ foyer.compteur.vh3 }}
+    </div>
+    <div margin-top="43" height="12" vertical-align="middle">
+        {{ foyer.compteur.mtcvm }}
+    </div>
+</div>

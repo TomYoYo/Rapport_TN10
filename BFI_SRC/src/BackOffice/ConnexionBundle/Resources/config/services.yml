@@ -1,0 +1,32 @@
+services:
+    back_office_connexion.SabSFTP:
+        class: BackOffice\ConnexionBundle\Manager\SabSFTPManager
+        arguments: [%sabCore.server%, %sabCore.user%, %sabCore.clePublic%, %sabCore.clePrivee%, %sabCore.unijob%]
+        calls:
+        - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+        - [ login ]
+
+    back_office_connexion.windowsFTP:
+        class: BackOffice\ConnexionBundle\Manager\WindowsFTPManager
+        arguments: [%svWin.server%, %svWin.user%, %svWin.pass%, %svWin.dirBanqueClient%, %svWin.maskNonClasse%, %svWin.dirDepotPDF%, %svWin.dirDepotPDFPerdu%, %svWin.dirDepotReleve%, %svWin.dirDepotEsab%, %svWin.dirDepotImpaye%, %svWin.dirDepotCaution%]
+        calls:
+        - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+        - [ login ]
+
+    back_office_connexion.angersFTP:
+        class: BackOffice\ConnexionBundle\Manager\AngersFTPManager
+        arguments: [%svAng.server%, %svAng.port%, %svAng.user%, %svAng.pass%, %svAng.dirToPrint%, %svAng.dirGeneratedFiles%, %svAng.dirRawFiles%]
+        calls:
+        - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+        - [ login ]
+
+    back_office_connexion.sabDb:
+        class: BackOffice\ConnexionBundle\Manager\SabDbManager
+        arguments: [@doctrine.orm.bfi2_entity_manager]
+
+    back_office_connexion.dwmSFTP:
+        class: BackOffice\ConnexionBundle\Manager\DwmSFTPManager
+        arguments: [%dwm.server%, %dwm.user%, %dwm.clePublic%, %dwm.clePrivee%]
+        calls:
+        - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+        - [ login ]

@@ -1,0 +1,121 @@
+{% extends 'EditiqueMasterBundle::layoutMsg.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+    <style>
+        .entry:not(:first-of-type){margin-top: 10px;}
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h3>Création d'une nouvelle relation</h3>
+
+    <div class="well new_relation">
+        <form action="{{ path('editique_releves_firme_create') }}" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputBfi" class="col-sm-2 control-label required">Utilisateur</label>
+                <div class="col-sm-10">
+                    <select name="user" class="form-control" id="inputBfi" required="required">
+                        <option value="0">Attente</option>
+                        {% for firmeUser in firmeUsers %}
+                            <option value="{{firmeUser.id}}">
+                            {{ firmeUser.prenom }} {{ firmeUser.nom }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="inputSab" class="col-sm-2 control-label required">Identifiants autorisés</label>
+                <div class="col-sm-10 fieldsSab">
+                    <div class="entry input-group col-sm-12">
+                        <input class="form-control" name="tiers[]" type="text" placeholder="Identifiant SAB" />
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button">+</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="inputInfos" class="col-sm-2 control-label">Infos.complémentaires</label>
+                <div class="col-sm-10">
+                    <input type="text" name="infos" class="form-control" id="inputInfos" placeholder="Informations complémentaires" maxlength="255">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="{{ path('editique_messages_commerciaux') }}" class="btn btn-default" onclick="return(confirm('Souhaitez-vous annuler définitivement cette saisie ?'));">Annuler</a>
+                    <button type="submit" class="btn btn-success" onclick="return valid();">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        
+    <script>
+        $( document ).ready( function(){
+            $( ".datepicker" ).datepicker({ 
+                dateFormat: "dd/mm/yy",
+                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                dayNamesShort: [ "Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ] ,
+                firstDay: 1,
+                monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+                monthNamesShort: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec" ] 
+            });
+        });
+         
+        $(function(){
+            $(document).on('click', '.btn-add', function(e){
+                e.preventDefault();
+
+                var controlForm = $('.new_relation form:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    blocInputs = currentEntry.parents('.fieldsSab'),
+                    newEntry = $(currentEntry.clone()).appendTo(blocInputs);
+
+                newEntry.find('input').val('');
+                controlForm.find('.entry:not(:last) .btn-add')
+                    .removeClass('btn-add').addClass('btn-remove')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('-');
+            }).on('click', '.btn-remove', function(e){
+                $(this).parents('.entry:first').remove();
+
+                e.preventDefault();
+                return false;
+            });
+        });
+        
+        function valid()
+        {
+            if (! $('.fieldsSab .entry:first input').val()) {
+                $('.fieldsSab .entry:first').addClass('has-error');
+                return false;
+            } else {
+                $('.fieldsSab .entry:first').removeClass('has-error');
+            }
+            
+            return(confirm('Souhaitez-vous enregistrer définitivement cette saisie ?'));
+        }
+    </script>
+{% endblock %}

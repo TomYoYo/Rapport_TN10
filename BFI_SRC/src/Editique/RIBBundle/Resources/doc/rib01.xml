@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+    <header>
+        <clientLicense/>
+        <environnement>SABxxxx</environnement>
+        <groupDroit>TODROITOTA</groupDroit>
+        <groupMenu>SABTELE</groupMenu>
+        <language>1</language>
+        <sab_agence>9999</sab_agence>
+        <sab_agence_label>SIEGE</sab_agence_label>
+        <sab_etablissement>0001</sab_etablissement>
+        <sab_etablissement_label>CM xxxxxxxx</sab_etablissement_label>
+        <sab_interAgence/>
+        <sab_service>DP</sab_service>
+        <sab_sousService>GP</sab_sousService>
+        <sab_service_label>PRODUCTION</sab_service_label>
+        <userId>TOJEAVITW</userId>
+        <sessionId>TOJEAVITW_0_3</sessionId>
+        <serviceName>CptReleveIdentiteBancaire</serviceName>
+        <functionName>CptReleveIdentiteBancaire</functionName>
+        <stepName>STEP1</stepName>
+    </header>
+    <body>
+        <libCpt>LEONIM      DAV PARTICULIER</libCpt>
+        <codEdt/>
+        <cptEdt>00000700002</cptEdt>
+        <codBnq>17xxx</codBnq>
+        <codGui>83001</codGui>
+        <cleRib>69</cleRib>
+        <codIbaPap>IBAN FR14 1xxx x830 0100 000V 9087 F69</codIbaPap>
+        <codIbaEle>FR141xxxx8300100000V9087F69</codIbaEle>
+        <codIbi>CCUTFR21</codIbi>
+        <nom>MR xxxx</nom>
+        <prenom>Marc</prenom>
+        <adrTit1>463 AV xxxxxx xxxx </adrTit1>
+        <adrTit2>L ESCAILLON</adrTit2>
+        <adrTit3/>
+        <codPosTit>8xxxx</codPosTit>
+        <vilTit>xxxxxx</vilTit>
+        <payTit>FRANCE</payTit>
+        <nomAge>AGENCE</nomAge>
+        <adrAge1>ADRESSE AGENCE</adrAge1>
+        <adrAge2/>
+        <adrAge3/>
+        <codePosAge>8xxxx</codePosAge>
+        <vilAge>VILLE</vilAge>
+        <telAge/>
+    </body>
+    <fault/>
+</service>

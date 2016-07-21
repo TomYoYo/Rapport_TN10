@@ -1,0 +1,32 @@
+<div class="well">
+    <form id="exportOD" action="{{ path('od_exporting') }}" method="POST" class="form-horizontal" role="form">
+        <table class="bandeauSaisie">
+            <tr>
+                <td width="45%">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Date de début</label>
+                        <div class="col-sm-3">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateSaiDu is defined %} value="{{ datas.dateSaiDu }}" {% endif %} autocomplete="off" name="search[dateSaiDu]" placeholder="Du" value="{{'now'|date('d/m/Y')}}"/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="45%">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Date de fin</label>
+                        <div class="col-sm-3">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateSaiAu is defined %} value="{{ datas.dateSaiAu }}" {% endif %} autocomplete="off" name="search[dateSaiAu]" placeholder="Au" value="{{'now'|date('d/m/Y')}}"/>
+                        </div>
+                    </div>
+                </td>
+                <td width="10%">
+                    <div class="form-group">
+                        <input type="hidden" name="search[statut]" value="ENV"/>
+                        <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

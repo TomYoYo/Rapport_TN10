@@ -1,0 +1,32 @@
+<div class="well">
+    <blockquote>
+        <p>
+            Pour actualiser les derniers fichiers. Cliquez sur le bouton ci-dessous.<br/>
+            <i>Attention, la synchronisation peut prendre plusieurs minutes.</i>
+        </p>
+
+        <small id="status">
+        {% if not lastSynchro %}
+            Jamais synchronisé
+        {% elseif lastSynchro.etat == 'OK' %}
+            Dernière synchronisation le {{ lastSynchro.dtAction|date('d/m/Y') }} à {{ lastSynchro.dtAction|date('H:i:s') }}.
+        {% elseif lastSynchro.etat == 'KO' %}
+            Dernière synchronisation échouée le {{ lastSynchro.dtAction|date('d/m/Y') }} à {{ lastSynchro.dtAction|date('H:i:s') }}.
+        {% elseif lastSynchro.etat == 'attente' %}
+            La synchronisation des fichiers doit commencer dans quelques instants.
+        {% elseif lastSynchro.etat == 'encours' %}
+            Synchronisation en cours. Veuillez patienter.
+        {% endif %}
+        </small>
+    </blockquote>
+
+    <button id="btn-synchro" class="btn btn-primary btn-lg">Actualiser les derniers fichiers</button>
+
+    <div style="margin-top: 30px" class="bubblingG">
+        <span id="bubblingG_1"></span>
+        <span id="bubblingG_2"></span>
+        <span id="bubblingG_3"></span>
+    </div>
+
+    <ul style="margin-top: 30px" id="tree_sab" class="ztree"></ul>
+</div>

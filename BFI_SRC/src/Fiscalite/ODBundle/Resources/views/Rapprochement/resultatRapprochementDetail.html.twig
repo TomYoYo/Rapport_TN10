@@ -1,0 +1,41 @@
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Numéro de compte</th>
+            <th>Numéro de pièce BFI</th>
+            <th>Numéro de pièce SAB</th>
+            <th>Code opération</th>
+            <th>Crédit BFI</th>
+            <th>Débit BFI</th>
+            <th>Solde BFI</th>
+            <th>Crédit SAB</th>
+            <th>Débit SAB</th>
+            <th>Solde SAB</th>
+            <th>ecart</th>
+            <th>Date Comptable</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for operation in entitiesDetail %}
+            <tr {% if operation.ecart != 0 %}class="danger" {% endif %} >
+                <td>{{ operation.compte }}</td>
+                <td>{% if operation.numPieceBFI is null %}Pas en base{% endif %}{{ operation.numPieceBFI }}</td>
+                <td>{{ operation.numPieceSAB }}</td>
+                <td>{{ operation.codeOpe }}</td>
+                <td>{{ operation.montantcreditBFI }}</td>
+                <td>{{ operation.montantdebitBFI|abs }}</td>
+                <td>{{ operation.soldeBFI }}</td>
+                <td>{{ operation.montantcreditSAB }}</td>
+                <td>{{ operation.montantdebitSAB|abs }}</td>
+                <td>{{ operation.soldeSAB }}</td>
+                <td>{{ operation.ecart }}</td>  
+                <td>{{ operation.dateCpt.format('d-m-Y') }}</td>   
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

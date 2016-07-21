@@ -1,0 +1,22 @@
+{% extends 'FiscaliteODBundle::layout.html.twig' %}
+
+{% block title %} Suppression d'une Opération Diverse {% endblock %}
+        
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('front_office_main_homepage') }}">Accueil</a></li>
+        <li><a href="#">Module Opérations Diverses</a></li>
+        <li><a href="{{ path('od_listing') }}">Rechercher une Opération</a></li>
+        <li class="active">Suppression d'une Opération Diverse</li>
+        {% include 'FiscaliteODBundle:Includes:aide.html.twig' %}
+    </ol>
+{% endblock %}
+
+{% block content -%}    
+    <div class="well">
+        <p>Vous vous apprêtez à supprimer une opération diverse. Pour confirmer la suppression, cliquez sur le bouton suivant.</p>
+        {{ form_start(delete_form) }}
+        {{ form_widget(delete_form.submit, {'label':'Supprimer', 'attr': {'class': 'btn btn-danger', 'onclick': "return confirm('Êtes-vous sûr de vouloir supprimer cette opération ?')"}}) }}
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

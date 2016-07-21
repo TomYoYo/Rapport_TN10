@@ -1,0 +1,121 @@
+{% extends 'FrontOfficeMainBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/accueil.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="">
+        <div class="board-inner">
+            <ul class="nav nav-tabs" id="myTab">
+                {% if is_granted('ROLE_COMPTABLE') or is_granted('ROLE_AGENCE') or is_granted('ROLE_COMMERCIAL') or is_granted('ROLE_RCCI') or is_granted('ROLE_ASSISTANCE') %}
+                <li>
+                    <a href="#editique" data-toggle="tab" title="Editique">
+                        <span class="round-tabs one">
+                            <i class="glyphicon glyphicon-file"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_REGLEMENTAIRE') or is_granted('ROLE_ASSISTANCE') or is_granted('ROLE_CONTROLEUR') %}
+                <li>
+                    <a href="#fiscalite" data-toggle="tab" title="Fiscalité">
+                        <span class="round-tabs two">
+                            <i class="glyphicon glyphicon-transfer"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_AGENCE') or is_granted('ROLE_BACKOFFICE') or is_granted('ROLE_ENGAGEMENT') or is_granted('ROLE_REGLEMENTAIRE') or is_granted('ROLE_COMMERCIAL') or is_granted('ROLE_RCCI') %}
+                <li>
+                    <a href="#transverse" data-toggle="tab" title="Interface Partenaire">
+                        <span class="round-tabs three">
+                            <i class="glyphicon glyphicon-comment"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_RCCI') or is_granted('ROLE_COMPTABLE') or is_granted('ROLE_ASSISTANCE') %}
+                <li>
+                    <a href="#backoffice" data-toggle="tab" title="Administration">
+                        <span class="round-tabs four">
+                            <i class="glyphicon glyphicon-cog"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_SAB') or is_granted('ROLE_ASSISTANCE') %}
+                <li>
+                    <a href="#sabcore" data-toggle="tab" title="SabCore">
+                        <span class="round-tabs five">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li>
+                    <a href="#tools" data-toggle="tab" title="Outils">
+                        <span class="round-tabs six">
+                            <i class="glyphicon glyphicon-wrench"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_FIRME') and not is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="#documents" data-toggle="tab" title="Mes documents">
+                        <span class="round-tabs seven">
+                            <i class="glyphicon glyphicon-cloud-download"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        {% if is_granted('ROLE_COMPTABLE') or is_granted('ROLE_AGENCE') or is_granted('ROLE_COMMERCIAL') or is_granted('ROLE_RCCI') or is_granted('ROLE_ASSISTANCE') %}
+            {% include 'FrontOfficeMainBundle:Default:block-editique.html.twig' %}
+        {% endif %}
+        {% if is_granted('ROLE_REGLEMENTAIRE') or is_granted('ROLE_ASSISTANCE') or is_granted('ROLE_CONTROLEUR') %}
+            {% include 'FrontOfficeMainBundle:Default:block-fiscalite.html.twig' %}
+        {% endif %}
+        {% if is_granted('ROLE_AGENCE') or is_granted('ROLE_BACKOFFICE') or is_granted('ROLE_ENGAGEMENT') or is_granted('ROLE_REGLEMENTAIRE') or is_granted('ROLE_COMMERCIAL') or is_granted('ROLE_RCCI') %}
+            {% include 'FrontOfficeMainBundle:Default:block-interfacepartenaire.html.twig' %}
+        {% endif %}
+        {% if is_granted('ROLE_RCCI') or is_granted('ROLE_COMPTABLE') or is_granted('ROLE_ASSISTANCE') %}
+            {% include 'FrontOfficeMainBundle:Default:block-backoffice.html.twig' %}
+        {% endif %}
+        {% if is_granted('ROLE_SAB') or is_granted('ROLE_ASSISTANCE') %}
+            {% include 'FrontOfficeMainBundle:Default:block-sabcore.html.twig' %}
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% include 'FrontOfficeMainBundle:Default:block-outils.html.twig' %}
+        {% endif %}
+        {% if is_granted('ROLE_FIRME') and not is_granted('ROLE_ADMIN') %}
+            {% include 'FrontOfficeMainBundle:Default:block-documents.html.twig' %}
+        {% endif %}
+
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            $('#myTab li:first').addClass('active');
+            $('.tab-content .tab-pane:first').addClass('in active');
+        });
+        $(function(){
+            $('a[title]').tooltip();
+        });
+    </script>
+{% endblock %}

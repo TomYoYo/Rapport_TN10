@@ -1,0 +1,83 @@
+
+parameters:
+    
+    ######################################################
+    #                   Accès à base ORACLE
+    ######################################################    
+    database_driver: oci8
+    database_host: 
+    database_port: 
+    database_bfi_name: SABDEV
+    database_bfi_user: BFI
+    database_bfi_password: uAlW>sJ0W7q356
+    
+    
+    ######################################################
+    #                   Param EMAIL
+    # Le jour ou le flux email sera mis en place, 
+    # il sera parametré ici pour symfony
+    ######################################################    
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    
+    
+    ######################################################
+    #                   Accès à sabCore
+    ######################################################
+    sabCore.user: trfbfisab01
+    sabCore.pass: 
+    sabCore.server: lxlyosab32
+    sabCore.viaKey: true
+    sabCore.clePrivee: /home/bfi/.ssh/id_dsa.bfisabcore
+    sabCore.clePublic: /home/bfi/.ssh/id_dsa.bfisabcore.pub
+    sabCore.dirPathPrint: /sab/sab139u/prints/    
+    sabCore.dirSortie: /app/sabfid/editique/
+    sabCore.dirSortie2: /sab/sab139u/SAB139/fichiers_externes/
+    sabCore.dirPathXML: /sab/sab139u/SAB139/fichiers_externes/XML_Reports/
+    sabCore.subDirXML: /XTR/
+    sabCore.exempleFichier: EICED063P1_11402211430194326965.txt
+    
+    ######################################################
+    #                   Accès serveur windows
+    ######################################################
+    svWin.user: bfi
+    svWin.pass: sab1Bfi12FTP
+    svWin.server: svlyobfi21
+    svWin.dirBanqueClient : BANQUE/04-Clients/
+    svWin.maskNonClasse : '00-'
+    svWin.dirDepotPDF : 03-Editions client/
+    svWin.dirDepotPDFPerdu : 01-Editions Client sans affectation/
+    
+    ######################################################
+    #    Heure de génération des CRE (Module Operation Diverse)
+    ######################################################    
+    cre_generation_hour: '18'
+    cre_generation_minute: '00'
+    
+    
+    ######################################################
+    #        Déclaration des repertoires d'echange
+    ######################################################
+    dirSortieEditique : /app/exchange/editique/out/
+    dirEntreeEditique : /app/exchange/editique/in/
+    dirErrorEditique : /app/exchange/editique/error/
+    dirTreatedEditique : /app/exchange/editique/treated/
+
+    dirSortieSIRH : /app/exchange/SIRH_compta/out/
+    dirEntreeSIRH : /app/exchange/SIRH_compta/in/
+    dirErrorSIRH : /app/exchange/SIRH_compta/error/
+    dirTreatedSIRH : /app/exchange/SIRH_compta/treated/
+    
+    dirSortieModuleODAudit : /app/exchange/moduleOD/Audit/out/
+    dirSortieModuleODCRE : /app/exchange/moduleOD/CRE/out/
+    
+    dirSortieModuleOD : /app/exchange/moduleOD_Audit/out/
+
+
+    ######################################################
+    #        Autres parametres du framework
+    ######################################################    
+    locale: en
+    secret: f09d16bac03a30059391dc4effc9f091897815ae

@@ -1,0 +1,72 @@
+{% set numPageMarginLeft = 480 %}
+{% set colorLineOpe = '#F8E9EB' %}
+{% set numOpe = 0 %}
+{% set margeNumClient = 144 %}
+    
+{% set codeRupture = 1 %}
+{% set codeAlim = 8 %}
+
+<pdf>
+    {% for idClient, tab_releve in tab_releve_global %}
+        {# tab_releve est le tableau des releves d'un client #}
+        {% set nbReleve = tab_releve|length %}
+        {% set numReleve = 1 %}
+        
+        {% for oReleve in tab_releve %}
+            {% set nbFeuille = ((oReleve.enchainementTpl|length)/2)|round(0, 'ceil') %}
+            {% set numPage = 1 %}
+            {% set numFeuille = 1 %}
+    
+            {% for tpl in oReleve.enchainementTpl %}
+                {% if oReleve.startAndLength[loop.index - 1] is defined %}
+                    {% set sliceValues = oReleve.startAndLength[loop.index - 1] %}
+                {% endif %}
+                <dynamic-page document-template="{{tplArray[tpl]}}" font-size="8" margin="0">
+                    {% if numPage % 2 > 0 %}
+                        {% if numFeuille == nbFeuille and numReleve == nbReleve %}
+                            {% set numImg = codeRupture %}
+                        {% else %}
+                            {% set numImg = codeAlim %}
+                        {% endif %}
+                            
+                        {% if codeRupture == 7 %}
+                            {% set codeRupture = 1 %}
+                        {% else %}
+                            {% set codeRupture = codeRupture +1 %}
+                        {% endif %}
+                            
+                        {% if codeAlim == 14 %}
+                            {% set codeAlim = 8 %}
+                        {% else %}
+                            {% set codeAlim = codeAlim +1 %}
+                        {% endif %}
+                        
+                        <img src="{{ pdf_image('EditiqueReleveBundle:OMR/Code' ~ numImg ~'.jpg') }}" width="15mm" margin-left="1mm" margin-top="8mm"/>
+
+                        <div margin-left="42px" margin-top="-140px" margin-right="34px">
+                            {% include 'EditiqueReleveBundle:pdf:numPage.pdf.twig' %}
+                            {% include 'EditiqueReleveBundle:pdf:'~tpl~'.pdf.twig' %}
+                        </div>
+                    {% else %}                    
+                        <div margin-left="42px" margin-top="11mm" margin-right="34px">
+                            {% include 'EditiqueReleveBundle:pdf:numPage.pdf.twig' %}
+                            {% include 'EditiqueReleveBundle:pdf:'~tpl~'.pdf.twig' %}
+                        </div>
+                    {% endif %}
+                </dynamic-page>
+
+                {% set numPage = numPage + 1 %}
+                {% if numPage % 2 == 0 %}
+                    {% set numFeuille = numFeuille + 1 %}
+                {% endif %}
+            {% endfor %}
+            
+            {% set numReleve = numReleve + 1 %}
+                
+            {% if numPage % 2 == 0 %}
+                <dynamic-page><div></div></dynamic-page>
+            {% endif %}
+            
+        {% endfor %}
+    {% endfor %}
+</pdf>

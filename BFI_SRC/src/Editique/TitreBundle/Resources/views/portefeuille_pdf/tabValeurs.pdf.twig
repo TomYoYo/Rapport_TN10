@@ -1,0 +1,13 @@
+<tr background.color="{{colorLineOpe}}">
+    {% if lg is defined %}
+    <td border-type="none" padding-left="4" width="99">{% for categLg in lg.CATEGORIE %}{{categLg}}<br padding="0" margin="0"/>{% endfor %}</td>
+    <td border-type="none" width="128">{% for libLg in lg.LIB %}{{libLg}}<br/>{% endfor %}</td>
+    <td border-type="none" width="60">{{lg.CODE}}</td>
+    <td border-type="none" width="54" text-align="right">{{lg.QUANTITE|number_format(3,',',' ')}}</td>
+    <td border-type="none" width="58" text-align="right">{{lg.COURS|number_format(2,',',' ')}}</td>
+    <td border-type="none" width="66" text-align="right">{{lg.PRIXREVIENT|number_format(2,',',' ')}}</td>
+    <td border-type="none" padding-right="1" text-align="right">{{lg.VALORISATION|number_format(2,',',' ')}}</td>
+    {% else %}
+    <td border-type="none">&#160;</td>
+    {% endif %}
+</tr>

@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Editique Test{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+    
+{% block nav_content %}
+    {% set route = app.request.attributes.get('_route') %}
+    <ul class="list-inline">
+        <li {% if route == "editique_rib" %} class="active" {% endif %}>
+            <a href="{{ path('editique_rib') }}">RIB</a>
+        </li>
+        <li {% if route == "editique_releve" %} class="active" {% endif %}>
+            <a href="{{ path('editique_releve') }}">Relevé</a>
+        </li>
+        <li {% if route == "editique_dat" %} class="active" {% endif %}>
+            <a href="{{ path('editique_dat') }}">DAT</a>
+        </li>
+        <li {% if route == "editique_livret" %} class="active" {% endif %}>
+            <a href="{{ path('editique_livret') }}">Livret</a>
+        </li>
+        <li {% if route == "editique_credit" %} class="active" {% endif %}>
+            <a href="{{ path('editique_credit') }}">Crédit</a>
+        </li>
+        <li {% if route == "editique_compte" %} class="active" {% endif %}>
+            <a href="{{ path('editique_compte') }}">Compte</a>
+        </li>
+        <li {% if route == "editique_lettre" %} class="active" {% endif %}>
+            <a href="{{ path('editique_lettre') }}">Lettre</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}

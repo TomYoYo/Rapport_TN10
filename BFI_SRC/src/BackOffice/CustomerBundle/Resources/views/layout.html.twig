@@ -1,0 +1,78 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Intégration Clients{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+    '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+    '@FrontOfficeMainBundle/Resources/public/css/placeholder.css'
+    '@BackOfficeMonitoringBundle/Resources/public/css/monito.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block nav_content %}
+        {% set route = app.request.attributes.get('_route') %}
+        <h1>Intégration des clients externes</h1>
+        <ul class="list-inline">
+                    <li class="{% if route == 'back_office_customer_tocomplete' %}active{% endif %}">
+                        <a href="{{ path('back_office_customer_tocomplete') }}">A completer</a>
+                    </li>
+                    <li class="{% if route == 'back_office_customer_modified' %}active{% endif %}">
+                        <a href="{{ path('back_office_customer_modified') }}">En cours d'envoi</a>
+                    </li>
+                    <li class="{% if route == 'back_office_customer_sended' %}active{% endif %}" >
+                        <a href="{{ path('back_office_customer_sended') }}">Envoyé</a>
+                    </li>
+                    <li class="{% if route == 'back_office_customer_anomalies_sab' %}active{% endif %}">
+                        <a href="{{ path('back_office_customer_anomalies_sab') }}">Anomalies Clients</a>
+                    </li>
+             {% if is_granted('ROLE_ADMIN')  %}
+            <li class="dropdown {% if route == 'back_office_customer_parametrage_responsable' or route == 'back_office_customer_parametrage_civility' or route == 'back_office_customer_parametrage_state' or route == 'back_office_customer_parametrage_juridique' or route == 'back_office_customer_parametrage_quality'%}active{% endif %}">
+                <a href="#" class="dropdown-toggle " data-toggle="dropdown">Paramétrage<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ path('back_office_customer_parametrage_responsable') }}">Paramétrage Code responsable</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('back_office_customer_parametrage_civility') }}">Paramétrage Code civilité</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('back_office_customer_parametrage_state') }}">Paramétrage Code Etat</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('back_office_customer_parametrage_juridique') }}">Paramétrage Forme Juridique</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('back_office_customer_parametrage_quality') }}">Paramétrage Qualité Client</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown {% if route == 'back_office_customer_anomalies' %}active{% endif %}">
+                <a href="{{ path('back_office_customer_anomalies') }}" >Anomalies</a>
+            </li>
+            {% endif %}
+        </ul>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+    '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+    '@FrontOfficeMainBundle/Resources/public/js/bootstrap.min.js'
+    '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+    '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+    '@BackOfficeCustomerBundle/Resources/public/js/main_customer.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

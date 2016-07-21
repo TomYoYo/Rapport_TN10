@@ -1,0 +1,186 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Performance {% endblock %}
+
+{% block content %}
+
+    <h3>Performance SAB - JOUR</h3>
+
+    <p>Graphique des temps de réponse du traitement JOUR</p>
+
+    <div style="">
+        <div>
+            <canvas id="canvasJOUR" height="450" width="900"></canvas>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>Performance SAB - JOURBD</h3>
+
+    <p>Graphique des temps de réponse du traitement JOURBD</p>
+
+    <div style="">
+        <div>
+            <canvas id="canvasJOURBD" height="450" width="900"></canvas>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>Performance SAB - Base oracle</h3>
+
+    <p>Graphique des temps de réponse à la consultation de ZCOMPTE0</p>
+
+    <div style="">
+        <div>
+            <canvas id="canvasBDD" height="450" width="900"></canvas>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/ChartNew.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+
+		var randomScalingFactor = function(min, max){
+            var val = Math.round(Math.random()*max);
+            if (val < min) return val + min*1.0;
+            return val;
+        };
+
+        var dataSetNbOpe =
+                {
+					label: "Nb opé",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "green",
+					pointColor : "green",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [ {% for j in jours %}"{{perf[j].nbOperation is defined ? perf[j].nbOperation : ''}}",{% endfor %}],
+                    axis : 2,
+                    title: 'Nb opé'
+				};
+
+        var dataSetNbClient =
+                {
+					label: "Nb clients",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "orange",
+					pointColor : "orange",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [ {% for j in jours %}"{{perf[j].nbClient is defined ? perf[j].nbClient : ''}}",{% endfor %}],
+                    axis : 2,
+                    title: 'Nb clients'
+				};
+
+        var dataSetNbProduit =
+                {
+					label: "Nb produit",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "blue",
+					pointColor : "blue",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [ {% for j in jours %}"{{perf[j].nbProduit is defined ? perf[j].nbProduit : ''}}",{% endfor %}],
+                    axis : 2,
+                    title: 'Nb produit'
+				};
+
+        var dataSetDureeBDD =
+                {
+					label: "Durée d'execution",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "red",
+					pointColor : "red",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+					data : [ {% for j in jours %}"{{perf[j].dureeBdd is defined ? perf[j].dureeBdd : ''}}",{% endfor %}],
+                    axis : 1,
+                    title: "Durée d'execution"
+				};
+
+        var dataSetDureeJour =
+                {
+					label: "Durée d'execution",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "red",
+					pointColor : "red",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+					data : [ {% for j in jours %}"{{perf[j].dureeJour is defined ? perf[j].dureeJour : ''}}",{% endfor %}],
+                    axis : 1,
+                    title: "Durée d'execution"
+				};
+
+        var dataSetDureeJourBd =
+                {
+					label: "Durée d'execution",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "red",
+					pointColor : "red",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+					data : [ {% for j in jours %}"{{perf[j].dureeJourBD is defined ? perf[j].dureeJourBD : ''}}",{% endfor %}],
+                    axis : 1,
+                    title: "Durée d'execution"
+				};
+
+		var lineChartDataBdd = {
+			labels : [ {% for j in jours %}"{{j}}",{% endfor %}],
+			datasets : [dataSetNbClient, dataSetNbOpe, dataSetNbProduit, dataSetDureeBDD]
+		};
+
+        var lineChartDataJour = {
+			labels : [ {% for j in jours %}"{{j}}",{% endfor %}],
+			datasets : [dataSetNbClient, dataSetNbOpe, dataSetNbProduit, dataSetDureeJour]
+		};
+
+        var lineChartDataJourBd = {
+			labels : [ {% for j in jours %}"{{j}}",{% endfor %}],
+			datasets : [dataSetNbClient, dataSetNbOpe, dataSetNbProduit, dataSetDureeJourBd]
+		};
+
+        var confChart = {
+			responsive: true,
+            scaleBeginAtZero: true,
+            //scaleLabel: "<%=value%> min",
+            yAxisRight : true,
+            yAxisUnit : 'Secondes',
+            yAxisLabel : 'Durée d\'exécution',
+            yAxisUnit2 : 'Nb',
+            yAxisLabel2 : 'Volume activité',
+            yAxisUnitFontSize: 12,
+            yAxisMinimumInterval : 0.1,
+            //yAxisMinimumInterval2 : 10,
+            legend : true,
+            //legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){ %><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){ %><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+            annotateDisplay: true,
+        	//annotateLabel : 'V1:<%=v1%> V2:<%=v2%> V3:<%=v3%> V4:<%=v4%> V5:<%=v5%> V6:<%=v6%> V7:<%=v7%> V8:<%=v8%> V9:<%=v9%> V10:<%=v10%> V11:<%=v11%> V12:<%=v12%>'
+            annotateLabel : '<%=v1%> : <%=v3%><br> Date : <%=v2%> '
+		};
+
+        window.onload = function(){
+            new Chart(document.getElementById("canvasJOUR").getContext("2d")).Line(lineChartDataJour, confChart);
+            new Chart(document.getElementById("canvasJOURBD").getContext("2d")).Line(lineChartDataJourBd, confChart);
+            new Chart(document.getElementById("canvasBDD").getContext("2d")).Line(lineChartDataBdd, confChart);
+
+        }
+    </script>
+{% endblock %}

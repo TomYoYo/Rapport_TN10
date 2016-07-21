@@ -1,0 +1,90 @@
+{% extends 'EditiqueMasterBundle::layoutMsg.html.twig' %}
+
+{% block content %}
+    <h3>Messages commerciaux</h3>
+    <div class="panel panel-default monitoFiltre">
+        <div class="panel-heading text-center">
+            <h3 class="panel-title">Filtres</h3>
+        </div>
+        <div class="panel-body" id="filtreLog">
+            <form id="saisieOD" action="{{ path('editique_messages_commerciaux') }}" method="POST" class="form-horizontal" role="form">
+                <table class="bandeauSaisie" style="width:95%">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Contenu</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control input-sm" type="text" {% if datas.content is defined %} value="{{ datas.content }}" {% endif %} autocomplete="off" name="search[content]" placeholder="Contenu">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Statut</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control input-sm" name="search[statut]">
+                                        <option value="all" {% if datas.statut is defined and datas.statut == "all" %} selected="selected" {% endif %}>Tous</option>
+                                        <option value="active" {% if datas.statut is defined and datas.statut == "active" %} selected="selected" {% endif %}>Actifs</option>
+                                        <option value="programmed" {% if datas.statut is defined and datas.statut == "programmed" %} selected="selected" {% endif %}>Programmés</option>
+                                        <option value="passed" {% if datas.statut is defined and datas.statut == "passed" %} selected="selected" {% endif %}>Passés</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-condensed">
+        <tr>
+            <th>Contenu du Message</th>
+            <th style="width:115px;">Date de début</th>
+            <th style="width:115px;">Date de fin</th>
+            <th style="width:75px;">Actions</th>
+        </tr>
+        {% for message in messages %}
+        <tr class="{% if not message.isActive %} text-muted warning {% else %} success {% endif %}">
+            <td>{{ message.message }}</td>
+            <td>{{ message.dateDebut|date('d/m/Y') }}</td>
+            <td>{{ message.dateFin|date('d/m/Y') }}</td>
+            <td>
+                <a href="{{ path('editique_messages_commerciaux_edit', {'id':message.id}) }}">
+                    <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier" title="Modifier" />
+                </a>
+                <a href="{{ path('editique_messages_commerciaux_show', {'id':message.id}) }}">
+                    <img src="{{ asset('bundles/frontofficemain/images/view_2.png') }}" width="30" alt="Détails" title="Supprimer" />
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">Aucun message à afficher</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="panel panel-default monitoFiltre">
+        <div class="panel-body">
+            <center><a href="{{ path('editique_messages_commerciaux_new') }}">Ajouter une nouvelle entrée</a></center>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

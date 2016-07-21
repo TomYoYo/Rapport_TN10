@@ -1,0 +1,64 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Monito {% endblock %}
+
+{% block content %}
+
+    <h3>Monitoring des accès aux systèmes tiers</h3>
+
+<div id="monito">
+    <div class="page-header">
+        <h1>
+            <img src="{{ asset('bundles/backofficemonitoring/images/db_gris_fonce.jpg') }}" alt="" title="" />
+            <small>Bases Oracle</small>
+        </h1>
+    </div>
+
+    <div id="testOracleBFI" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:connexionOracleBFI.html.twig' %}
+    </div>
+    <div id="testOracleSAB" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:connexionOracleSAB.html.twig' %}
+    </div>
+    <div id="testOracleTitre" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:connexionOracleTitre.html.twig' %}
+    </div>
+    <div id="testTrigger" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:presenceTrigger.html.twig' %}
+    </div>
+
+    <div class="page-header">
+        <h1>
+            <img src="{{ asset('bundles/backofficemonitoring/images/network.jpg') }}" alt="" title="" />
+            <small>Serveurs et services tiers</small>
+        </h1>
+    </div>
+
+    <div id="testSabCore" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:connexionSabCore.html.twig' %}
+    </div>
+    <div id="testWindows" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:connexionWindows.html.twig' %}
+    </div>
+    <div id="testAngers" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:connexionAngers.html.twig' %}
+    </div>
+    <div id="testSIT" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:surveillanceCASA.html.twig' %}
+    </div>
+
+    <div class="page-header">
+        <h1>
+            <img src="{{ asset('bundles/backofficemonitoring/images/process.jpg') }}" alt="" title="" />
+            <small>Démons</small>
+        </h1>
+    </div>
+
+    <div id="testSurveillanceTrigger" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:presenceSurveillanceTrigger.html.twig' %}
+    </div>
+    <div id="testSurveillanceFichiers" class="panel panel-default">
+        {% include 'BackOfficeMonitoringBundle:Includes:presenceSurveillanceFichiers.html.twig' %}
+    </div>
+</div>
+{% endblock %}

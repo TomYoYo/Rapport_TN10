@@ -1,0 +1,46 @@
+{% extends 'BackOfficeCustomerBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Paramétrage Code Civilité{% endblock %}
+{% block content %}
+<div class="row">
+    <h1 style="text-align: center;padding-bottom: 50px">Paramétrage code Civilité</h1>
+
+        <table class="bandeauSaisie">
+
+            <tbody> <tr>
+            <td class="col-sm-3">
+                <div class="form-group" > <div class="col-sm-12">
+                    {{ form_label(form.civility,"Code civilité",{'label_attr':{'class':' control-label required'}}) }}
+                    {{ form_errors(form.civility) }}
+
+                        {{ form_widget(form.civility,{'attr':{'class':'form-control'}}) }}
+                    </div>
+                </div>
+            </td>
+                <td class="col-sm-5" >
+                    <table class="table table-bordered table-hover"><caption style="font-weight: bold">
+                            Formes Juridiques associées
+                        </caption>
+                        <thead>
+                        <tr>
+                            <td>Forme Juridique</td>
+                            <td>Code</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+                        <tbody id="formeJuridique">
+                        </tbody>
+                    </table>
+                </td>
+            <td class="col-sm-4" style="border-left: 1px solid black;padding-top: 0px">
+                <div class="form-group" ><div class="col-sm-12">
+                    {{ form_label(form.formeJuridique,"Forme Juridique",{'label_attr':{'class':' control-label required'}}) }}
+                    {{ form_errors(form.formeJuridique) }}
+                        {{ form_widget(form.formeJuridique,{'attr':{'class':'form-control'}}) }}
+                        <a  class="btn btn-danger col-sm-4 col-sm-offset-4" style="margin-top: 10px" id="add_form">Ajouter</a>
+                </div></div>
+            </td>
+
+
+           </tr></tbody></table></div>
+{% endblock %}

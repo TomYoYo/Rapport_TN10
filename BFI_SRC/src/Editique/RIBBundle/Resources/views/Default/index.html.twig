@@ -1,0 +1,8 @@
+{% extends 'EditiqueMasterBundle::layout_test.html.twig' %}
+
+{% block content %}
+    <div class="well">
+        <h5>Nom du fichier : <strong>{{ fileName }}</strong></h5>
+        <div style="border-left: 1px solid; display: block;">{{sortieBrute|raw|nl2br}}</div>
+    </div>
+{% endblock %}

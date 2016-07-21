@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ parent() }} - Accès interdit{% endblock %}
+
+{% block nav_title %}
+    <a class="navbar-brand" href="{{ path('front_office_main_homepage') }}">
+        <img class="logo" src="{{ asset('bundles/frontofficemain/images/logo_entete.png') }}" alt="Banque Fiducial" title="Banque Fiducial" />
+    </a>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+    <div class="page-header">
+        <h1>Permissions insuffisantes</h1>
+    </div>
+    <div class="well">
+        <p>La page que vous demandez nécessite des permissions que vous ne possèdez pas.</p>
+    </div>
+    {% endblock %}
+{% endblock %}

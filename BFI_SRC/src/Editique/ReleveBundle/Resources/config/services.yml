@@ -1,0 +1,14 @@
+services:         
+    editique.releveManager:
+        class: Editique\ReleveBundle\Manager\ReleveManager
+        calls:
+            - [ setEcritureManager, [ @backoffice_parser.ecritureManager ] ]
+            - [ setLectureManager, [ @backoffice_parser.lectureManager ] ]
+            - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+            - [ setEntityManager, [ @doctrine ] ]
+            - [ setFileManager, [ @backoffice_file.fileManager ] ] 
+            - [ setWindowsFTPManager, [ @back_office_connexion.windowsFTP ] ] 
+            #- [ setAngersFTPManager, [ @back_office_connexion.angersFTP ] ]
+            - [ setPDFManager, [ @ps_pdf.facade_builder] ]
+            - [ setTplManager, [ @templating] ]
+        

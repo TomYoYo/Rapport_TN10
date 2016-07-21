@@ -1,0 +1,150 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Actions {% endblock %}
+
+{% block content %}
+    <h3>Consultation des actions</h3>
+    <div id="monitoAction">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_action') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Type</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[type]">
+                                            <option value="" label="Type"></option>
+                                            <option value="EDITIQUE" {% if datas.type is defined and datas.type == "EDITIQUE" %} selected="selected" {% endif %}>Editique</option>
+                                            <option value="OD" {% if datas.type is defined and datas.type == "OD" %} selected="selected" {% endif %}>OD</option>
+                                            <option value="Monitoring" {% if datas.type is defined and datas.type == "Monitoring" %} selected="selected" {% endif %}>Monitoring</option>
+                                            <option value="SAB" {% if datas.type is defined and datas.type == "SAB" %} selected="selected" {% endif %}>SAB (Logs)</option>
+                                            <option value="NETTOYAGE" {% if datas.type is defined and datas.type == "NETTOYAGE" %} selected="selected" {% endif %}>Nettoyage</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Module</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.module is defined %} value="{{ datas.module }}" {% endif %} autocomplete="off" name="search[module]" placeholder="Module">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Id. document</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.identifiant is defined %} value="{{ datas.identifiant }}" {% endif %} autocomplete="off" name="search[identifiant]" placeholder="ID Document">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date action</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateActionDu is defined %} value="{{ datas.dateActionDu }}" {% endif %} autocomplete="off" name="search[dateActionDu]" placeholder="Du" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateActionAu is defined %} value="{{ datas.dateActionAu }}" {% endif %} autocomplete="off" name="search[dateActionAu]" placeholder="Au">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Nombre essais</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.nbEssai is defined %} value="{{ datas.nbEssai }}" {% endif %} autocomplete="off" name="search[nbEssai]" placeholder="Nombre d'essais">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date dernier essai</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateDernierEssaiDu is defined %} value="{{ datas.dateDernierEssaiDu }}" {% endif %} autocomplete="off" name="search[dateDernierEssaiDu]" placeholder="Du" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateDernierEssaiAu is defined %} value="{{ datas.dateDernierEssaiAu }}" {% endif %} autocomplete="off" name="search[dateDernierEssaiAu]" placeholder="Au">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Etat</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[etat]">
+                                            <option value="" label="Etat"></option>
+                                            <option value="Attente" {% if datas.etat is defined and datas.etat == "Attente" %} selected="selected" {% endif %}>Attente</option>
+                                            <option value="OK" {% if datas.etat is defined and datas.etat == "OK" %} selected="selected" {% endif %}>OK</option>
+                                            <option value="KO" {% if datas.etat is defined and datas.etat == "KO" %} selected="selected" {% endif %}>KO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href="{{ path('back_office_delete_filters', {'page':'actions'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Type', 'column': 'type'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Module', 'column': 'module'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Id. document', 'column': 'numCpt'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Date action', 'column': 'dtAction'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Nombre essais', 'column': 'nbEssai'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Date dernier essai', 'column': 'dtDernierEssai'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Etat', 'column': 'etat'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Action', 'column': 'action', 'noSort': true} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in entities %}
+                {% if a.etat == "OK" %}
+                    {% set class='success' %}
+                {% elseif a.etat == "KO" %}
+                    {% set class='danger' %}
+                {% elseif a.etat == "attente" %}
+                    {% set class='warning' %}
+                {% else %}
+                    {% set class='default' %}
+                {% endif %}
+                <tr class="{{class}}">
+                    <td>{{a.type}}</td>
+                    <td>{{a.module}}</td>
+                    <td>{{a.numCpt}}</td>
+                    <td>{{a.dtAction|date('d/m/Y H:i:s')}}</td>
+                    <td>{{a.nbEssai}}</td>
+                    <td>
+                        {% if a.dtDernierEssai %}
+                        {{a.dtDernierEssai|date('d/m/Y H:i:s')}}
+                        {% else %}
+                        /
+                        {% endif %}
+                    </td>
+                    <td>{{a.etat}}</td>
+                    <td>
+                        {% if a.etat == 'KO' %}
+                            <a href="{{ path('back_office_monitoring_action_retry', {'id':a.id}) }}">
+                                <img src="{{ asset('bundles/frontofficemain/images/retry.png') }}" alt="Relancer" title="Relancer" />
+                            </a>
+                        {% else %}
+                            /
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+    </div>
+{% endblock %}

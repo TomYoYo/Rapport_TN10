@@ -1,0 +1,18 @@
+{% extends 'BackOfficeHabilitationBundle::layout.html.twig' %}
+
+{% block title %}Details{% endblock %}
+
+{% block content %}
+    <a href="{{ path('back_office_habilitation') }}">Retour à la liste des utilisateurs</a>
+    <div class="row">
+        <div class="col-md-12"><h1 style="text-align: center"><a id="menuu" href='#'>Menu</a> / <a id="metier" href='#'>Metier</a> / <a id="donnees" href='#'>Données</a></h1></div>
+        <div class="col-md-12"><h1 id="title" style="text-align: center"></h1>  <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-4">
+                    {{ form_widget(form.groupe,{'attr':{'class':'form-control menuHab'}}) }}
+                </div>
+                <div class="col-sm-4" id="progressbar">
+                </div>
+            </div>
+        </div><div id="result" class="row"><div class="col-md-12" id="accordion"></div></div>
+    </div>
+{% endblock %}

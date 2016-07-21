@@ -1,0 +1,42 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Arborescence {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/ztree.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+
+    <h3>Arborescence du dossier /app/exchange</h3>
+
+    <div class="border-box">
+        <ul id="treeExchange" class="ztree">
+            <div class="bubblingG">
+                <span id="bubblingG_1"></span>
+                <span id="bubblingG_2"></span>
+                <span id="bubblingG_3"></span>
+            </div>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.ztree.min.js'
+        '@BackOfficeMonitoringBundle/Resources/public/js/tree.js'
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

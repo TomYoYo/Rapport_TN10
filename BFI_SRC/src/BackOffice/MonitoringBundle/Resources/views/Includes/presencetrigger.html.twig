@@ -1,0 +1,39 @@
+{% set altRefresh = 'Rafraîchir le statut de ce block'%}
+
+{% if statusTrigger == 'triggerOk' %}
+    {% set img = 'rondVert'%}
+    {% set alt = 'Tous les triggers sont là'%}
+{% elseif statusTrigger == 'triggerKo' %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Il manque un ou plusieurs triggers'%}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Présence des <strong>Triggers</strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le {{ "now"|date("d/m/Y") }} à
+    <strong>{{ "now"|date("H:i:s") }}</strong>
+
+    <button onclick="$('#detailTrigger').fadeToggle()">Détail</button>
+</div>
+
+<div class="formRefresh" id="detailTrigger">
+    <table class="table table-striped table-condensed table-hover">
+        {% for trigger in listeTrigger %}
+            <tr>
+                <td>
+                    {% if trigger.status == 'triggerOk' %} {% set img = 'rondVert'%}
+                    {% elseif trigger.status == 'triggerKo' %} {% set img = 'rondRouge'%}
+                    {% endif %}
+                    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="" title="" />
+                </td>
+                <td>{{trigger.nom}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+

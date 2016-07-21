@@ -1,0 +1,65 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+
+{% block title %}Administrations des alertes sur les OI25{% endblock %}
+
+{% block content %}
+
+    <h3>
+        Ajouter une adresse mail
+    </h3>
+
+
+    <br /><br />
+
+
+    <form id="alerteImpaye" action="{{ path('transverse_partenaire_alerteImpaye_administration') }}" method="POST" class="form-horizontal" role="form">
+
+        <div class="form-group">
+            <label class="col-md-4 control-label">Email(s) :</label>
+            <div class="col-md-4">
+                <input type="text" id="" name="mail" required="required" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </div>
+
+
+    </form>
+
+    <br />
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Adresse mail</th>
+            <th><i class="fa fa-cogs"></i>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mail in mails %}
+            <tr>
+                <td>{{ mail.id }}</td>
+                <td>{{ mail.mail }}</td>
+                <td>
+                    <div class="item-actions">
+                        <a href="{{ path('transverse_partenaire_alerteImpaye_administration_delete', {'id': mail.id}) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Supprimer</a>
+                    <div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <div class="section actions">
+        <a href="{{ path('transverse_partenaire_alerteImpaye') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour</a>
+    </div>
+
+
+{% endblock %}
+
+

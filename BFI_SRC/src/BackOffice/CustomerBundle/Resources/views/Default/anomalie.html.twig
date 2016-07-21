@@ -1,0 +1,33 @@
+{% extends 'BackOfficeCustomerBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Utilisateurs {% endblock %}
+
+{% block content %}
+<div class="row">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Désignation</th>
+            <th>Cause</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for anomalie in anomalies %}
+            <tr>
+                <td>{{ anomalie.idcustomer }}</td>
+                <td>{{ anomalie.designation }}</td>
+                <td>{{ anomalie.cause }}</td>
+                <td>
+                    <a href="{{ path('back_office_customer_anomalie_delete', { 'id': anomalie.id }) }}">
+                        <img src="{{ asset('bundles/frontofficemain/images/delete.png') }}" width="30" alt="Désactiver" title="Désactiver" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette anomalie ?'));" />
+                        </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

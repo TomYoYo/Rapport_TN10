@@ -1,0 +1,7 @@
+services:
+    backoffice_parser.ecritureManager:
+        class: BackOffice\ParserBundle\Manager\EcritureManager
+        arguments: [ @backoffice_monitoring.logManager]
+    backoffice_parser.lectureManager:
+        class: BackOffice\ParserBundle\Manager\LectureManager
+        arguments: [ @backoffice_monitoring.logManager]

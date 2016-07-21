@@ -1,0 +1,15 @@
+services:    
+    fiscalite.ODManager:
+        class: Fiscalite\ODBundle\Manager\ODManager
+        arguments:
+            - @backoffice_monitoring.logManager
+            - @doctrine
+            - @backoffice_parser.ecritureManager
+    fiscalite.CREManager:
+        class: Fiscalite\ODBundle\Manager\CREManager
+        arguments:
+            - @backoffice_monitoring.logManager
+            - @backoffice_file.fileManager
+            - @doctrine
+            - "%dirSortieModuleODCRE%"
+            - "%sabCore.dirSortie2%"

@@ -1,0 +1,53 @@
+{% extends 'BackOfficeCustomerBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Paramétrage Code Responsable {% endblock %}
+{% set i = 0 %}
+{% set cpt = 1 %}
+{% block content %}
+<form id="saisieHabilitation" action="{{ path('back_office_customer_parametrage_responsable') }}" method="POST" class="form-horizontal" role="form">
+    <div class="row">
+        <h1 style="text-align: center;padding-bottom: 50px">Paramétrage code Responsable</h1>
+
+        <ul class="well">
+
+        <table class="bandeauSaisie">
+
+            <tbody id="us">
+
+            <tr>
+                {{ form_errors(form) }}
+                <td>
+                    <div class="form-group" >
+                        {{ form_label(form.codes,"Codes",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                        {{ form_errors(form.codes) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(form.codes,{'attr':{'class':'form-control'}}) }}
+                            <p id="content_info">
+
+                            </p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <ul id="dept-fields-list">
+                    {% for dept in form.deptChoice %}
+                        {% set i = i+1 %}
+                        <li style="list-style-type: none" >
+                        {{  form_widget(dept , {'attr':{'class':'myCheckbox'}}) }}
+                           {{  form_label(dept) }} <a style="color: #6b6d6d"  href="javascript:void(0);" onclick="change({{ cpt }})">ii</a></li>
+                        {% set cpt = cpt+1 %}
+                        {% if i == 30  %}
+                            </td>
+                            <td>
+                                {% set i =0 %}
+                        {% endif %}
+                    {% endfor %}</ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" class="btn btn-primary" id="submit" value="Enregistrer">
+    {{ form_row(form._token) }}</div>
+</form>
+{% endblock %}

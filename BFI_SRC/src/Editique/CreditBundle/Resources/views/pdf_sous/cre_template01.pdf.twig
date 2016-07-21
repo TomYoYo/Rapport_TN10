@@ -1,0 +1,49 @@
+<div margin-top="213" margin-left="11" height="123">
+    {% set firstLine = 1 %}
+    {% for ligne_id in oSouscription.identification %}
+        {% if firstLine %}
+        <span font-style="bold" font-size="11">{{ ligne_id }} <br/></span>
+        {% if ligne_id != '' %}{% set firstLine = 0 %}{% endif %}
+        {% else %}
+        <span>{{ ligne_id }} <br/></span>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div margin-left="168">
+    <div margin-top="41">
+        {{ oSouscription.idDossier }}
+    </div>
+    <div margin-top="4" height="22">
+        {{ oSouscription.montantPret.0 }} <br/>
+        {{ oSouscription.montantPret.1 }}
+    </div>
+    <div margin-top="6">
+        {{ oSouscription.duree ?: '-' }}
+    </div>
+    <div margin-top="7" height="97">
+        {% for line in oSouscription.objetFinancement %}
+            {{ line }}
+            {% if not loop.last %}<br/>{% endif %}
+        {% endfor %}
+    </div>
+    <div margin-top="8">
+        {{ oSouscription.dtDecaissement ?: '-' }}
+    </div>
+    <div margin-top="11">
+        {{ oSouscription.dtDerEcheance ?: '-' }}
+    </div>
+
+    <div margin-top="43">
+        {{ oSouscription.cptSupport ?: '-' }}
+    </div>
+    <div margin-top="11">
+        {{ oSouscription.nbEcheances ?: '-' }}
+    </div>
+    <div margin-top="8">
+        {{ oSouscription.diffAmo ?: '-' }}
+    </div>
+    <div margin-top="8">
+        {{ oSouscription.modeAmo ?: '-' }}
+    </div>
+</div>

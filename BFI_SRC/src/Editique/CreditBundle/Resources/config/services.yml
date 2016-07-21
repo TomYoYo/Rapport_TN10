@@ -1,0 +1,28 @@
+services:
+    editique.creditManager:
+        class: Editique\CreditBundle\Manager\CreditManager
+        calls:
+            - [ setEntityManager, [ @doctrine ] ]
+    editique.echeancierManager:
+        class: Editique\CreditBundle\Manager\EcheancierManager
+        calls:
+            - [ setEcritureManager, [ @backoffice_parser.ecritureManager ] ]
+            - [ setLectureManager, [ @backoffice_parser.lectureManager ] ]
+            - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+            - [ setEntityManager, [ @doctrine ] ]
+            - [ setFileManager, [ @backoffice_file.fileManager ] ]     
+            - [ setWindowsFTPManager, [ @back_office_connexion.windowsFTP ] ]          
+            - [ setPDFManager, [ @ps_pdf.facade] ]
+            - [ setTplManager, [ @templating] ]
+    editique.souscriptionManager:
+        class: Editique\CreditBundle\Manager\SouscriptionManager
+        calls:
+            - [ setEcritureManager, [ @backoffice_parser.ecritureManager ] ]
+            - [ setLectureManager, [ @backoffice_parser.lectureManager ] ]
+            - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+            - [ setEntityManager, [ @doctrine ] ]
+            - [ setFileManager, [ @backoffice_file.fileManager ] ]     
+            - [ setWindowsFTPManager, [ @back_office_connexion.windowsFTP ] ]          
+            - [ setPDFManager, [ @ps_pdf.facade] ]
+            - [ setTplManager, [ @templating] ]
+            - [ setCreManager, [ @editique.creditManager ] ]

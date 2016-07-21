@@ -1,0 +1,140 @@
+
+back_office_habilitation:
+    path: /habilitation/{page}
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:index,page : 1}
+
+
+back_office_habilitation_user_desactivate :
+    pattern:  /habilitation/desactivate/{id}
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:userDesactivate }
+
+back_office_habilitation_user_activate :
+    pattern:  /habilitation/activate/{id}
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:userActivate }
+
+back_office_habilitation_user_create :
+    path: /habilitation/creation/
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:createUser}
+
+back_office_habilitation_superieur :
+    path: /habilitation/superieur/
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:superieur}
+
+back_office_habilitation_user_reinitiate :
+    pattern:  /habilitation/reinitiate/{login}
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:userReinitiate }
+
+back_office_habilitation_services :
+    pattern: /habilitation/services/
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:services }
+    methods : POST
+
+back_office_habilitation_sous_services :
+    pattern: /habilitation/sous-services/
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:sousServices }
+    methods : POST
+
+back_office_habilitation_check :
+    pattern: /habilitation/creation/check/
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:checkLogin }
+    methods : POST
+
+back_office_habilitation_superieur_check :
+    pattern: /habilitation/superieur/check/
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:checkLogin }
+    methods : POST
+
+back_office_habilitation_services_dup :
+    pattern: /habilitation/creation/services/
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:services }
+    methods : POST
+
+back_office_habilitation_sous_services_dup :
+    pattern: /habilitation/creation/sous-services/
+    defaults: { _controller: BackOfficeHabilitationBundle:Default:sousServices }
+    methods : POST
+
+back_office_habilitation_sous_us:
+    pattern : /habilitation/users/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:usersAjax }
+    methods : POST
+
+back_office_habilitation_menu:
+    pattern : /habilitation/detail/detailMenu/
+    defaults : { _controller: BackOfficeHabilitationBundle:DetailHabilitation:menu }
+    methods : POST
+
+back_office_habilitation_donnees:
+    pattern : /habilitation/detail/detailDonnees/
+    defaults : { _controller: BackOfficeHabilitationBundle:DetailHabilitation:donnees }
+    methods : POST
+
+back_office_habilitation_donnees_each:
+    pattern : /habilitation/detail/detailDonneesEach/
+    defaults : { _controller: BackOfficeHabilitationBundle:DetailHabilitation:donneesEach }
+    methods : POST
+
+back_office_habilitation_donnees_search:
+    pattern : /habilitation/detail/searchLib/
+    defaults : { _controller: BackOfficeHabilitationBundle:DetailHabilitation:searchLib }
+    methods : POST
+
+back_office_habilitation_sous_users:
+    pattern : /habilitation/creation/users/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:usersAjax }
+    methods : POST
+
+back_office_habilitation_users_superieur:
+    pattern : /habilitation/superieur/userssup/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:usersAjax }
+    methods : POST
+
+back_office_habilitation_subordonnees:
+    pattern : /habilitation/superieur/subordonne/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:getSub }
+    methods : POST
+
+
+back_office_habilitation_username:
+    pattern : /habilitation/username/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:userNameAjax }
+    methods : POST
+
+back_office_habilitation_username_modif:
+    pattern : /habilitation/creation/username/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:userNameAjax }
+    methods : POST
+
+back_office_habilitation_new_user:
+    pattern : /habilitation/creation/
+    defaults : { _controller: BackOfficeHabilitationBundle:Default:createUser }
+    methods : POST
+
+back_office_habilitation_user_duplicate :
+    path: /habilitation/creation/
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:createUser}
+
+back_office_habilitation_user_modification :
+    path: /habilitation/creation/
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:createUser}
+
+back_office_habilitation_detail :
+    path: /habilitation/detail/
+    defaults: {_controller: BackOfficeHabilitationBundle:DetailHabilitation:index}
+
+back_office_habilitation_detail_choices:
+    pattern : /habilitation/detail/choiceGroupe/
+    defaults : { _controller: BackOfficeHabilitationBundle:DetailHabilitation:choiceGroupe }
+    methods : POST
+
+back_office_habilitation_test :
+    path: /habilitation/test/
+    defaults: {_controller: BackOfficeHabilitationBundle:DetailHabilitation:test}
+
+back_office_habilitation_filtre_desactivate :
+    path: /habilitation/desactivate
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:index}
+
+back_office_habilitation_filtre_reset :
+    path: /habilitation/reset
+    defaults: {_controller: BackOfficeHabilitationBundle:Default:index}

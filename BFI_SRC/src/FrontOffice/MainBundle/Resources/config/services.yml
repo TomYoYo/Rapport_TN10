@@ -1,0 +1,6 @@
+services:
+    main.twig.main_extension:
+        class: FrontOffice\MainBundle\Twig\MainExtension
+        arguments: [ '@service_container' ]
+        tags:
+            - { name: twig.extension }

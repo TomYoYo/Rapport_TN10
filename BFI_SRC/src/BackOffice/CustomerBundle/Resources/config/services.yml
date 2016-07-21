@@ -1,0 +1,13 @@
+parameters:
+#    back_office_customer.example.class: BackOffice\CustomerBundle\Example
+
+services:
+#    back_office_customer.example:
+#        class: %back_office_customer.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    backoffice.informationsmanager:
+        class: BackOffice\CustomerBundle\Manager\InformationsManager
+        arguments: [@doctrine.orm.entity_manager, @backoffice_monitoring.logManager]
+        calls:
+            - [ setEntityManager, [ @doctrine ] ]
+            - [ setContainer,[@service_container]]

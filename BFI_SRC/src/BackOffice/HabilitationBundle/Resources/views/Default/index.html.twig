@@ -1,0 +1,148 @@
+{% extends 'BackOfficeHabilitationBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Utilisateurs {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h3 style="margin-top: 0">Liste des utilisateurs SAB</h3>
+        </div>
+
+        <div class="col-md-3 text-right col-md-offset-1">{% if is_granted('ROLE_ASSISTANCE') %}
+            <a class="btn btn-primary" style="color: white;margin-bottom: 10px;width: 100%" href="{{ path('back_office_habilitation_user_create') }}">Ajouter un utilisateur</a><br/>
+            <a class="btn btn-danger" style="color: white;margin-bottom: 10px;width: 100%" href="{{ path('back_office_habilitation_superieur') }}">Changer Supérieur</a><br/>{% endif %}
+            <a style="color: white;margin-bottom: 10px;width: 100%" href="{{ path('back_office_habilitation_detail') }}" class="btn btn-success">Détail des habilitations</a>
+
+            <!--<a style="color: white;margin-bottom: 10px;display: none;" href="{{ path('back_office_habilitation_test') }}" class="btn btn-success">TEST</a>-->
+        </div>
+    </div>
+    {% if error != '' %}
+        <div class="alert alert-danger">{{ error }}</div>{% endif  %}
+    {% if info != '' %}
+        <div class="alert alert-success" style="text-align: center">{{ info }}</div>{% endif  %}
+    <div id="habilitationFiltres">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_habilitation') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Login Nom/Prenom</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if data is defined %} value="{{ data }}" {% endif %} autocomplete="off" name="Login" placeholder="Login">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    {{ form_label(form.desactivate,"Accès SAB",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                    {{ form_errors(form.desactivate) }}
+                                    <div class="col-sm-6">
+                                            {{ form_widget(form.desactivate,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    {{ form_label(form.filtres.menu,"Habilitation Menu",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                    {{ form_errors(form.filtres.menu) }}
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.filtres.menu,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    {{ form_label(form.filtres.donnees,"Habilitation Données",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                    {{ form_errors(form.filtres.donnees) }}
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.filtres.donnees,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    {{ form_label(form.filtres.metier,"Habilitation Metier",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                    {{ form_errors(form.filtres.metier) }}
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.filtres.metier,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                    <a href="{{ path('back_office_habilitation_filtre_reset') }}" class="btn btn-success btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    {{ form_row(form._token) }}
+                </form>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Login</th>
+                <th>Code Utilisateur</th>
+                <th>Prenom/Nom</th>
+                <th>Habilitation Menu</th>
+                <th>Habilitation Données</th>
+                <th>Habilitation Métiers</th>
+                <th>Accès SAB</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.login }}</td>
+                    <td>{{ user.code }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.hab2 }}</td>
+                    <td>{{ user.hab3 }}</td>
+                    <td>{{ user.hab4 }}</td>
+                    <td >{% if user.entree == 'O' %}Oui{% else %}Non{% endif %}</td>
+                    <td style="width: 150px">
+                        {% if user.entree == 'N' %}
+                            {% if is_granted('ROLE_ASSISTANCE') %}
+                            <a href="{{ path('back_office_habilitation_user_activate', { 'id': user.code }) }}">
+                                <img src="{{ asset('bundles/frontofficemain/images/activate.png') }}" width="30" alt="Réactiver" title="Réactiver" onclick="return(confirm('Etes-vous sûr de vouloir Réactiver cet utilisateur ?'));" />
+                            </a>{% endif %}
+
+                        {% else %}                            {% if is_granted('ROLE_ASSISTANCE') %}
+                            <a href="{{ path('back_office_habilitation_user_duplicate', { 'login': user.login }) }}">
+                                <span style="font-size:1.7em;top: 8px" class="glyphicon glyphicon-resize-horizontal" title="Dupliquer" onclick="return(confirm('Etes-vous sûr de vouloir créer un utilisateur avec ce profil ?'));" ></span>
+                            </a>{% endif %}
+                            <a href="{{ path('back_office_habilitation_user_modification', { 'login_modif': user.login }) }}">
+                                <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier/Visualiser" title="Modifier/visualiser"  />
+                            </a>      {% if is_granted('ROLE_ASSISTANCE') %}        {% if user.date|date('Y/m/d') > 'now'|date('Y/m/d') %}
+                            <a href="{{ path('back_office_habilitation_user_reinitiate', { 'login': user.login }) }}">
+                                <span style="font-size:1.7em;top: 10px" class="glyphicon glyphicon-refresh" title="Forcer le changement de mot de passe" onclick="return(confirm('Etes-vous sûr de vouloir forcer le changeùent du mot de passe de cet utilisateur ?'));" ></span>
+                            </a> {% endif %}
+                            <a href="{{ path('back_office_habilitation_user_desactivate', { 'id': user.code }) }}">
+                                <img src="{{ asset('bundles/frontofficemain/images/delete.png') }}" width="30" alt="Désactiver" title="Désactiver" onclick="return(confirm('Etes-vous sûr de vouloir désactiver cet utilisateur ?'));" />
+                            </a>{% endif %}
+
+                       {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if pager %}
+    {% if pager.haveToPaginate %}
+        {{ pagerfanta(pager,'twitter_bootstrap3', {'prev_message':'&larr; Précédente', 'next_message':'Suivante &rarr;'}) }}
+    {% endif %}{% endif %}
+{% endblock %}

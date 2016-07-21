@@ -1,0 +1,92 @@
+{% extends 'BackOfficeHabilitationBundle::layout.html.twig' %}
+
+{% block title %}Superieur{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h3 style="margin-top: 0">Changement de supérieur pour plusieurs utilisateurs</h3>
+        </div>
+    </div>
+<form id="saisieHabilitation"action="{{ path('back_office_habilitation_superieur') }}" method="POST" class="form-horizontal" role="form">
+    <div class="well">
+
+        <table class="bandeauSaisie">
+            <tbody id="us">
+            <tr>
+                <td style="width: 50%">
+                    <div class="form-group" >
+                        {{ form_label(form.oldSup,"Ancien Supérieur",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                        {{ form_errors(form.oldSup) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(form.oldSup,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        {{ form_label(form.newSup,"Nouveau Supérieur",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                        {{ form_errors(form.newSup) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(form.newSup,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        {{ form_label(form.sub) }}
+                        {{ form_errors(form.sub) }}
+
+                        <ul id="sub-fields-list" data-prototype="{{ form_widget(form.sub.vars.prototype)|e }}">
+                            {% for subField in form.sub %}
+                                <li>
+                                    {{ form_errors(subField) }}
+                                    {{ form_widget(subField) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            <div class="panel panel-success" style="width: 100%;">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" id="supTitle">
+                                        Utilisateurs cible du changement
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="tableauScrollable" tabindex="30000000">
+                                        <table class="table table-condensed table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <td>Login</td>
+                                                <td>Action</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tableSup">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="form-group">
+                                        <label for="searchSup">Utilisateur : </label>
+                                        <input type="text" id="searchSup">   </div>
+                                    <div class="form-group">
+                                    <a  class="btn btn-primary" id="ajoutSup">Ajouter</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center">
+        <input type="submit" class="btn btn-primary" id="submit" value="Envoyer"  onclick="return(confirm('Etes vous sur de vouloir envoyer ces informations (cette action est irréversible) ? '))">
+        <a href="{{ path('back_office_habilitation') }}" class="btn btn-danger">Annuler</a>
+    </div>        {{ form_row(form._token) }}
+</form>
+{% endblock %}

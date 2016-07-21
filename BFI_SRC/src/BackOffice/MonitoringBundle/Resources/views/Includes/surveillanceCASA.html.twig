@@ -1,0 +1,75 @@
+{% set altRefresh = 'Rafraîchir le statut de ce block'%}
+
+{% if statusSIT == 'surveillanceSITOk' %}
+    {% set img = 'rondVert'%}
+    {% set alt = 'Fichier présent et occurence non présente'%}
+{% elseif statusSIT == 'surveillanceSITKo' %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Fichier présent mais occurence présente'%}
+{% elseif statusSIT == 'surveillanceSITError' %}
+    {% set img = 'rondOrange'%}
+    {% set alt = 'Fichier non présent'%}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Fichier <strong>Opérations SIT</strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le
+    <strong>
+        {{ lastDateTimeSIT|date("d/m/Y") }} à 
+        {{ lastDateTimeSIT|date("H:i:s") }}
+    </strong>
+    
+    <button onclick="$('#detailSIT').fadeToggle()">Détail</button>
+</div>
+
+<div class="formRefresh" id="detailSIT">
+    Surveillance Opérations SIT
+    <br>
+    <br>
+
+    <table class="table table-striped table-condensed table-hover">
+        <tr>
+            <td>
+                <img class="" src="{{ asset('bundles/backofficemonitoring/images/rondVert.png') }}" alt="Fichier présent et occurence non présente" title="" />
+            </td>
+            <td>
+                {% if dateTimeSuccessSIT != '' %}
+                Dernier succès le {{ dateTimeSuccessSIT|date("d/m/Y") }} à <strong>{{ dateTimeSuccessSIT|date("H:i:s") }}</strong>
+                {% else %}
+                Aucun succès loggué !
+                {% endif %}
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img class="" src="{{ asset('bundles/backofficemonitoring/images/rondRouge.png') }}" alt="Fichier présent mais occurence présente" title="" />
+            </td>
+            <td>
+                {% if dateTimeFailSIT != '' %}
+                Dernier échec le {{ dateTimeFailSIT|date("d/m/Y") }} à <strong>{{ dateTimeFailSIT|date("H:i:s") }}</strong>
+                {% else %}
+                Aucun échec loggué !
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img class="" src="{{ asset('bundles/backofficemonitoring/images/rondOrange.png') }}" alt="Fichier non présent" title="" />
+            </td>
+            <td>
+                {% if dateTimeAlertSIT != '' %}
+                Dernière alerte le {{ dateTimeAlertSIT|date("d/m/Y") }} à <strong>{{ dateTimeAlertSIT|date("H:i:s") }}</strong>
+                {% else %}
+                Aucune alerte logguée !
+                {% endif %}
+                
+            </td>
+        </tr>
+    </table>
+</div>

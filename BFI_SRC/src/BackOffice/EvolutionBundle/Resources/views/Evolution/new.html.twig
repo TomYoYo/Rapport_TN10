@@ -1,0 +1,90 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Nouvelle évolution {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/tinyeditor.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}    
+{% endblock %}
+
+{% block content %}
+    <h3>Nouvelle évolution</h3>
+    
+    <div class="well">
+        {{ form_errors(form) }}
+        <form action="{{ path('evolution_create') }}" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                {{ form_label(form.versionNumber, 'Numéro de version', {'label_attr': {'class':'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.versionNumber, {'attr': {'class': 'form-control', 'placeholder': 'Numéro de version'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.preprodRealisation, 'Date Pré-production', {'label_attr': {'class':'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.preprodRealisation, {'attr': {'class': 'form-control datetime', 'placeholder': 'Date de mise en PREPROD'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.prodRealisation, 'Date Production', {'label_attr': {'class':'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.prodRealisation, {'attr': {'class': 'form-control datetime', 'placeholder': 'Date de mise en PROD'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.estimatedDate, 'Date estimée', {'label_attr': {'class':'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.estimatedDate, {'attr': {'class': 'form-control datetime', 'placeholder': 'Date estimée'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.description, 'Description', {'label_attr': {'class':'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    {{ form_widget(form._token) }}
+                    <button type="submit" class="btn btn-success" id="valid-evol">Ajouter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/tiny.editor.packed.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        
+    <script>
+        new TINY.editor.edit('editor',{
+            id:'backoffice_evolutionbundle_evolution_description',
+            width:'100%',
+            height:175,
+            cssclass:'tinyeditor',
+            controlclass:'tinyeditor-control',
+            rowclass:'tinyeditor-header',
+            dividerclass:'tinyeditor-divider',
+            controls:['bold', 'italic', 'undeline', 'subscript', 'superscript', '|', 'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|' , 'undo', 'redo'],
+            xhtml:true,
+            content:'<p>Liste des modifications :</p><ul><li><i>[Module]</i> Description de la modification</li></ul>',
+            bodyid:'editor',
+            css:'body{color:#555; font-size:14px;font-family:"Helvetica Neue",​Helvetica,​Arial,​sans-serif;line-height:20px;}'
+        });
+        
+        $(document).ready(function(){
+            $('#valid-evol').click(function(){
+                editor.post();
+            });
+        });
+    </script>
+{% endblock %}

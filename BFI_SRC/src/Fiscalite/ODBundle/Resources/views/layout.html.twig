@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Opérations diverses{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+        '@FrontOfficeMainBundle/Resources/public/css/placeholder.css'
+        '@FiscaliteODBundle/Resources/public/css/od.css'
+        '@FiscaliteODBundle/Resources/public/css/demo_table.css'
+        '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}    
+{% endblock %}
+
+{% block nav_content %}
+    {% set route = app.request.attributes.get('_route') %}
+    
+    <ul class="list-inline">
+        <li {% if route == "od_new" %} class="active" {% endif %}><a href="{{ path('od_new') }}">Saisir</a></li>
+        <li {% if route == "od_listing" or route == "od_show" or route == "od_search" or route == "od_request_cre_jc" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consulter<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ path('od_listing') }}">Toutes les opérations</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <form action="{{ path('od_listing') }}" method="post" class="falseForm">
+                        <input type="hidden" value="SAI" name="search[statut]" />
+                        <input type="submit" value="Opérations pré-saisies" />
+                    </form>
+                </li>
+                <li>
+                    <form action="{{ path('od_listing') }}" method="post" class="falseForm">
+                        <input type="hidden" value="VAL" name="search[statut]" />
+                        <input type="submit" value="Opérations en attente de validation" />
+                    </form>
+                </li>
+                <li>
+                    <form action="{{ path('od_listing') }}" method="post" class="falseForm">
+                        <input type="hidden" value="ENR" name="search[statut]" />
+                        <input type="submit" value="Opérations enregistrées" />
+                    </form>
+                </li>
+                <li>
+                    <form action="{{ path('od_listing') }}" method="post" class="falseForm">
+                        <input type="hidden" value="ENV" name="search[statut]" />
+                        <input type="submit" value="Opérations envoyées" />
+                    </form>
+                </li>
+                {% if is_granted("ROLE_USER") %}
+                    <li class="divider"></li>
+                    <li>
+                        <form action="{{ path('od_listing') }}" method="post" class="falseForm">
+                            <input type="hidden" value="{{ app.user.username }}" name="search[saisisseur]" />
+                            <input type="submit" value="Mes opérations" />
+                        </form>
+                    </li>
+                {% endif %}
+                <li class="divider"></li>
+                <li>
+                    <a href="{{ path('od_request_cre_jc') }}">Générer le CRE J. Comp.</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if route == "od_export" %} class="active" {% endif %}><a href="{{ path('od_export') }}">Exporter</a></li>
+        {% if route == "od_new" or route == "od_edit" or route == "od_create" %}
+            <li data-toggle="modal" data-target="#raccourciModal"><a href="#">Raccourcis clavier</a></li>
+            <li data-toggle="modal" data-target="#listeCompteModal"><a href="#">Liste comptes</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block nav_search %}
+    <form class="navbar-form navbar-right" action="{{ path('od_search') }}" method="post" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Numéro de pièce" name="search[numPiece]" />
+        </div>
+        <button type="submit" class="btn btn-default">Rechercher</button>
+    </form>
+{% endblock %}
+    
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}
+        
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/bootstrap.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.auto-numeric.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@FiscaliteODBundle/Resources/public/js/jquery.dataTables.min.js'
+        '@FiscaliteODBundle/Resources/public/js/od.js'
+        '@FrontOfficeMainBundle/Resources/public/js/ie8.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

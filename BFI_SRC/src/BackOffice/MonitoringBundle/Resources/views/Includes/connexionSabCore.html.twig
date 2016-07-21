@@ -1,0 +1,63 @@
+{% set altRefresh = 'Rafraîchir le statut de ce block'%}
+
+{% if statusSabCore == 'serverOk' %} 
+    {% set img = 'rondVert'%}
+    {% set alt = 'Serveur atteint et dossiers présents'%}
+{% elseif statusSabCore == 'serverUnreachable' %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Serveur inaccessible'%}
+{% elseif statusSabCore == 'serverPb' %}
+    {% set img = 'rondOrange'%}
+    {% set alt = 'Serveur atteint mais un ou plusieurs dossiers sont absents'%}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Accès serveur <strong>SabCore </strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le
+    <strong>
+        {{ lastTimeSabCoreStatus|date("d/m/Y") }} à 
+        {{ lastTimeSabCoreStatus|date("H:i:s") }}
+    </strong>
+
+    <button onclick="$('#detailSabCore').fadeToggle()">Détail</button>
+    
+</div>
+
+<div class="formRefresh" id="detailSabCore">
+    Connexion SSH par clé privée/publique
+    <br>
+    <br>
+
+    <table class="table table-striped table-condensed table-hover">
+        <tr>
+            <td>
+                <img class="" src="{{ asset('bundles/backofficemonitoring/images/rondVert.png') }}" alt="" title="" />
+            </td>
+            <td>
+                {% if dateTimeSuccessSabCore != '' %}
+                Dernier succès le {{ dateTimeSuccessSabCore|date("d/m/Y") }} à <strong>{{ dateTimeSuccessSabCore|date("H:i:s") }}</strong>
+                {% else %}
+                Aucun succès loggué !
+                {% endif %}
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img class="" src="{{ asset('bundles/backofficemonitoring/images/rondRouge.png') }}" alt="" title="" />
+            </td>
+            <td>
+                {% if dateTimeFailSabCore != '' %}
+                Dernier échec le {{ dateTimeFailSabCore|date("d/m/Y") }} à <strong>{{ dateTimeFailSabCore|date("H:i:s") }}</strong>
+                {% else %}
+                Aucun échec loggué !
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>

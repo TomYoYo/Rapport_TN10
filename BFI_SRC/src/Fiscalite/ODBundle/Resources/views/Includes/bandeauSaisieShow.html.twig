@@ -1,0 +1,83 @@
+<div class="well">
+    <table class="bandeauSaisie">
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <th>Saisie</th>
+                        <td>{{ operation.profil ?: operation.statut.idStatut ? 'Automatique' : '-' }} le {{ operation.dateSai|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Validation</th>
+                        <td>{{ operation.valideur ? operation.valideur~' le '~operation.dateValid|date('d/m/Y') :  '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Identifiant</th>
+                        <td>{{ operation.numPiece }}</td>
+                    </tr>
+                    <tr>
+                        <th>Numéro de pièce</th>
+                        <td>{{ operation.numPieceTech }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date comptable</th>
+                        <td>{{ operation.dateCpt|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de valeur</th>
+                        <td>{{ operation.dateVal|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Devise</th>
+                        <td>{{ operation.devise }}</td>
+                    </tr>
+                </table>
+            </td>
+            
+            <td>
+                <table>
+                    <tr>
+                        <th>Code opération</th>
+                        <td>{{ operation.codeOpe }}</td>
+                    </tr>
+                    <tr>
+                        <th>Code évènement</th>
+                        <td>{{ operation.codeEve }}</td>
+                    </tr>
+                    <tr>
+                        <th>Réf. lettrage</th>
+                        <td>{{ operation.refLet }}</td>
+                    </tr>
+                    <tr>
+                        <th>Réf. analytique</th>
+                        <td>{{ operation.refAnalytique }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tiers</th>
+                        <td>{{ operation.tiers ?: '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Statut actuel</th>
+                        <td>{{ operation.statut }}</td>
+                    </tr>
+                    <tr>
+                        <th>Journée complémentaire</th>
+                        <td>{{ operation.isComplementaryDay ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                </table>
+            </td>
+            
+            <td>
+                <div class="form-group">
+                    <a href="{{ path('od_edit', {'id':operation.numPiece}) }}" class="btn btn-warning" {% if operation.statut.idStatut == 'ENR' or operation.statut.idStatut == 'ENV' or operation.isDeleted %} disabled="disabled" {% endif %}>Modifier</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ path('od_valid', {'id':operation.numPiece}) }}" class="btn btn-success" {% if operation.statut.idStatut == 'SAI' or operation.statut.idStatut == 'ENR' or operation.statut.idStatut == 'ENV' or operation.isDeleted or operation.profil.id == app.user.id or not is_granted('ROLE_SUPER_COMPTABLE') %} disabled="disabled" {% endif %}>Valider</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ path('od_listing') }}" class="btn btn-default">Retour</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

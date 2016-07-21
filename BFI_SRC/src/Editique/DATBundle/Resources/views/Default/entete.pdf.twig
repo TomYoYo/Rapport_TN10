@@ -1,0 +1,21 @@
+<div>{{ dat.idClient }}</div>
+<div margin-top="7px">{{ dat.nom }} {{ dat.prenom }}</div>
+<div margin-top="5px">
+    {% set marginTopAdresse = "1px" %}
+    {% for adr in dat.adresseFinale %}
+        <div position="absolute" margin-top="{{marginTopAdresse}}">{{ adr|raw }}</div>
+        {% if adr == ' ' %}
+            {% set marginTopAdresse = "16px" %}
+        {% else %}
+            {% set marginTopAdresse = "1px" %}
+        {% endif %}
+    {% endfor %}
+</div>
+<div margin-top="6px" height="9">{{ dat.siren ?: '' }}</div>
+<div margin-top="7px">{{ dat.nomRepresentant }} {{ dat.prenomRepresentant }}</div>     
+
+<div margin-top="45px">{{ dat.refDat }}</div>
+<div margin-top="12px">{{ dat.dateDebutFromSab }} (inclus)</div>
+<div margin-top="13px">{{ dat.dateEcheanceFromSab }} (inclus)</div>
+<div margin-top="10px">{{ dat.montantDepotFinal|join }}</div>
+<div margin-top="8px">{{ dat.numCompteSupport }}</div>

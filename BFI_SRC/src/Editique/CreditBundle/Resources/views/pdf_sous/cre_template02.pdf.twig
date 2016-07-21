@@ -1,0 +1,38 @@
+<div margin-left="168">
+    <div margin-top="30">
+        {{ oSouscription.periodeInteret ?: '-' }}
+    </div>
+    <div margin-top="14" margin-left="17">
+        {{ oSouscription.jourPrelevement ?: '01' }}
+    </div>
+    <div margin-top="19">
+        {{ oSouscription.tauxPret }}
+    </div>
+    <div margin-top="16">
+        {{ oSouscription.fraisDossier ?: '-' }}
+    </div>
+    <div margin-top="6" height="60">
+        {{ oSouscription.assurances.0 }} <br/>
+        {{ oSouscription.assurances.1 }} <br/>
+        {{ oSouscription.assurances.2 }} <br/>
+        {{ oSouscription.assurances.3 }} <br/>
+        {{ oSouscription.assurances.4 }}
+    </div>
+    <div margin-top="8">
+        {{ oSouscription.teg }}
+    </div>
+
+    <div margin-top="95" height="82">
+        {% for fraisGarLib, fraisGarMont in oSouscription.fraisGaranties %}
+            {{ fraisGarLib }} : {{ fraisGarMont}} € <br/>
+        {% else %}
+        -
+        {% endfor %}
+    </div>
+    
+    <div margin-top="11">
+    {% for i,gar in oSouscription.garanties|slice(sliceValues['start'], sliceValues['length']) %}
+        {{ gar }} <br/>
+    {% endfor %}
+    </div>
+</div>

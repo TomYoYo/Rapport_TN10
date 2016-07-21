@@ -1,0 +1,57 @@
+security:
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                #success_handler: bakcofficeuser.success_handler
+            logout: true
+            anonymous: true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: ROLE_SUPER_ADMIN }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/$, role: ROLE_USER }
+        - { path: ^/fiscalite/od/mep/mise-a-jour-bdd, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fiscalite/etats-reglementaires, role: [ROLE_REGLEMENTAIRE, ROLE_ASSISTANCE] }
+        - { path: ^/fiscalite/, role: ROLE_COMPTABLE }
+        - { path: ^/controle-budgetaire, role: ROLE_CONTROLEUR }
+        - { path: ^/editique/souscription-credit/, role: ROLE_AGENCE }
+        - { path: ^/editique/messages, role: ROLE_COMMERCIAL }
+        - { path: ^/editique/documents, role: ROLE_FIRME }
+        - { path: ^/editique/pdf, role: [ROLE_AGENCE, ROLE_FIRME, ROLE_ASSISTANCE] }
+        - { path: ^/editique/releves-firmes, role: ROLE_COMPTABLE }
+        - { path: ^/editique/, role: [ROLE_AGENCE, ROLE_RCCI, ROLE_ASSISTANCE] }
+        - { path: ^/backoffice/sab/logs, role: [ROLE_SAB,, ROLE_ASSISTANCE] }
+        - { path: ^/backoffice/sab/arbo, role: [ROLE_RCCI, ROLE_COMPTABLE, ROLE_ASSISTANCE] }
+        - { path: ^/backoffice/customer, role: [ROLE_AGENCE] }
+        - { path: ^/backoffice/habilitation, role: [ ROLE_ASSISTANCE, ROLE_RCCI] }
+        - { path: ^/backoffice/, role: [ROLE_ADMIN, ROLE_ASSISTANCE] }  
+        - { path: ^/transverse/spoolalert, role: [ROLE_BACKOFFICE, ROLE_AGENCE, ROLE_REGLEMENTAIRE, ROLE_RCCI] }
+        - { path: ^/transverse/fluxCB, role: ROLE_BACKOFFICE }
+        - { path: ^/transverse/spoolalert/administration, role: ROLE_ADMIN }
+        - { path: ^/transverse/fluxCB/administration, role: ROLE_ADMIN }
+        
+    role_hierarchy:
+        ROLE_SUPER_ADMIN:       ROLE_ADMIN
+        ROLE_ADMIN:             [ROLE_SUPER_COMPTABLE, ROLE_ASSISTANCE, ROLE_RCCI, ROLE_CONTROLEUR, ROLE_AGENCE, ROLE_COMMERCIAL, ROLE_SAB, ROLE_BACKOFFICE]
+        ROLE_SUPER_COMPTABLE:   ROLE_COMPTABLE
+        ROLE_COMPTABLE:         ROLE_REGLEMENTAIRE
+        ROLE_ASSISTANCE:        ROLE_USER
+        ROLE_RCCI:              ROLE_USER
+        ROLE_CONTROLEUR:        ROLE_USER
+        ROLE_AGENCE:            ROLE_USER
+        ROLE_REGLEMENTAIRE:     ROLE_USER
+        ROLE_COMMERCIAL:        ROLE_USER
+        ROLE_SAB:               ROLE_USER
+        ROLE_FIRME:             ROLE_USER
+        ROLE_BACKOFFICE:        ROLE_USER

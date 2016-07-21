@@ -1,0 +1,134 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block content %}
+    <h3>Consultation des Opérations Diverses</h3>
+    <div id="monitoEditique">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_od_operations') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Identifiant</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.numPiece is defined %} value="{{ datas.numPiece }}" {% endif %} autocomplete="off" name="search[numPiece]" placeholder="Numéro identifiant">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Statut</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[statut]">
+                                            <option value="" label="Statut"></option>
+                                            <option value="SAI" {% if datas.statut is defined and datas.statut == "SAI" %} selected="selected" {% endif %}>Pré-saisie</option>
+                                            <option value="ENR" {% if datas.statut is defined and datas.statut == "ENR" %} selected="selected" {% endif %}>Enregistrée</option>
+                                            <option value="VAL" {% if datas.statut is defined and datas.statut == "VAL" %} selected="selected" {% endif %}>A valider</option>
+                                            <option value="ENV" {% if datas.statut is defined and datas.statut == "ENV" %} selected="selected" {% endif %}>Envoyée</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Saisisseur</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.saisisseur is defined %} value="{{ datas.saisisseur }}" {% endif %} autocomplete="off" maxlength="10" name="search[saisisseur]" placeholder="Saisisseur">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Numéro de pièce</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.numPieceTech is defined %} value="{{ datas.numPieceTech }}" {% endif %} autocomplete="off" name="search[numPieceTech]" placeholder="Numéro de pièce">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date de saisie</label>                                    
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateSaiDu is defined %} value="{{ datas.dateSaiDu }}" {% endif %} autocomplete="off" name="search[dateSaiDu]" placeholder="Du">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateSaiAu is defined %} value="{{ datas.dateSaiAu }}" {% endif %} autocomplete="off" name="search[dateSaiAu]" placeholder="Au">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Supprimé</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[isDeleted]">
+                                            <option value="" label="Supprimé"></option>
+                                            <option value="oui" {% if datas.isDeleted is defined and datas.isDeleted == "oui" %} selected="selected" {% endif %}>Oui</option>
+                                            <option value="non" {% if datas.isDeleted is defined and datas.isDeleted == "non" %} selected="selected" {% endif %}>Non</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href="{{ path('back_office_delete_filters', {'page':'od_operations'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Numéro identifiant', 'column': 'numPiece'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Numéro de pièce', 'column': 'numPieceTech'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Statut', 'column': 'statut'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Saisisseur', 'column': 'profil'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Date de saisie', 'column': 'dateSai'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Supprimé ?', 'column': 'isDeleted'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Action', 'column': 'action', 'noSort':true} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for operation in entities %}
+                <tr>
+                    <td>{{operation.numPiece}}</td>
+                    <td>{{operation.numPieceTech ?: '-'}}</td>
+                    <td>{{operation.statut}} ({{operation.dateStatut|date('d-m-Y')}})</td>
+                    <td>{{ operation.profil ?: operation.statut.idStatut ? 'Automatique' : '/' }}</td>
+                    <td>{{operation.dateSai|date('d-m-Y')}}</td>
+                    <td><b>{{ operation.isDeleted ? 'OUI' : 'NON' }}</b></td>
+                    <td>
+                        {% if operation.isDeleted  %}
+                            <a href="{{ path('od_show', {'id':operation.numPiece}) }}" target="_blank">
+                                <img src="{{ asset('bundles/backofficemonitoring/images/od_saved.png') }}" width="30" alt="Consulter cette OD supprimée" title="Consulter cette OD supprimée" />
+                            </a>
+                        {% else %}
+                            {% if operation.statut.idStatut != 'SAI' %}
+                            <a href="{{ path('back_office_monitoring_od_change_status', {'id':operation.numPiece, 'statusCode':'SAI'}) }}">
+                                <img src="{{ asset('bundles/backofficemonitoring/images/od_initialized.png') }}" width="30" alt="Passer au statut 'Pré-saisie'" title="Passer au statut 'Pré-saisie'" onclick="return(confirm('Etes-vous sûr de vouloir modifier cette Opération au statut \'Pré-saisie\' ?'));" />
+                            </a>
+                            {% endif %}
+                            {% if operation.statut.idStatut != 'ENR' %}
+                            <a href="{{ path('back_office_monitoring_od_change_status', {'id':operation.numPiece, 'statusCode':'ENR'}) }}">
+                                <img src="{{ asset('bundles/backofficemonitoring/images/od_saved.png') }}" width="30" alt="Passer au statut 'Enregistrée'" title="Passer au statut 'Enregistrée'" onclick="return(confirm('Etes-vous sûr de vouloir modifier cette Opération au statut \'Enregistrée\' ?'));" />
+                            </a>
+                            {% endif %}
+                            {% if operation.statut.idStatut != 'ENV' %}
+                            <a href="{{ path('back_office_monitoring_od_change_status', {'id':operation.numPiece, 'statusCode':'ENV'}) }}">
+                                <img src="{{ asset('bundles/backofficemonitoring/images/od_sended.png') }}" width="30" alt="Passer au statut 'Envoyée'" title="Passer au statut 'Envoyée'" onclick="return(confirm('Etes-vous sûr de vouloir modifier cette Opération au statut \'Envoyée\' ?'));" />
+                            </a>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+    </div>
+{% endblock %}

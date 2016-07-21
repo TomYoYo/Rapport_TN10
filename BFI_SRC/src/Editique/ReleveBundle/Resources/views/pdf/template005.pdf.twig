@@ -1,0 +1,16 @@
+<table margin-top="96" margin-left="215" height="48">
+    <tr>
+        <td border-type="none">{{oReleve.txRemuneration and oReleve.modeDiffusion != 'F' ? oReleve.txRemunerationGlobal : '0,00 %'}}</td>
+    </tr>
+    <tr margin-top="5">
+        <td border-type="none">{{ oReleve.totalInteretAcquis and oReleve.modeDiffusion != 'F' ? oReleve.totalInteretAcquisGlobal : '0,00 euros'}}</td>
+    </tr>
+</table>
+
+<table margin-top="21" margin-left="4" height="104">
+    {% for msg in oReleve.messageCommerciaux %}
+    <tr>
+        <td border-type="none">{{ msg.0 }}{{ msg.1 }}</td>
+    </tr>
+    {% endfor %}
+</table>

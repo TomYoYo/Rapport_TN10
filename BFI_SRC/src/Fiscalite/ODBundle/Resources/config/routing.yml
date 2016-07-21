@@ -1,0 +1,133 @@
+od_rapprochement:
+    pattern:  /rapprochement
+    defaults: { _controller: FiscaliteODBundle:Rapprochement:rapprochement }
+    requirements:
+        _method:  GET
+ 
+od_rapprochement_search:
+    pattern:  /rapprochement
+    defaults: { _controller: FiscaliteODBundle:Rapprochement:rapprochementSearch }
+    requirements:
+        _method:  POST
+        
+od_rapprochement_detail:
+    pattern:  /compte
+    defaults: { _controller: FiscaliteODBundle:Rapprochement:rapprochementDetail }
+    requirements:
+        _method:  POST
+ 
+
+od_rapprochement_exporting:
+    pattern:  /rapprochement_exporting
+    defaults: { _controller: FiscaliteODBundle:Rapprochement:rapprochementExporting }
+    requirements:
+        _method:  POST
+       
+        
+od_listing:
+    pattern:  /list
+    defaults: { _controller: FiscaliteODBundle:Operation:listing }
+    requirements:
+        _method:  GET
+        
+od_export:
+    pattern:  /export
+    defaults: { _controller: FiscaliteODBundle:Operation:export }
+    requirements:
+        _method:  GET
+        
+od_exporting:
+    pattern:  /exporting
+    defaults: { _controller: FiscaliteODBundle:Operation:exporting }
+    requirements:
+        _method:  POST
+
+od_search:
+    pattern:  /list
+    defaults: { _controller: FiscaliteODBundle:Operation:search }
+    requirements:
+        _method:  POST
+        
+od_delete_filters:
+    pattern:  /deleter-filters
+    defaults: { _controller: FiscaliteODBundle:Operation:deleteFilters }
+    requirements:
+        _method:  GET
+    
+od_new:
+    pattern:  /new
+    defaults: { _controller: FiscaliteODBundle:Operation:new }
+    requirements:
+        _method:  GET
+        
+od_create:
+    pattern:  /
+    defaults: { _controller: FiscaliteODBundle:Operation:create }
+    requirements:
+        _method:  POST
+        
+od_show:
+    pattern:  /{id}
+    defaults: { _controller: FiscaliteODBundle:Operation:show }
+    requirements:
+        _method:  GET
+        
+od_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: FiscaliteODBundle:Operation:edit }
+    requirements:
+        _method:  GET
+        
+od_update:
+    pattern:  /{id}
+    defaults: { _controller: FiscaliteODBundle:Operation:update }
+    requirements:
+        _method:  POST
+
+od_valid:
+    pattern:  /{id}/valid
+    defaults: { _controller: FiscaliteODBundle:Operation:valid }
+    requirements:
+        _method:  GET
+
+od_delete_link:
+    pattern:  /{id}/delete
+    defaults: { _controller: FiscaliteODBundle:Operation:deleteLink }
+    requirements:
+        _method: GET
+        
+od_maj:
+    pattern:  /mep/mise-a-jour-bdd
+    defaults: { _controller: FiscaliteODBundle:Operation:maj }
+    requirements:
+        _method:  GET
+        
+od_delete:
+    pattern:  /{id}
+    defaults: { _controller: FiscaliteODBundle:Operation:delete }
+    requirements:
+        _method:  DELETE
+        
+od_request_cre_jc:
+    pattern:  /cre-jc/request/
+    defaults: { _controller: FiscaliteODBundle:Operation:requestCreJc }
+    requirements:
+        _method: GET
+        
+od_generate_cre_jc:
+    pattern:  /cre-jc/generate/
+    defaults: { _controller: FiscaliteODBundle:Operation:generateCreJc }
+    requirements:
+        _method: GET
+        
+od_ajax_check_customer:
+    pattern:  /ajax/customer/
+    defaults: { _controller: FiscaliteODBundle:Ajax:checkCustomer }
+    requirements:
+        _method: GET
+        
+od_ajax_check_account:
+    pattern:  /ajax/account/
+    defaults: { _controller: FiscaliteODBundle:Ajax:checkAccount }
+    requirements:
+        _method: GET

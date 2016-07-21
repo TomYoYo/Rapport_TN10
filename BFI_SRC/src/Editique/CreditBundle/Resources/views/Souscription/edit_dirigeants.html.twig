@@ -1,0 +1,30 @@
+<div class="tab-pane" id="dirigeants">
+    {% for dirigeant in dirigeants %}
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="dir{{loop.index}}" class="col-md-6 control-label">Dirigeant {{loop.index}} - Dénomination</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="dir{{loop.index}}" value="{{ dirigeant.civ|trim ~' '~ dirigeant.rs1|trim ~' '~ dirigeant.rs2|trim }}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="qual{{loop.index}}" class="col-md-6 control-label required">Qualité</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm qualite" id="qual{{loop.index}}" maxlength="30" name="dirigeant[{{dirigeant.id}}]" required="required" value='{{souscription and souscription.dirigeants[dirigeant.id] ? souscription.dirigeants[dirigeant.id] : ''}}'>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="dir{{loop.index}}" class="col-md-6 control-label">Identifiant</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="id{{loop.index}}" value="{{ dirigeant.id }}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    {% else %}
+    <p class='text-danger'>Une erreur se présente. Aucun dirigeant n'est rattaché au client et l'Editique ne peut pas être généré.</p>
+    {% endfor %}
+</div>

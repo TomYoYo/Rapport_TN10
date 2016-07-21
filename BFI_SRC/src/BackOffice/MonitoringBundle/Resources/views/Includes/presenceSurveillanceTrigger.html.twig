@@ -1,0 +1,31 @@
+{% set altRefresh = 'Rafraîchir le statut de ce block'%}
+
+{% if statusSurveillanceTrigger == 'surveillanceTriggerOk' %}
+    {% set img = 'rondVert'%}
+    {% set alt = 'Surveillance des actions lancée 1 fois' %}
+    {% if statusSurveillanceTriggerNb != '1' %}
+        {% set img = 'rondOrange' %}
+        {% set alt = 'Attention surveillance des actions lancée '~statusSurveillanceTriggerNb~' fois' %}
+    {% endif %}
+{% else %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Surveillance des actions non lancée' %}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Surveillance des <strong>Actions</strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le {{ "now"|date("d/m/Y") }} à
+    <strong>{{ "now"|date("H:i:s") }}</strong>
+
+    <button onclick="$('#detailSurveillanceTrigger').fadeToggle()">Détail</button>
+</div>
+
+<div class="formRefresh" id="detailSurveillanceTrigger">
+    {{alt}}
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+</div>

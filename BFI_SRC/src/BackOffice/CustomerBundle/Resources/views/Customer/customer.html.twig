@@ -1,0 +1,221 @@
+{% extends 'BackOfficeCustomerBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Utilisateurs {% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" method="post">
+        <h1>Informations générales Client : {{ customer.idcustomer }}</h1>
+        {% if info != '' %}
+            <div class="alert alert-success" style="text-align: center">{{ info }}</div>{% endif  %}
+        {% if customer.anomaliesComments %}
+        <div class="alert alert-danger" style="text-align: center">
+            <h2>Anomalies d'intégration : </h2>
+        <p>{{ customer.anomaliesComments }}</p></div>{% endif %}
+        <div class="well">
+            <p>* : Champs obligatoires</p>
+            <table class="bandeauSaisie" style="width: 100%">
+                <tbody>
+                <tr>
+                    <td style="width: 50%">
+                    <div class="form-group" >
+                        {{ form_label(form.designation,"Designation *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                        {{ form_errors(form.designation) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(form.designation,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                        <div class="form-group" >
+                            {{ form_label(form.tel,"téléphone",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.tel) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.tel,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.fax,"Fax",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.fax) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.fax,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.email,"Email",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.email) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" id="dateNaissance">
+                            {{ form_label(form.pays,"Date de Naissance",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.dateNaissance,{'attr':{'class':'input-sm'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" id="codePays">
+                            {{ form_label(form.codePays,"Code pays de naissance",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.codePays) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.codePays,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        </td><td>
+                        <div class="form-group" >
+                            {{ form_label(form.adresse,"Adresse *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.adresse) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.adresse,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.cP,"Code Postal *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.cP) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.cP,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.ville,"Ville *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.ville) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.ville,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.pays,"Pays *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.pays) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.pays,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_errors(form.dateCreation) }}
+                            {{ form_label(form.dateCreation,"Date de mise en relation *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.dateCreation,{'attr':{'class':'input-sm'}}) }}
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h1>Informations détaillés </h1>
+        {% if customer.formeJuridiqueExt %}<p>Forme Juridique : {{ customer.formeJuridiqueExt }}</p>{% endif %}
+        <div class="well">
+            <p>* : Champs obligatoires</p>
+            <table class="bandeauSaisie" style="width: 100%">
+                <tbody>
+                <tr>
+                    <td style="width: 50%">
+                        <div class="form-group">
+                            {{ form_label(form.codeEtat,"Code Etat *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.codeEtat,{'attr':{'class':'form-control'}}) }}
+                            </div></div>
+                        <div class="form-group">
+                            {{ form_label(form.codeCivilite,"Code civilité *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.codeCivilite,{'attr':{'class':'form-control'}}) }}
+                            </div></div>
+                        <div class="form-group">
+                            {{ form_label(form.qualiteClient,"Qualité du client *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.qualiteClient,{'attr':{'class':'form-control'}}) }}
+                            </div></div>
+                        <div class="form-group" >
+                            {{ form_label(form.Juridique,"Forme Juridique SAB",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.Juridique) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.Juridique,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.siren,"Siren",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.siren) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.siren,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.codeNic,"Code Nic",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.codeNic) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.codeNic,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+
+
+
+</td><td>
+
+                        <div class="form-group" >
+                            {{ form_label(form.categorieClient,"Categorie Client",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.categorieClient) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.categorieClient,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.codeApe,"Code Ape",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.codeApe) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.codeApe,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            {{ form_label(form.chiffreAffaire,"Chiffre d'affaire",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.chiffreAffaire) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.chiffreAffaire,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            {{ form_label(form.capital,"Capital",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.capital) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.capital,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.coteActivite,"Cote activite",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.coteActivite,{'attr':{'class':'form-control'}}) }}
+                            </div></div>  <div class="form-group">
+                            {{ form_label(form.cotecredit,"Cote Credit",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.cotecredit,{'attr':{'class':'form-control'}}) }}
+                            </div></div>
+                        <div class="form-group" style="display: none">
+                            {{ form_label(form.idCustomer,"",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.idCustomer) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.idCustomer,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none">
+                            {{ form_label(form.statut,"",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            {{ form_errors(form.statut) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.statut,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group" {% if form.responsable != ""  %}style="display: none"{% endif %}>
+                            {{ form_label(form.responsable,"Code Responsable *",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(form.responsable,{'attr':{'class':'form-contro'}}) }}
+                            </div></div>
+
+                        {{ form_rest(form) }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12" style="text-align: center">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a href="{{ path('back_office_customer_transcodage',{id : customer.id}) }}" class="btn btn-success">Lancer un transcodage</a>
+        <a href="{% if statut == 1 %}{{ path('back_office_customer_tocomplete') }}{% elseif statut == 2 %}{{ path('back_office_customer_modified') }}{% endif %}" class="btn btn-danger">Retour</a></div>
+    </form>
+{% endblock %}

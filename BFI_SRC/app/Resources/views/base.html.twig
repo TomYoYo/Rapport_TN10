@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Banque Fiducial{% endblock %}</title>
+
+        {% block stylesheets %}
+            {% stylesheets
+                '@FrontOfficeMainBundle/Resources/public/css/bootstrap.css'
+                '@FrontOfficeMainBundle/Resources/public/css/bootstrap-theme.min.css'
+                '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+            %}
+                <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/bundles/frontofficemain/images/favicon-32x32.png') }}" />
+    </head>
+    <body>
+        <div class="container">
+            {% block header %}
+            <header>
+                <div class="row logo">
+                    <div class="col-md-6">
+                        <a href="{{ path('front_office_main_homepage') }}">
+                            <img src="{{ asset('bundles/frontofficemain/images/logo-fiducial-banque.png') }}" alt="Banque Fiducial" title="Banque Fiducial" />
+                        </a>
+                    </div>
+
+                    <div class="user text-center col-md-6">
+                        {% if app.user %}
+                        <p style="text-align: center; margin-bottom: 0px; letter-spacing: 1px; margin-top: 28px;">
+                            Bienvenue <b>{{ app.user.prenom }} {{ app.user.nom }}</b><br/>
+                            <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="menu" id="menu">
+                    {% block nav_content %}{% endblock %}
+                </div>
+            </header>
+            {% endblock %}
+
+            {% block breadcrumbs %}{% endblock %}
+
+            {% block flashMessages %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('info') %}
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            {% endblock %}
+            
+            {% block body %}{% endblock %}
+
+            {% block footer %}
+            <div class="clearfix"></div>
+            <footer>
+                <blockquote class="text-muted">
+                    &copy; Banque Fiducial<br/>
+                    {% if app.user %} {{ 'Version : '|lastModification|raw }} {% endif %}
+                </blockquote>
+            </footer>
+            {% endblock %}
+        </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

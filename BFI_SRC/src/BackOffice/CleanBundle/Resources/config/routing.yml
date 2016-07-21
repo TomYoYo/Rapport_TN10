@@ -1,0 +1,11 @@
+back_office_clean_index:
+    path:  /
+    defaults: { _controller: BackOfficeCleanBundle:RegleNettoyage:index }
+
+back_office_clean_listingDAN:
+    path:  /listingDAN
+    defaults: { _controller: BackOfficeCleanBundle:Default:listingDAN }
+
+BackOfficeCleanBundle_reglenettoyage:
+    resource: "@BackOfficeCleanBundle/Resources/config/routing/reglenettoyage.yml"
+    prefix:   /reglenettoyage

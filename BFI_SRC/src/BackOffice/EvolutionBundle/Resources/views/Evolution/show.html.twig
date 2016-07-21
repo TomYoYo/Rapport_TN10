@@ -1,0 +1,37 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Evolution {{ entity.versionNumber }} {% endblock %}
+
+{% block content %}
+    <h3>Evolution {{ entity.versionNumber }}</h3>
+    
+    <table class="table table-condensed" style="width:75%;">
+        <tbody>
+            <tr>
+                <th>Numéro de version</th>
+                <td>{{ entity.versionNumber }}</td>
+            </tr>
+            <tr>
+                <th>Date de mise en Pré-production</th>
+                <td>{{ entity.preprodRealisation ? entity.preprodRealisation|date('d/m/Y') : '-' }}</td>
+            </tr>
+            <tr>
+                <th>Date de mise en Production</th>
+                <td>{{ entity.prodRealisation ? entity.prodRealisation|date('d/m/Y') : '-' }}</td>
+            </tr>
+            <tr>
+                <th>Date estimée</th>
+                <td>{{ entity.estimatedDate ? entity.estimatedDate|date('d/m/Y') : '-' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p>
+        {{ entity.description|raw }}
+    </p>
+    
+    <div class="col-md-12 text-right">
+        <a href="{{ path('evolution') }}" class="btn btn-info">Retour à la liste</a>
+        <a href="{{ path('evolution_edit', { 'id': entity.id }) }}" class="btn btn-warning">Modifier cette entité</a>
+    </div>
+{% endblock %}

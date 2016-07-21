@@ -1,0 +1,12 @@
+<div class="tab-pane" id="submit">
+    <div class="alert alert-danger text-center" role="alert" style='display:none;'>Un ou plusieurs champs ne sont pas correctement saisis. Merci de vérifier le formulaire avant d'enregistrer.</div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-lg btn-success btn-block col-md-10" onclick="return saveAlert();" style="margin:0;" name='save'>Enregistrer</button>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-lg btn-info btn-block col-md-10" onclick="return generateAlert();" style="margin:0;" name='generate' {% if client.type == 'PRO' and not dirigeants %} disabled="disabled" {% endif %}>Générer Editique</button>
+    </div>
+    <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
+        <a href="{{ path('editique_souscription_credit') }}" class="btn btn-default btn-block col-md-8" onclick="return cancelAlert();">Annuler</a>
+    </div>
+</div>

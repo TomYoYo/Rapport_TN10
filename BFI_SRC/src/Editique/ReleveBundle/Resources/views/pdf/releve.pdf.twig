@@ -1,0 +1,21 @@
+{% set numPage = 1 %}
+{% set numPageMarginLeft = 480 %}
+{% set colorLineOpe = '#F8E9EB' %}
+{% set numOpe = 0 %}
+{% set margeNumClient = 144 %}
+
+<pdf>
+    {% for tpl in oReleve.enchainementTpl %}
+        {% if oReleve.startAndLength[loop.index - 1] is defined %}
+            {% set sliceValues = oReleve.startAndLength[loop.index - 1] %}
+        {% endif %}
+        <dynamic-page document-template="{{tplArray[tpl]}}" font-size="8" margin="32">
+          <div>
+              {% include 'EditiqueReleveBundle:pdf:numPage.pdf.twig' %}
+              {% include 'EditiqueReleveBundle:pdf:'~tpl~'.pdf.twig' %}
+          </div>
+        </dynamic-page>
+    
+        {% set numPage = numPage + 1 %}
+    {% endfor %}
+</pdf>

@@ -1,0 +1,125 @@
+<div margin-left="95" margin-top="115">
+    {{oReleve.IdeSab ?: '-'}}
+</div>
+
+<div margin-left="130" margin-top="57">
+    {{oReleve.idClient}}
+</div>
+
+<div margin-left="130" font-size="10pt" font-style="bold">
+    {{oReleve.numCompte}}
+</div>
+
+<div margin-left="130" margin-top="1" font-size="6">
+    {{oReleve.intitule}}
+</div>
+
+<div position="absolute" top="120" left="360" height="90" font-size="9pt">
+    {% if oReleve.titulaire1 %}{{oReleve.titulaire1}}<br />{% endif %}
+    {% if oReleve.titulaire2 %}{{oReleve.titulaire2}}<br />{% endif %}
+    <br />
+    {{oReleve.adresse|nl2br}}
+</div>
+
+<div text-align="center" font-size="14pt" font-style="bold" margin-top="-68">
+    {{oReleve.libelleCompteGlobal}}<br />
+    DU {{oReleve.dateDebut}} AU {{oReleve.dateFin}} {% if oReleve.numReleve %} - N°{{oReleve.numReleve}} {% endif %}
+</div>
+
+<table margin-top="38" margin-left="220">
+    <tr>
+        <td border-type="none" width="137">{{oReleve.dateFinPrecedente}}</td>
+        <td border-type="none" width="85" text-align="right">{{ oReleve.ancienSoldeDebiteur != 0 ? oReleve.ancienSoldeDebiteur : ''}}</td>
+        <td border-type="none" text-align="right" padding-right="6">{{ oReleve.ancienSoldeDebiteur == 0 ? oReleve.ancienSoldeCrediteur : ''}}</td>
+    </tr>
+</table>
+
+<table margin-top="7" width="100%">
+    {% set numOpe = 16 %}
+    
+    {% for i,ope in oReleve.operations|slice(sliceValues['start'], sliceValues['length']) %}
+        {% include 'EditiqueReleveBundle:pdf:tabLine.pdf.twig' %}
+    
+        {% if ope is defined and ope.libelleInArray.1 is defined and ope.libelleInArray.1 %}
+            {% if ope is defined and ope.libelleInArray.2 is defined and ope.libelleInArray.2 %}
+                {% if colorLineOpe == '#F8E9EB' %}
+                    {% set colorLineOpe = 'white'%}
+                {% else %}
+                    {% set colorLineOpe = '#F8E9EB'%}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if colorLineOpe == '#F8E9EB' %}
+                {% set colorLineOpe = 'white'%}
+            {% else %}
+                {% set colorLineOpe = '#F8E9EB'%}
+            {% endif %}
+        {% endif %}
+    
+        {% if ope is defined %}{% set numOpe = numOpe - 1 %}{% endif %}
+        {% if ope.libelleInArray.1 is defined and ope.libelleInArray.1 %}{% set numOpe = numOpe - 1 %}{% endif %}
+        {% if ope.libelleInArray.2 is defined and ope.libelleInArray.2 %}{% set numOpe = numOpe - 1 %}{% endif %}
+    {% endfor %}
+    
+    {% if numOpe > 0 %}
+        {% for i in 1..numOpe %}
+            {% include 'EditiqueReleveBundle:pdf:tabLine.pdf.twig' %}
+
+            {% if colorLineOpe == '#F8E9EB' %}
+                {% set colorLineOpe = 'white'%}
+            {% else %}
+                {% set colorLineOpe = '#F8E9EB'%}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</table>
+
+<table margin-top="6" margin-left="230">
+    <tr>
+        <td border-type="none" width="129"></td>
+        <td border-type="none" width="85" text-align="right">{{oReleve.totalMvtDebiteur}}</td>
+        <td border-type="none" padding-right="6"></td>
+    </tr>
+    <tr>
+        <td border-type="none" width="129"></td>
+        <td border-type="none" width="85"></td>
+        <td border-type="none" text-align="right" padding-right="6">{{oReleve.totalMvtCrediteur}}</td>
+    </tr>
+    <tr>
+        <td border-type="none" width="129">{{oReleve.dateFin}}</td>
+        <td border-type="none" width="85" text-align="right">{{ oReleve.soldeDebiteur != 0 ? oReleve.soldeDebiteur : ''}}</td>
+        <td border-type="none" text-align="right" padding-right="6">{{ oReleve.soldeDebiteur == 0 ? oReleve.soldeCrediteur : ''}}</td>
+    </tr>
+</table>
+
+<table margin-top="35" margin-left="215" height="104px">
+    <tr>
+        <td border-type="none">{{oReleve.txRemuneration and oReleve.modeDiffusion != 'F' ? oReleve.txRemunerationGlobal : '0,00 %'}}</td>
+    </tr>
+    <tr margin-top="5">
+        <td border-type="none">{{ oReleve.totalInteretAcquis and oReleve.modeDiffusion != 'F' ? oReleve.totalInteretAcquisGlobal : '0,00 euros'}}</td>
+    </tr>
+    <tr margin-top="5">
+        <td border-type="none">{{oReleve.totalInteretDebiteur and oReleve.modeDiffusion != 'F' ? oReleve.totalInteretDebiteur : '0,00 euros'}}</td>
+    </tr>
+    <tr margin-top="1">
+        <td border-type="none">{{oReleve.txInteret and oReleve.modeDiffusion != 'F' ? oReleve.txInteret : '0,00 %'}}</td>
+    </tr>
+    <tr margin-top="1">
+        <td border-type="none">{{oReleve.TEG and oReleve.modeDiffusion != 'F' ? oReleve.TEG : '0,00 %'}}</td>
+    </tr>
+    <tr margin-top="1">
+        <td border-type="none">{{oReleve.commissionsDebiteur and oReleve.modeDiffusion != 'F' ? oReleve.commissionsDebiteur : '0,00 euros'}}</td>
+    </tr>
+    <tr>
+        <td border-type="none">{{oReleve.totalCommissions and oReleve.modeDiffusion != 'F' ? oReleve.totalCommissions : '0,00 euros'}}</td>
+    </tr>
+</table>
+
+<table margin-top="40" margin-left="4" height="40px">
+    {% for msg in oReleve.messageCommerciaux %}
+    <tr>
+        <td border-type="none">{{ msg.0 }}{{ msg.1 }}</td>
+    </tr>
+    {% endfor %}
+</table>

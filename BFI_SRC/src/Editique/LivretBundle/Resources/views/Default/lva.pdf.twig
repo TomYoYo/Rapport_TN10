@@ -1,0 +1,100 @@
+{% set normalFontSize = "8pt" %}
+{% set normalMarginLeft = "218px" %}
+
+<pdf>
+    <dynamic-page document-template="{{templates.page1}}">
+        <div margin-left="-5px">
+            <div margin-left="{{ normalMarginLeft }}" margin-top="115px" font-size="{{ normalFontSize }}">
+                {{ livret.idClient }}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" margin-top="1px" font-size="{{ normalFontSize }}">
+                {{ livret.raisonSociale1 }} {{ livret.raisonSociale2 }}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" font-size="{{ normalFontSize }}" margin-top="1px">
+                {{ livret.adresse1 }}
+                {% if livret.adresse2 is defined and livret.adresse2|trim %} - {{ livret.adresse2 }} {% endif %}
+                {% if livret.adresse3 is defined and livret.adresse3|trim %} - {{ livret.adresse3 }} {% endif %}
+                {% if livret.adresse4 is defined and livret.adresse4|trim %} - {{ livret.adresse4 }} {% endif %}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" font-size="{{ normalFontSize }}">
+                {{ livret.codePostal }} {{ livret.ville }}
+            </div>
+            
+            <div margin-left="{{ normalMarginLeft }}" margin-top="34px" font-size="{{ normalFontSize }}">
+                {{ livret.numCptERE }}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" font-size="{{ normalFontSize }}">
+                {% for montant in livret.montantFinal %}
+                    {{ montant }}
+                {% endfor %}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" font-size="{{ normalFontSize }}">
+                {% if livret.compteSupport|trim == '' %}
+                .
+                {% else %}
+                {{ livret.compteSupport }}
+                {% endif %}
+            </div>
+            
+            <div margin-left="{{ normalMarginLeft }}" margin-top="39px" font-size="{{ normalFontSize }}">
+                {{ livret.taux|replace(',','.')|number_format(2, ',', ' ') }} %
+            </div>
+            
+            {% if livret.montantPeriodique > 0 %}
+                {% set marginVersementPeriodique = "150px" %}
+            {% else %}
+                {% set marginVersementPeriodique = "470px" %}
+            {% endif %}
+            <div margin-left="{{ marginVersementPeriodique }}" margin-top="40px" font-size="13px">
+                X
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" font-size="{{ normalFontSize }}">
+                {% if livret.montantPeriodique > 0 %}
+                    {{ livret.comptePreleve }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" margin-top="1px" font-size="{{ normalFontSize }}">
+                {% if livret.montantPeriodique > 0 %}
+                    {{ livret.libPeriodicite }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" margin-top="1px" font-size="{{ normalFontSize }}">
+                {% if livret.montantPeriodique > 0 %}
+                    {{ livret.montantPeriodique }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+            <div margin-left="{{ normalMarginLeft }}" margin-top="1px" font-size="{{ normalFontSize }}">
+                {% if livret.montantPeriodique > 0 %}
+                    {{ livret.jourVersement }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+            
+            <div margin-left="172px" margin-top="316px" font-size="{{ normalFontSize }}">
+                {{ "now"|date('d-m-Y') }}
+            </div>
+        </div>
+        <div position="absolute" left="47px" top="179px" font-size="{{ normalFontSize }}">
+            {% if livret.isParticulier %}
+                Nom et Prénom :
+            {% else %}
+                Raison sociale :
+            {% endif %}
+        </div>
+    </dynamic-page>
+    
+    <dynamic-page document-template="{{templates.page2}}">
+        <div></div>
+    </dynamic-page>
+    
+    <dynamic-page document-template="{{templates.page3}}">
+        <div></div>
+    </dynamic-page>
+</pdf>

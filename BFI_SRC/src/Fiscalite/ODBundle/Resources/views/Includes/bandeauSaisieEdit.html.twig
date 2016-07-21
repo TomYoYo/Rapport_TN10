@@ -1,0 +1,115 @@
+<div class="well">
+    <table class="bandeauSaisie">
+        <tr>
+            <td>
+                <div class="form-group">
+                    {{ form_label(form.profil, 'Saisisseur', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.profil, {'attr': {'class': 'form-control input-sm'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.dateSai, 'Date de saisie', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.dateSai, {'attr': {'class': 'form-control input-sm', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.numPiece, 'Identifiant', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.numPiece, {'attr': {'class': 'form-control input-sm', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.numPieceTech, 'Num. de pièce', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.numPieceTech, {'attr': {'class': 'form-control input-sm', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.devise, 'Devise', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.devise, {'attr': {'class': 'form-control input-sm', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+            </td>
+            
+            <td>
+                <div class="form-group">
+                    {{ form_label(form.dateVal, 'Date valeur', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.dateVal, {'attr': {'class': 'form-control input-sm datepicker', 'placeholder': 'Date valeur', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.dateCpt, 'Date comptable', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.dateCpt, {'attr': {'class': 'form-control input-sm datepicker', 'placeholder': 'Date comptable', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.codeOpe, 'Code opération', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.codeOpe, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Code opération', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.codeEve, 'Code évènement', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.codeEve, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Code évènement', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.refLet, 'Réf. lettrage', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.refLet, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Réf. lettrage', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.refAnalytique, 'Réf. analytique', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.refAnalytique, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Réf. analytique', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.tiers, 'Tiers', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.tiers, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Tiers', 'autocomplete':'off'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                {% if jcAutorisee %}
+                    {{ form_label(form.isComplementaryDay, 'Journée complémentaire', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.isComplementaryDay, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Tiers', 'autocomplete':'off'}}) }}
+                    </div>
+                {% else %}
+                    <div class="panel alert-warning" style="padding:5px">
+                        NB : Une ou plusieurs JN ont été saisies. <br>
+                        Vous ne pouvez donc plus saisir de JC aujourd'hui. 
+                    </div>
+                    <input type="hidden" name="od_odbundle_operation[isComplementaryDay]" value="{{form.vars.value.isComplementaryDay}}">
+                    {{ form_label(form.isComplementaryDay, 'Journée complémentaire', {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(form.isComplementaryDay, {'attr': {'class': 'form-control input-sm', 'placeholder': 'Tiers', 'disabled':'disabled', 'autocomplete':'off'}}) }}
+                    </div>
+                {% endif %}                                  
+                    
+                </div>
+            </td>
+            
+            <td>
+                {{ form_widget(form._token) }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" id="submitEditOperation" tabindex="30000000">Enregistrer</button>
+                </div>
+                <div class="form-group">
+                    <a href="{{ path('od_delete_link', {'id':entity.numPiece}) }}" class="btn btn-danger" tabindex="30000001">Supprimer</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ path('od_show', {'id':entity.numPiece}) }}" class="btn btn-default" tabindex="30000002">Annuler</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,11 @@
+front_office_main_homepage:
+    pattern:  /
+    defaults: { _controller: FrontOfficeMainBundle:Default:index }
+
+front_office_print_file :
+    pattern:  /print/{filePath}
+    defaults: { _controller: FrontOfficeMainBundle:Default:printFile }
+    
+front_office_old_browser:
+    pattern:  /old-browser
+    defaults: { _controller: FrontOfficeMainBundle:Default:oldBrowser }

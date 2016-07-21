@@ -1,0 +1,9 @@
+<pdf>
+    <dynamic-page document-template="{{template_let}}" margin="0" font-size="10">
+        {% include 'EditiqueFiscalBundle:Default:lettre.html.twig' %}
+    </dynamic-page>
+
+    <dynamic-page document-template="{{template}}" margin="0" font-size="7">
+        {% include 'EditiqueFiscalBundle:Default:content.html.twig' %}
+    </dynamic-page>
+</pdf>

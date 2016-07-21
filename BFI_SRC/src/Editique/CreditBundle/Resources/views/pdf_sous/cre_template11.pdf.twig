@@ -1,0 +1,5 @@
+<div margin-left="170" margin-top="30">
+{% for i,gar in oSouscription.garanties|slice(sliceValues['start'], sliceValues['length']) %}
+    {{ gar }} <br/>
+{% endfor %}
+</div>

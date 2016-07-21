@@ -1,0 +1,37 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %} Flux CB & SEPA {% endblock %}
+
+{% block content %}
+
+    <h3>
+        Gestion des fichiers PAIN et des BICs en anomalies
+    </h3>
+    <br />
+    <br />
+    <p>
+
+        {% if is_granted('ROLE_ADMIN')  %}
+            <a href="{{ path('transverse_partenaire_fluxCB_administration') }}" class="btn btn-danger btn-lg">Administrations des alertes sur les contrôles BIC des fichiers PAIN</a>
+        {% endif %}
+        {% if  is_granted('ROLE_BACKOFFICE')  %}
+            <a href="{{ path('transverse_partenaire_fluxCB_consultation') }}" class="btn btn-primary btn-lg">Consultation des PAINs en anomalies</a>
+        {% endif %}
+    </p>
+        
+    
+
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+ 
+
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

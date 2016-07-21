@@ -1,0 +1,52 @@
+<div class="tab-pane fade" id="transverse">
+    <h3 class="head text-center">Interface partenaire</h3>
+    <p class="narrow text-center">
+        L'interface Partenaire de BFI vous permet  ...     </p>
+
+    <div class="list-links">
+        <div class="col-md-6">
+            <a href="{{ path('transverse_partenaire_spoolalert') }}">
+                <div class="blockquote-box blockquote-danger clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-lg glyphicon-fire"></span>
+                    </div>
+                    <h4>Etats de gestion</h4>
+                    <p>
+                        Visualisez les spools en instantanné.
+                    </p>
+                </div>
+            </a>
+
+        </div>
+        {% if is_granted('ROLE_AGENCE') %}
+        <div class="col-md-6">
+            <a href="{{ path('back_office_customer') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-inbox glyphicon-lg"></span>
+                    </div>
+                    <h4>Intégrations des clients externes</h4>
+                    <p>
+                        Gestion et paramétrage des intégrations des clients externes dans SAB
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        {% if is_granted('ROLE_BACKOFFICE') %}
+            <div class="col-md-6">
+                <a href="{{ path('transverse_partenaire_fluxCB') }}">
+                    <div class="blockquote-box blockquote-info clearfix">
+                        <div class="square pull-left">
+                            <span class="glyphicon glyphicon-file glyphicon-lg"></span>
+                        </div>
+                        <h4>Consultation des fichiers PAIN en erreur</h4>
+                        <p>
+                            Consultez et administrez les alertes sur l'ensemble des fichiers PAIN dont un BIC est erroné.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>

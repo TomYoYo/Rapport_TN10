@@ -1,0 +1,129 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Ajout utilisateur {% endblock %}
+
+{% block content %}
+
+    <h3>Nouvel utilisateur</h3>
+
+    <div class="well">
+        <form action="{{ path('back_office_monitoring_user_create') }}" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" name="user[email]" class="form-control" id="inputEmail" placeholder="E-mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Nom</label>
+                <div class="col-sm-10">
+                    <input type="text" name="user[name]" class="form-control" id="inputName" placeholder="Nom">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputFirstName" class="col-sm-2 control-label">Prénom</label>
+                <div class="col-sm-10">
+                    <input type="text" name="user[firstName]" class="form-control" id="inputFirstName" placeholder="Prénom">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputCodeUser" class="col-sm-2 control-label">Code utilisateur</label>
+                <div class="col-sm-10">
+                    <input type="text" name="user[codeUser]" class="form-control" id="inputCodeUser" placeholder="Code utilisateur" maxlength="4">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Rôles</label>
+                <div class="col-sm-10">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleSuperAdmin]" value="1">
+                            Développeur
+                        </label>
+                    </div>
+                    {% endif %}
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleAdmin]" value="1">
+                            Administrateur
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleSuperComptable]" value="1">
+                            Comptable valideur
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleComptable]" value="1">
+                            Comptable
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleAssistance]" value="1">
+                            Assistance
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleRCCI]" value="1">
+                            RCCI
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleControleur]" value="1">
+                            Contrôleur
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleAgence]" value="1">
+                            DRC
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleReglementaire]" value="1">
+                            Réglementaire
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleCommercial]" value="1">
+                            Commercial
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleSAB]" value="1">
+                            Prestataire SAB
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleFirme]" value="1">
+                            Client Firme
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user[role][roleBackoffice]" value="1">
+                            Backoffice
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Plus d'informations sur les rôles</button>
+                    <button type="submit" class="btn btn-success">Créer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% include 'BackOfficeMonitoringBundle:Includes:rappel_roles.html.twig' %}
+{% endblock %}

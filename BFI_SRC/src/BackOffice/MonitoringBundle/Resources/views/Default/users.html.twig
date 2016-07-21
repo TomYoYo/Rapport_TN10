@@ -1,0 +1,184 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Utilisateurs {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h3 style="margin-top: 0">Liste des utilisateurs</h3>
+        </div>
+        <div class="col-md-4 text-right">
+            <a href="{{ path('back_office_monitoring_user_new') }}">Ajouter un utilisateur</a>
+        </div>
+    </div>
+
+    <div id="monitoEditique">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_users') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Nom d'utilisateur</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.username is defined %} value="{{ datas.username }}" {% endif %} autocomplete="off" name="search[username]" placeholder="Nom d'utilisateur">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Nom</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.name is defined %} value="{{ datas.name }}" {% endif %} autocomplete="off" name="search[name]" placeholder="Nom">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Prénom</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.firstName is defined %} value="{{ datas.firstName }}" {% endif %} autocomplete="off" name="search[firstName]" placeholder="Prénom">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Code utilisateur</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.codeUser is defined %} value="{{ datas.codeUser }}" {% endif %} autocomplete="off" name="search[codeUser]" placeholder="Code utilisateur">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">E-Mail</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.email is defined %} value="{{ datas.email }}" {% endif %} autocomplete="off" name="search[email]"  placeholder="E-Mail">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Rôle</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[role]">
+                                            <option value="" label="Rôle"></option>
+                                            <option value="ROLE_SUPER_ADMIN" {% if datas.role is defined and datas.role == "ROLE_SUPER_ADMIN" %} selected="selected" {% endif %}>Développeur</option>
+                                            <option value="ROLE_ADMIN" {% if datas.role is defined and datas.role == "ROLE_ADMIN" %} selected="selected" {% endif %}>Administrateur</option>
+                                            <option value="ROLE_SUPER_COMPTABLE" {% if datas.role is defined and datas.role == "ROLE_SUPER_COMPTABLE" %} selected="selected" {% endif %}>Comptable valideur</option>
+                                            <option value="ROLE_COMPTABLE" {% if datas.role is defined and datas.role == "ROLE_COMPTABLE" %} selected="selected" {% endif %}>Comptable</option>
+                                            <option value="ROLE_ASSISTANCE" {% if datas.role is defined and datas.role == "ROLE_ASSISTANCE" %} selected="selected" {% endif %}>Assistance</option>
+                                            <option value="ROLE_RCCI" {% if datas.role is defined and datas.role == "ROLE_RCCI" %} selected="selected" {% endif %}>RCCI</option>
+                                            <option value="ROLE_BACKOFFICE" {% if datas.role is defined and datas.role == "ROLE_BACKOFFICE" %} selected="selected" {% endif %}>Back-Office</option>
+                                            <option value="ROLE_CONTROLEUR" {% if datas.role is defined and datas.role == "ROLE_CONTROLEUR" %} selected="selected" {% endif %}>Contrôleur</option>
+                                            <option value="ROLE_AGENCE" {% if datas.role is defined and datas.role == "ROLE_AGENCE" %} selected="selected" {% endif %}>DRC</option>
+                                            <option value="ROLE_REGLEMENTAIRE" {% if datas.role is defined and datas.role == "ROLE_REGLEMENTAIRE" %} selected="selected" {% endif %}>Réglementaire</option>
+                                            <option value="ROLE_COMMERCIAL" {% if datas.role is defined and datas.role == "ROLE_COMMERCIAL" %} selected="selected" {% endif %}>Commercial</option>
+                                            <option value="ROLE_SAB" {% if datas.role is defined and datas.role == "ROLE_SAB" %} selected="selected" {% endif %}>Prestataire SAB</option>
+                                            <option value="ROLE_FIRME" {% if datas.role is defined and datas.role == "ROLE_FIRME" %} selected="selected" {% endif %}>Client Firme</option>
+                                            <option value="ROLE_USER" {% if datas.role is defined and datas.role == "ROLE_USER" %} selected="selected" {% endif %}>Aucun</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href="{{ path('back_office_delete_filters', {'page':'users'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Nom d\'utilisateur', 'column': 'username'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Nom / Prénom', 'column': 'nom'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Code utilisateur', 'column': 'codeUser'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'E-mail', 'column': 'email'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Dernière connexion', 'column': 'lastLogin'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Rôle', 'column': 'roles', 'noSort':1} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Actions', 'column': 'actions', 'noSort':1} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in entities %}
+                <tr {% if user.locked %}class="disabled"{% endif %}>
+                    <td>{{user.login}}</td>
+                    <td>{{user.nom}} {{user.prenom}}</td>
+                    <td>{{user.codeUser}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        {% if user.lastLogin %}
+                            {{user.lastLogin|date('d-m-Y H:i:s')}}
+                        {% else %}
+                            Jamais
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for role in user.roles %}
+                            {% if role == "ROLE_SUPER_ADMIN" %}
+                                <span class="label label-danger" data-toggle="modal" data-target="#myModal">Développeur</span>
+                            {% elseif role == "ROLE_ADMIN" %}
+                                <span class="label label-warning" data-toggle="modal" data-target="#myModal">Administrateur</span>
+                            {% elseif role == "ROLE_AGENCE" %}
+                                <span class="label label-info" data-toggle="modal" data-target="#myModal">DRC</span>
+                            {% elseif role == "ROLE_COMMERCIAL" %}
+                                <span class="label label-info" data-toggle="modal" data-target="#myModal">Commercial</span>
+                            {% elseif role == "ROLE_SUPER_COMPTABLE" %}
+                                <span class="label label-primary" data-toggle="modal" data-target="#myModal">Comptable valideur</span>
+                            {% elseif role == "ROLE_COMPTABLE" %}
+                                <span class="label label-primary" data-toggle="modal" data-target="#myModal">Comptable</span>
+                            {% elseif role == "ROLE_ASSISTANCE" %}
+                                <span class="label label-warning" data-toggle="modal" data-target="#myModal">Assistance</span>
+                            {% elseif role == "ROLE_RCCI" %}
+                                <span class="label label-primary" data-toggle="modal" data-target="#myModal">RCCI</span>
+                            {% elseif role == "ROLE_BACKOFFICE" %}
+                                <span class="label label-primary" data-toggle="modal" data-target="#myModal">Back-Office</span>
+                            {% elseif role == "ROLE_CONTROLEUR" %}
+                                <span class="label label-primary" data-toggle="modal" data-target="#myModal">Contrôleur</span>
+                            {% elseif role == "ROLE_REGLEMENTAIRE" %}
+                                <span class="label label-primary" data-toggle="modal" data-target="#myModal">Réglementaire</span>
+                            {% elseif role == "ROLE_SAB" %}
+                                <span class="label label-success" data-toggle="modal" data-target="#myModal">Prestataire SAB</span>
+                            {% elseif role == "ROLE_FIRME" %}
+                                <span class="label label-success" data-toggle="modal" data-target="#myModal">Client Firme</span>
+                            {% elseif role == "ROLE_USER" and user.roles|length == 1 %}
+                                <span class="label label-default" data-toggle="modal" data-target="#myModal">Aucun</span>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('back_office_monitoring_user_edit', { 'id': user.id }) }}">
+                            <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier" title="Modifier" />
+                        </a>
+                        {% if user.locked %}
+                            <a href="{{ path('back_office_monitoring_user_activate', { 'id': user.id }) }}">
+                                <img src="{{ asset('bundles/frontofficemain/images/activate.png') }}" width="30" alt="Réactiver" title="Réactiver" onclick="return(confirm('Etes-vous sûr de vouloir réactiver cet utilisateur ?'));" />
+                            </a>
+                        {% else %}
+                            <a href="{{ path('back_office_monitoring_user_delete', { 'id': user.id }) }}">
+                                <img src="{{ asset('bundles/frontofficemain/images/delete.png') }}" width="30" alt="Désactiver" title="Désactiver" onclick="return(confirm('Etes-vous sûr de vouloir désactiver cet utilisateur ?'));" />
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% include 'BackOfficeMonitoringBundle:Includes:rappel_roles.html.twig' %}
+
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-body">
+                <a href="{{ path('back_office_monitoring_user_new') }}">Ajouter une nouvelle entrée</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+parameters:
+#    transverse_partenaire.example.class: Transverse\PartenaireBundle\Example
+
+services:
+#    transverse_partenaire.example:
+#        class: %transverse_partenaire.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+
+
+

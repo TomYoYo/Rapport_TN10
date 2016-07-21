@@ -1,0 +1,19 @@
+{% set margeHolder = 100 %}
+{% set deltaMargeIban = 95 %}
+{% set leftMargeIban = 220 %}
+{% set deltaMargeBic = 11 %}
+{% set leftMargeBic = 330 %}
+{% set fontSize = 12 %}
+{% set interRib = 153 %}
+
+<pdf>
+    <dynamic-page document-template="{{template}}">
+        {% include 'EditiqueRIBBundle:Default:inRib.pdf.twig' %}
+    
+        {% set margeHolder = interRib %}
+        {% include 'EditiqueRIBBundle:Default:inRib.pdf.twig' %}
+
+        {% set margeHolder = interRib %}
+        {% include 'EditiqueRIBBundle:Default:inRib.pdf.twig' %}
+    </dynamic-page>
+</pdf>

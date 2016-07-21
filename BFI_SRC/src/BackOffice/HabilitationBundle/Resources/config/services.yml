@@ -1,0 +1,18 @@
+parameters:
+#    back_office_habilitation.example.class: BackOffice\HabilitationBundle\Example
+
+services:
+#    back_office_habilitation.example:
+#        class: %back_office_habilitation.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    backoffice.usermanager:
+        class: BackOffice\HabilitationBundle\Manager\UserManager
+        arguments: [@doctrine.orm.entity_manager, @backoffice_monitoring.logManager]
+        calls:
+            - [ setEntityManager, [ @doctrine ] ]
+
+    backoffice.habilitationmanager:
+        class: BackOffice\HabilitationBundle\Manager\HabilitationManager
+        arguments: [@doctrine.orm.entity_manager, @backoffice_monitoring.logManager]
+        calls:
+            - [ setEntityManager, [ @doctrine ] ]

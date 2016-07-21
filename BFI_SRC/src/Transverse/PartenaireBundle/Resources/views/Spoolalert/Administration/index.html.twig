@@ -1,0 +1,53 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+
+{% block title %} Administration des spools - Liste des spools paramétrés{% endblock %}
+
+{% block content %}
+
+    <h3>
+        Liste des spools paramétrés 
+    </h3>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom du Paramètre</th>
+                <th>Préfixe du Spool</th>
+                <th><i class="fa fa-calendar"></i> Date de création</th>
+                <th><i class="fa fa-cogs"></i>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for parametrage in parametrages %}
+            <tr>
+                <td>{{ parametrage.id }}</td>
+                <td>{{ parametrage.titreParam }}</td>
+                <td>{{ parametrage.prefixeSpool }}</td>
+                <td>{% if parametrage.publishedAt %}{{ parametrage.publishedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                   <div class="item-actions">
+                            <a href="{{ path('transverse_partenaire_spoolalert_administration_show', { 'id': parametrage.id }) }}" class="btn btn-sm btn-default">Afficher</a>
+                            <a href="{{ path('transverse_partenaire_spoolalert_administration_edit', { 'id': parametrage.id }) }}" class="btn btn-sm btn-default">Editer</a>
+                            <a href="{{ path('transverse_partenaire_spoolalert_administration_delete', { 'id': parametrage.id }) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Supprimer</a>
+                    <div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="section actions">
+        <a href="{{ path('transverse_partenaire_spoolalert_administration_new') }}" class="btn btn-danger"><i class="glyphicon glyphicon-plus"></i> Créer un nouveau paramètre</a>
+        <a href="{{ path('transverse_partenaire_spoolalert') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Revenir sur la page d'acceuil des états de gestion</a>
+    </div>
+</div> 
+
+
+
+{% endblock %}
+
+

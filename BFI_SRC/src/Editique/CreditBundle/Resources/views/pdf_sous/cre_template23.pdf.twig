@@ -1,0 +1,11 @@
+<div margin-left="168">
+    <div margin-top="32">
+        {{ oSouscription.fraisGaranties ?: '-' }}
+    </div>
+
+    <div margin-top="11">
+    {% for i,gar in oSouscription.garanties|slice(sliceValues['start'], sliceValues['length']) %}
+        {{ gar }} <br/>
+    {% endfor %}
+    </div>
+</div>

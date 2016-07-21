@@ -1,0 +1,82 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Abonnements {% endblock %}
+
+{% block content %}
+    <h3>Gestion des abonnements</h3>
+
+    <div id="monitoEditique" style='margin-top:20px'>
+        <form action="{{ path('back_office_monitoring_notifications_manage')}}" method='post'>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th rowspan='2' width='40%' style='vertical-align:middle;'>Identification</th>
+                        <th colspan='4'>Abonnements</th>
+                    </tr>
+                    <tr>
+                        <th width='15%'>Erreurs système</th>
+                        <th width='15%'>Surveillance SIT</th>
+                        <th width='15%'>Editique pour Angers</th>
+                        <th width='15%'>Taux interbancaires</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr {% if user.locked %}class="disabled"{% endif %}>
+                        <td class='text-left'>
+                            {% for role in user.roles %}
+                                {% if role == "ROLE_SUPER_ADMIN" %}
+                                    <span class="label label-danger" data-toggle="modal" data-target="#myModal">DEV</span>
+                                {% elseif role == "ROLE_ADMIN" %}
+                                    <span class="label label-warning" data-toggle="modal" data-target="#myModal">ADM</span>
+                                {% elseif role == "ROLE_AGENCE" %}
+                                    <span class="label label-info" data-toggle="modal" data-target="#myModal">DRC</span>
+                                {% elseif role == "ROLE_COMMERCIAL" %}
+                                    <span class="label label-info" data-toggle="modal" data-target="#myModal">COM</span>
+                                {% elseif role == "ROLE_SUPER_COMPTABLE" %}
+                                    <span class="label label-primary" data-toggle="modal" data-target="#myModal">CPT+</span>
+                                {% elseif role == "ROLE_COMPTABLE" %}
+                                    <span class="label label-primary" data-toggle="modal" data-target="#myModal">CPT</span>
+                                {% elseif role == "ROLE_CONTROLEUR" %}
+                                    <span class="label label-primary" data-toggle="modal" data-target="#myModal">CON</span>
+                                {% elseif role == "ROLE_REGLEMENTAIRE" %}
+                                    <span class="label label-primary" data-toggle="modal" data-target="#myModal">REG</span>
+                                {% elseif role == "ROLE_SAB" %}
+                                    <span class="label label-success" data-toggle="modal" data-target="#myModal">SAB</span>
+                                {% elseif role == "ROLE_FIRME" %}
+                                    <span class="label label-success" data-toggle="modal" data-target="#myModal">FIR</span>
+                                {% elseif role == "ROLE_USER" and user.roles|length == 1 %}
+                                    <span class="label label-default" data-toggle="modal" data-target="#myModal">NON</span>
+                                {% endif %}
+                                {% elseif role == "ROLE_BACKOFFICE" %}
+                                    <span class="label label-default" data-toggle="modal" data-target="#myModal">BACK</span>
+                                {% endif %}
+
+                            {% endfor %}
+                            {{user.prenom}} {{user.nom}} <small class='text-muted'>- {{user.email}}</small>
+                        </td>
+                        <td>
+                            <input type='checkbox' name='notification[{{user.id}}][SYSTEM]' {% if 'SYSTEM' in user.notifications %} checked='checked' {% endif %} />
+                        </td>
+                        <td>
+                            <input type='checkbox' name='notification[{{user.id}}][SIT]' {% if 'SIT' in user.notifications %} checked='checked' {% endif %} />
+                        </td>
+                        <td>
+                            <input type='checkbox' name='notification[{{user.id}}][ANGERS]' {% if 'ANGERS' in user.notifications %} checked='checked' {% endif %} />
+                        </td>
+                        <td>
+                            <input type='checkbox' name='notification[{{user.id}}][TAUX]' {% if 'TAUX' in user.notifications %} checked='checked' {% endif %} />
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div style='margin-top:20px;text-align:right;'>
+                <input type='submit' class='btn btn-success' value='Enregistrer' />
+            </div>
+        </form>
+
+        {% include 'BackOfficeMonitoringBundle:Includes:rappel_roles.html.twig' %}
+    </div>
+{% endblock %}

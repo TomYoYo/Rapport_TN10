@@ -1,0 +1,62 @@
+{% extends 'EditiqueMasterBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Paramètres des relevés Firme {% endblock %}
+
+
+{% block content %}
+<h3>Paramètres des relevés Firme</h3>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Utilisateur</th>
+            <th>Liste des comptes autorisés</th>
+            <th>Informations complémentaires</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for relation in relations %}
+        <tr>
+            <td>{{ relation.id }}</td>
+            <td>{% if relation.idBfi %}{{ relation.idBfi.prenom }} {{ relation.idBfi.nom }}{% else %}Attente{% endif %}</td>
+            <td>
+                {% for tiers in relation.idTiers|sort %}
+                <span class="label label-primary">{{ tiers }}</span>
+                {% endfor %}
+            </td>
+            <td>{{ relation.informations }}</td>
+            <td>
+                <a href="{{ path('editique_releves_firme_edit', {'id':relation.id}) }}">
+                    <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier" title="Modifier" />
+                </a>
+                <a href="{{ path('editique_releves_firme_delete', {'id':relation.id}) }}" onclick="return(confirm('Souhaitez-vous supprimer définitivement cette relation ?'));">
+                    <img src="{{ asset('bundles/frontofficemain/images/delete.png') }}" width="30" alt="Supprimer" title="Supprimer" />
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" style="text-align:center;">Aucune relation à afficher</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="panel panel-default monitoFiltre">
+    <div class="panel-body">
+        <center><a href="{{ path('editique_releves_firme_new') }}">Ajouter une nouvelle entrée</a></center>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

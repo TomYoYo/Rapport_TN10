@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Editique{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@EditiqueMasterBundle/Resources/public/css/editique.css'
+        '@FrontOfficeMainBundle/Resources/public/css/placeholder.css'
+        '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block nav_content %}
+    {% set route = app.request.attributes.get('_route') %}
+    <ul class="list-inline">
+        {% if is_granted('ROLE_AGENCE') %}
+        <li {% if route == "editique_homepage" %} class="active" {% endif %}>
+            <a href="{{ path('editique_homepage') }}">Accès aux documents</a>
+        </li>
+        <li {% if route == "editique_souscription_credit" %} class="active" {% endif %}>
+            <a href="{{ path('editique_souscription_credit') }}">Souscription de crédit</a>
+        </li>
+        {% endif %}
+        {% if is_granted('ROLE_COMMERCIAL') %}
+        <li {% if route == "editique_messages_commerciaux" %} class="active" {% endif %}>
+            <a href="{{ path('editique_messages_commerciaux') }}">Messages Commerciaux</a>
+        </li>
+        {% endif %}
+        {% if is_granted('ROLE_COMPTABLE') %}
+        <li {% if route == "editique_releves_firme" %} class="active" {% endif %}>
+            <a href="{{ path('editique_releves_firme') }}">Relevés Firme</a>
+        </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}
+        
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/bootstrap.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@FrontOfficeMainBundle/Resources/public/js/ie8.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

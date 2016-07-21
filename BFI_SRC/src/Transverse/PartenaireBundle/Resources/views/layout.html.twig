@@ -1,0 +1,122 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Opérations diverses{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+        '@FrontOfficeMainBundle/Resources/public/css/placeholder.css'
+        '@FiscaliteODBundle/Resources/public/css/od.css'
+        '@FiscaliteODBundle/Resources/public/css/demo_table.css'
+        '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}    
+{% endblock %}
+
+
+        
+
+    
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}
+        
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/bootstrap.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.auto-numeric.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@FiscaliteODBundle/Resources/public/js/jquery.dataTables.min.js'
+        '@FiscaliteODBundle/Resources/public/js/od.js'
+        '@FrontOfficeMainBundle/Resources/public/js/ie8.js'
+
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>  
+    {% endjavascripts %}
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            var $container_edit = $('div#transverse_partenairebundle_parametrage_tags2');
+            var index_edit = $container_edit.find(':input').length;
+            index_edit = index_edit/2;
+       
+            var $container = $('div#transverse_partenairebundle_parametrage_tags1');
+            var index = ($container.find(':input').length) + index_edit;
+ 
+            $(document).on('click', '.btn-add', function(e)
+            {
+                if (index > 0){
+                    $(this).removeClass('btn-success').addClass('btn-danger').removeClass('btn-add').addClass('btn-remove')
+                    .html('<span class="glyphicon glyphicon-minus"></span>');
+                }
+                addTag($container);
+                e.preventDefault();
+                return false;
+            });
+            $(document).on('click', '.btn-remove', function(e)
+            {
+                $(this).parents('.entry:first').remove();
+                e.preventDefault();
+                return false;    
+            });
+            
+            if (index == 0 || index == index_edit) {
+                addTag($container);
+            } 
+            function addTag($container) {
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Mail n°' + (index+1))
+                .replace(/__name__/g, index)
+                );
+                $container.append($prototype);
+                index++;
+            }
+
+            var $container_filtre_edit = $('div#transverse_partenairebundle_parametrage_filtres2');
+            var index_filtre_edit = $container_filtre_edit.find(':input').length;
+            index_filtre_edit = index_filtre_edit/2;
+            
+            var $container_filtre = $('div#transverse_partenairebundle_parametrage_filtres1');
+            var index_filtre = ($container_filtre.find(':input').length) +  index_filtre_edit;
+            $(document).on('click', '.btn-add-filtre', function(e)
+            {
+                if (index_filtre > 0){
+                    $(this).removeClass('btn-success').addClass('btn-danger').removeClass('btn-add-filtre').addClass('btn-remove-filtre')
+                    .html('<span class="glyphicon glyphicon-minus"></span>');
+                }
+                addFiltre($container_filtre);
+                e.preventDefault();
+                return false;
+            });
+            $(document).on('click', '.btn-remove-filtre', function(e)
+            {
+                $(this).parents('.entry:first').remove();
+                e.preventDefault();
+                return false;    
+            });
+            
+            if (index_filtre == 0 ||  index_filtre == index_filtre_edit) {
+                addFiltre($container_filtre);
+            } 
+            function addFiltre($container_filtre) {
+                var $prototype_filtre = $($container_filtre.attr('data-prototype_filtre').replace(/__name__label__/g, 'Filtre n°' + (index_filtre+1))
+                .replace(/__name__/g, index_filtre)
+                );
+                $container_filtre.append($prototype_filtre);
+                index_filtre++;
+            }
+
+       
+            });
+            
+
+    </script>
+
+{% endblock %}

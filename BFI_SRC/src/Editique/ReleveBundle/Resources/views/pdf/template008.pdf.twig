@@ -1,0 +1,21 @@
+<table margin-top="113" width="100%">
+    {% for i,ope in oReleve.operations|slice(sliceValues['start'], sliceValues['length']) %}
+        {% include 'EditiqueReleveBundle:pdf:tabLine.pdf.twig' %}
+    
+        {% if ope is defined and ope.libelleInArray.1 is defined and ope.libelleInArray.1 %}
+            {% if ope is defined and ope.libelleInArray.2 is defined and ope.libelleInArray.2 %}
+                {% if colorLineOpe == '#F8E9EB' %}
+                    {% set colorLineOpe = 'white'%}
+                {% else %}
+                    {% set colorLineOpe = '#F8E9EB'%}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if colorLineOpe == '#F8E9EB' %}
+                {% set colorLineOpe = 'white'%}
+            {% else %}
+                {% set colorLineOpe = '#F8E9EB'%}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</table>

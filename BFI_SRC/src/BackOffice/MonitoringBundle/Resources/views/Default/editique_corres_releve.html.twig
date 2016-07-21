@@ -1,0 +1,96 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Paramétrage des relevés de compte{% endblock %}
+
+{% block content %}
+    <h3>Paramétrage des relevés de compte</h3>
+    <div id="monitoEditique">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_editique_correspondance_releve') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Libellé Relevé</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.libelle is defined %} value="{{ datas.libelle }}" {% endif %} autocomplete="off" name="search[libelle]" placeholder="Libellé du relevé">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Type</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.type is defined %} value="{{ datas.type }}" {% endif %} autocomplete="off" name="search[type]" placeholder="Type de compte">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href="{{ path('back_office_delete_filters', {'page':'corres_releve'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Libellé du compte', 'column': 'libelle'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Type de compte', 'column': 'type'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Actions', 'column': 'actions', 'noSort':1} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for corres in entities %}
+                <tr>
+                    <td>{{corres.libelle}}</td>
+                    <td>
+                        {% if corres.type == 'COPRO' %}
+                        Compte Courant Pro.
+                        {% elseif corres.type == 'COPAR' %}
+                        Compte Courant Part.
+                        {% elseif corres.type == 'EPARG' %}
+                        Compte Epargne
+                        {% elseif corres.type == 'NOTRA' %}
+                        Non traité
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('back_office_monitoring_editique_correspondance_releve_edit', { 'id': corres.id }) }}">
+                            <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier" title="Modifier" />
+                        </a>
+                        <a href="{{ path('back_office_monitoring_editique_correspondance_releve_delete', { 'id': corres.id }) }}">
+                            <img src="{{ asset('bundles/frontofficemain/images/delete.png') }}" width="30" alt="Détails" title="Supprimer" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette correspondance ?'));" />
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">Aucun résultat</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+        
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-body">
+                <a href="{{ path('back_office_monitoring_editique_correspondance_releve_new') }}">Ajouter une nouvelle entrée</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

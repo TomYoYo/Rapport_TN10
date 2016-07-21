@@ -1,0 +1,25 @@
+{% extends 'FiscaliteODBundle::layout.html.twig' %}
+
+{% block title %} Consultation des Opérations Diverses {% endblock %}
+
+{% block content -%}
+
+    <h3>
+        Consultation des Opérations Diverses
+        {% include 'FiscaliteODBundle:Includes:aide.html.twig' %}
+    </h3>
+
+    {% include 'FiscaliteODBundle:Includes:bandeauRecherche.html.twig' %}
+    {% include 'FiscaliteODBundle:Includes:resultatRecherche.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

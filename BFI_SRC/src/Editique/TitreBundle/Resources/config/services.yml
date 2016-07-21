@@ -1,0 +1,23 @@
+services:
+    editique.titres.portefeuilleManager:
+        class: Editique\TitreBundle\Manager\PortefeuilleManager
+        calls:
+            - [ setEcritureManager, [ @backoffice_parser.ecritureManager ] ]
+            - [ setLectureManager, [ @backoffice_parser.lectureManager ] ]
+            - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+            - [ setEntityManager, [ @doctrine ] ]
+            - [ setFileManager, [ @backoffice_file.fileManager ] ]            
+            - [ setWindowsFTPManager, [ @back_office_connexion.windowsFTP ] ]
+            - [ setPDFManager, [ @ps_pdf.facade] ]
+            - [ setTplManager, [ @templating] ]
+    editique.titres.avisManager:
+        class: Editique\TitreBundle\Manager\AvisManager
+        calls:
+            - [ setEcritureManager, [ @backoffice_parser.ecritureManager ] ]
+            - [ setLectureManager, [ @backoffice_parser.lectureManager ] ]
+            - [ setLogManager, [ @backoffice_monitoring.logManager ] ]
+            - [ setEntityManager, [ @doctrine ] ]
+            - [ setFileManager, [ @backoffice_file.fileManager ] ]            
+            - [ setWindowsFTPManager, [ @back_office_connexion.windowsFTP ] ]
+            - [ setPDFManager, [ @ps_pdf.facade] ]
+            - [ setTplManager, [ @templating] ]

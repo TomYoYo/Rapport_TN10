@@ -1,0 +1,11 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Intégrité fonctionnelle {% endblock %}
+
+{% block content %}
+
+    <h3>Intégrité fonctionnelle</h3>
+
+    <p>Date comptable : <p style="color:{{ DATE_COMPTABLE['integrite'] ? 'green' : 'red' }}">{{DATE_COMPTABLE['res']}}</p>
+
+{% endblock %}

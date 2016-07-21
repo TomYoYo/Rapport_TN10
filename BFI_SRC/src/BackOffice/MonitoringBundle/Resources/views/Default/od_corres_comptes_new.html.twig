@@ -1,0 +1,59 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Ajout d'une nouvelle correspondance entre comptes {% endblock %}
+
+{% block content %}
+    <h3>Ajout d'une nouvelle correspondance entre comptes</h3>
+    <div class="well">
+        <form action="{{ path('back_office_monitoring_od_correspondance_comptes_create') }}" method="POST" class="form-horizontal" role="form">
+            <table class="bandeauSaisie" style="width:95%">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Numéro SAB</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" type="text" placeholder="Numéro de compte interne" autocomplete="off" name="interne[]">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Numéro SIRH</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" type="text" placeholder="Numéro de compte externe" autocomplete="off" name="externe[]">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="addLine" class="btn btn-primary">Ajouter une ligne de correspondance</button>
+                    <button type="submit" class="btn btn-success">Créer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+<script>
+    $(document).ready(function(){
+        $('#addLine').click(function(e){
+            e.preventDefault();
+
+            var field = $('table tr:first');
+            var field_new = field.clone();
+
+            field_new.find('input').val('');
+            $('table').append(field_new);
+
+            return false;
+        });
+    });
+</script>
+{% endblock %}

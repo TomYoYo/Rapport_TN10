@@ -1,0 +1,149 @@
+back_office_customer:
+    path:  /customer/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:index }
+
+
+back_office_customer_parametrage_responsable:
+    path:  /customer/parresponsable/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:parametrageResponsable }
+
+back_office_customer_parametrage_responsable_ajax:
+    path:  /customer/parresponsable/dept/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:getDept }
+    methods : POST
+
+back_office_customer_parametrage_searchresponsable_ajax:
+    path:  /customer/parresponsable/searchResp/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:searchResp }
+    methods : POST
+
+back_office_customer_parametrage_civility:
+    path:  /customer/parcivility/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:parametrageCivility }
+
+back_office_customer_parametrage_quality:
+    path:  /customer/parquality/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:parametrageQuality }
+
+back_office_customer_parametrage_state:
+    path:  /customer/paretat/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:parametrageEtat }
+
+back_office_customer_parametrage_juridique:
+    path:  /customer/parjuri/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:parametrageJuridique }
+
+back_office_customer_parametrage_addCivility_ajax:
+    path:  /customer/parcivility/addforme/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:addCivility }
+    methods : POST
+
+back_office_customer_parametrage_delCivility_ajax:
+    path:  /customer/parcivility/delForme/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:removeCivility }
+    methods : POST
+
+back_office_customer_parametrage_initialisation_ajax:
+    path:  /customer/parcivility/init/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:initCivility }
+    methods : POST
+
+back_office_customer_parametrage_addState_ajax:
+    path:  /customer/paretat/addstate/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:addState }
+    methods : POST
+
+back_office_customer_parametrage_addNace_ajax:
+    path:  /customer/parjuri/addnace/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:addNace }
+    methods : POST
+
+back_office_customer_parametrage_addQuality_ajax:
+    path:  /customer/parquality/addQuality/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:addQuality }
+    methods : POST
+
+back_office_customer_parametrage_delNace_ajax:
+    path:  /customer/parjuri/delNace/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:removeNace }
+    methods : POST
+
+back_office_customer_parametrage_initialisationNace_ajax:
+    path:  /customer/parjuri/init_nace/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:initNace }
+    methods : POST
+
+back_office_customer_parametrage_initialisationQuality_ajax:
+    path:  /customer/parquality/init_quality/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:initQuality }
+    methods : POST
+
+back_office_customer_parametrage_delState_ajax:
+    path:  /customer/paretat/delstate/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:removeState }
+    methods : POST
+
+back_office_customer_parametrage_initialisationState_ajax:
+    path:  /customer/paretat/init_state/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:initState }
+    methods : POST
+
+back_office_customer_anomalies:
+    path:  /customer/anomalies/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:anomalies }
+
+back_office_customer_anomalie_delete:
+    path:  /customer/anomalies/delete/{id}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:anomalieDelete }
+
+back_office_customer_tocomplete:
+    path:  /customer/list/{page}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:customerList,page : 1 ,statut : 1 }
+
+back_office_customer_modified:
+    path:  /customer/list_modified/{page}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:customerList,page : 1 ,statut : 3 }
+
+back_office_customer_sended:
+    path:  /customer/list_sended/{page}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:customerList,page : 1 ,statut : 4 }
+
+back_office_customer_anomalies_sab:
+    path:  /customer/list_anomalies/{page}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:customerList,page : 1 ,statut : 5 }
+
+back_office_customer_detail:
+    path:  /customer/list/detail/{id}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:customer }
+
+back_office_customer_send:
+    path:  /customer/list/send/{id}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:send }
+
+back_office_customer_parametrage_addCategory_ajax:
+    path:  /customer/parcategory/addcategory/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:addCategory }
+    methods : POST
+
+back_office_customer_parametrage_delCategory_ajax:
+    path:  /customer/parcategory/delcategory/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:removeCategory }
+    methods : POST
+
+back_office_customer_parametrage_category:
+    path:  /customer/parcategory/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:parametrageCategory }
+
+back_office_customer_parametrage_initialisationCategory_ajax:
+    path:  /customer/parcategory/init_category/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:initCategory }
+    methods : POST
+
+back_office_customer_parametrage_delQuality_ajax:
+    path:  /customer/parquality/delQuality/
+    defaults: { _controller: BackOfficeCustomerBundle:Default:removeQuality }
+    methods : POST
+
+back_office_customer_transcodage:
+    path: /customer/transcodage/{id}
+    defaults: { _controller: BackOfficeCustomerBundle:Default:transcodage }

@@ -1,0 +1,61 @@
+<div position="absolute" top="150" left="360" height="90" font-size="9pt">
+    {% if oPortefeuille.raisonSociale1 %}{{oPortefeuille.raisonSociale1}}<br />{% endif %}
+    {% if oPortefeuille.raisonSociale2 %}{{oPortefeuille.raisonSociale2}}<br />{% endif %}
+    <br />
+    {% for elem in oPortefeuille.adresse %}
+        {{ elem }}<br/>
+    {% endfor %}
+</div>
+
+<div position="absolute" top="256" left="391" height="10" font-style="bold">
+    {{ 'now'|date('d/m/Y') }}
+</div>
+
+<div margin-left="95" margin-top="11">
+    {{oPortefeuille.idEsab ?: '-'}}
+</div>
+
+<div margin-left="130" margin-top="51">
+    {{oPortefeuille.idClient}}
+</div>
+
+<div margin-left="130">
+    {{oPortefeuille.classMif}}
+</div>
+
+<div margin-left="130" font-size="10pt" margin-top="1" font-style="bold">
+    {{oPortefeuille.numCompte}}
+</div>
+
+<div text-align="center" font-size="14pt" font-style="bold" margin-top="20">
+    RELEVE DE COMPTE TITRES<br />
+    VALORISE AU {{ oPortefeuille.dateValorisation }}
+</div>
+
+<table margin-top="53.5" width="100%" height="410">
+    {% set numLg = 45 %}
+    
+    {% for i,lg in oPortefeuille.valeurs|slice(sliceValues['start'], sliceValues['length']) %}
+        {% include 'EditiqueTitreBundle:portefeuille_pdf:tabValeurs.pdf.twig' %}
+    
+        {% if lg is defined %}
+            {% set numLg = numLg - max(lg['CATEGORIE']|length, lg['LIB']|length) %}
+        {% endif %}
+    
+        {% if colorLineOpe == '#F8E9EB' %}
+            {% set colorLineOpe = 'white'%}
+        {% else %}
+            {% set colorLineOpe = '#F8E9EB'%}
+        {% endif %}
+    {% endfor %}
+    
+    {% for i in 1..numLg %}
+        {% include 'EditiqueTitreBundle:portefeuille_pdf:tabValeurs.pdf.twig' %}
+    
+        {% if colorLineOpe == '#F8E9EB' %}
+            {% set colorLineOpe = 'white'%}
+        {% else %}
+            {% set colorLineOpe = '#F8E9EB'%}
+        {% endif %}
+    {% endfor %}
+</table>

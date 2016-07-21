@@ -1,0 +1,48 @@
+{% extends 'EditiqueMasterBundle::layout_test.html.twig' %}
+
+{% block content %}
+    <div style="margin:20px">
+        <div class="page-header">
+            <h1>Interface de test - Editique Crédit</h1>
+        </div>
+
+        <div class="well" style="width:50%; display: inline-block">
+            <form action="." method="post" class="form-horizontal">
+                <label for="idCredit">Cas de test</label>
+                <select name="type" id="idCredit" class="form-control">
+                    <option value="XML1" {% if typeSpool == 'XML1' %}selected="selected"{%endif%}>XML - 1 page</option>
+                    <option value="XML2" {% if typeSpool == 'XML2' %}selected="selected"{%endif%}>XML - 2 pages</option>
+                    <option value="XML3" {% if typeSpool == 'XML3' %}selected="selected"{%endif%}>XML - 3 pages</option>
+                    <option value="XML4" {% if typeSpool == 'XML4' %}selected="selected"{%endif%}>XML - Vide</option>
+                    <option value="TXT1" {% if typeSpool == 'TXT1' %}selected="selected"{%endif%}>TXT - 1 page</option>
+                    <option value="TXT2" {% if typeSpool == 'TXT2' %}selected="selected"{%endif%}>TXT - 2 pages</option>
+                    <option value="TXT3" {% if typeSpool == 'TXT3' %}selected="selected"{%endif%}>TXT - 3 pages</option>
+                    <option value="TXT4" {% if typeSpool == 'TXT4' %}selected="selected"{%endif%}>TXT - Multi-feuillet</option>
+                    <option value="TXT5" {% if typeSpool == 'TXT5' %}selected="selected"{%endif%}>TXT - Multi-feuillet (4 pages)</option>
+                    <option value="TXT6" {% if typeSpool == 'TXT6' %}selected="selected"{%endif%}>TXT - Trimestriel</option>
+                    <option value="TXT7" {% if typeSpool == 'TXT7' %}selected="selected"{%endif%}>TXT - Annuel</option>
+                    <option value="BDD1" {% if typeSpool == 'BDD1' %}selected="selected"{%endif%}>BDD - 1 page</option>
+                </select>
+                
+                <br/>
+                <button class="btn btn-primary">Go </button>
+            </form>
+        </div>
+        
+        <ul>
+            {% for f in filePDF %}
+            <li>
+                <a href="{{ path('editique_test_pdf', { 'fileName': f.file }) }}">{{f.file}}</a> taille : {{f.size}} B
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <ul>
+            {% for f in fileTXT %}
+            <li>
+                <a href="{{ path('editique_test_txt', { 'fileName': f.file }) }}">{{f.file}}</a> taille : {{f.size}} B 
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

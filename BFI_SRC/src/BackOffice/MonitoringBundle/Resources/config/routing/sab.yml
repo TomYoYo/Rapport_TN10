@@ -1,0 +1,27 @@
+
+back_office_sab_logs :
+    pattern: /sab/logs
+    defaults: { _controller: BackOfficeMonitoringBundle:SAB:logs }
+
+back_office_sab_arbo :
+    pattern: /sab/arbo
+    defaults: { _controller: BackOfficeMonitoringBundle:SAB:arbo }
+
+
+back_office_sab_logs_synchro :
+    pattern: /sab/logsSynchro/
+    defaults: { _controller: BackOfficeMonitoringBundle:SAB:logsSynchro }
+
+back_office_sab_arbo_synchro :
+    pattern: /sab/arboSynchro/
+    defaults: { _controller: BackOfficeMonitoringBundle:SAB:arboSynchro }
+
+
+back_office_sab_logs_nodes :
+    pattern: /sab/logsNodes/
+    defaults: { _controller: BackOfficeMonitoringBundle:SAB:logsNodes }
+
+
+back_office_sab_arbo_nodes :
+    pattern: /sab/arboNodes/
+    defaults: { _controller: BackOfficeMonitoringBundle:SAB:arboNodes }

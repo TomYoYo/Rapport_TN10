@@ -1,0 +1,31 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %}  Administrations des alertes sur les contrôles BIC des fichiers PAIN - Suppression d'une adresse mail - {{ parent() }}{% endblock %}
+
+{% block content %}
+
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>Suppression d'une adresse mail</legend>
+
+
+<p>
+    Etes-vous certain de vouloir supprimer le mail numéro "<b>{{ mail.id }}</b>",  "<b>{{ mail.mail }}</b>" ?
+</p>
+
+
+<form action="{{ path('transverse_partenaire_fluxCB_administration_delete', {'id': mail.id}) }}" method="post">
+  <a href="{{ path('transverse_partenaire_fluxCB_administration') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour
+  </a>
+  <input type="submit" value="Supprimer" class="btn btn-danger" />
+</form>
+
+    
+    
+    
+    
+{% endblock %}

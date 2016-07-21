@@ -1,0 +1,7 @@
+parameters:
+#    fiscalite_etats.example.class: Fiscalite\EtatsBundle\Example
+
+services:
+#    fiscalite_etats.example:
+#        class: %fiscalite_etats.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

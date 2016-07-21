@@ -1,0 +1,110 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %}  Administration des spools - Création d'un paramètre{% endblock %}
+
+{% block content %}
+    
+<legend>Création d'un paramètre</legend>    
+<div class="well">
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
+    <div class="form-group">
+        {{ form_label(form.titreParam, "* Nom du paramètre", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+        {{ form_errors(form.titreParam) }}
+        <div class="col-md-5">
+            {{ form_widget(form.titreParam, {'attr': {'class': 'form-control'}}) }}
+            <span class="help-block">Exemple : CPT - SGHE 005 </span>
+        </div>
+    </div>
+            
+ 
+    
+    <div class="form-group">
+        {{ form_label(form.prefixeSpool, "* Préfixe du Spool :", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+        {{ form_errors(form.prefixeSpool) }}
+        <div class="col-md-5">
+            {{ form_widget(form.prefixeSpool, {'attr': {'class': 'form-control'}}) }}
+            <span class="help-block">Exemple : SCHGE005P1</span>
+        </div>
+    </div>  
+            
+            
+    <div class="form-group">
+        {{ form_label(form.isFiltreIncluded, "Si le contenu du filtre est présent dans un spool :", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+        <div class="col-md-4">
+            {{ form_widget(form.isFiltreIncluded, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+        
+        
+    <div class="form-group">   
+        <label class="col-md-4 control-label">Filtre(s) :</label>
+        <div id="transverse_partenairebundle_parametrage_filtres1" class="col-md-5" data-prototype_filtre="
+            {% filter escape %}
+                {{ include('TransversePartenaireBundle:Spoolalert/Administration:prototype_filtre.html.twig', { 'form': form.filtres.vars.prototype }) }}
+            {% endfilter %}">
+            <span class="help-block">Laisser vide si on récupère tous les spools sans distinction du contenu</span>
+        </div>
+        
+    </div>
+            
+    <div class="form-group">   
+        <label class="col-md-4 control-label">Email(s) :</label>
+        <div id="transverse_partenairebundle_parametrage_tags1" class="col-md-4" data-prototype="
+            {% filter escape %}
+                {{ include('TransversePartenaireBundle:Spoolalert/Administration:prototype.html.twig', { 'form': form.tags.vars.prototype }) }}
+            {% endfilter %}">
+        </div> 
+    </div>
+        
+
+  
+    <div class="form-group">
+        {{ form_label(form.priorite, "Priorité :", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+        <div class="col-md-4">
+            {{ form_widget(form.priorite, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+        
+    <div class="form-group">   
+        {{ form_label(form.roles, "Qui aura accès aux spools ?", {'label_attr': {'class': 'col-md-4 control-label'}}) }} <br />   
+        <div class="col-md-4">
+            {% for t in form.roles %} 
+                {{ form_widget(t) }}
+                {{ form_label(t) }}
+                <br />
+            {% endfor %}
+        </div> 
+    </div>   
+        
+        
+        
+    <div class="form-group">
+        {{ form_label(form.commentaire, "Commentaire :", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+        {{ form_errors(form.commentaire) }}
+        <div class="col-md-5">
+            {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+        
+
+    
+    <div class="form-group">
+        <div class="col-md-4 control-label">
+            <a href="{{ path('transverse_partenaire_spoolalert_administration') }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour
+            </a>
+            {{ form_widget(form.valider, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    </div>
+ {{form_rest(form)}}
+{{ form_end(form) }}
+</div>
+    
+
+
+    
+    
+{% endblock %} 
+

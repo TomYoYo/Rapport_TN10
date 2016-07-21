@@ -1,0 +1,3 @@
+monetique_card_homepage:
+    path:  /hello/{name}
+    defaults: { _controller: MonetiqueCardBundle:Default:index }

@@ -1,0 +1,71 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Modification d'un code opération surveillé{% endblock %}
+
+{% block content %}
+    <h3>Modification d'un code opération surveillé</h3>
+    <div class="well">
+        <form action="{{ path('back_office_monitoring_casa_code_operation_update', {'id':codeOperation.id}) }}" method="POST" class="form-horizontal" role="form">
+            <table class="bandeauSaisie" style="width:95%">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Code surveillé</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" type="text" placeholder="Code surveillé" autocomplete="off" value="{{ codeOperation.code }}" name="codeOperation[code]">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Libellé</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" type="text" placeholder="Libellé" autocomplete="off" value="{{ codeOperation.libelle }}" name="codeOperation[libelle]">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Type de log</label>
+                            <div class="col-sm-6">
+                                <select class="form-control input-sm" name="codeOperation[type]">
+                                    <option value="0" {% if codeOperation.typePresence == '0' %} selected="selected" {% endif %}>Exclu</option>
+                                    <option value="1" {% if codeOperation.typePresence == '1' %} selected="selected" {% endif %}>Visible</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+<script>
+    $(document).ready(function(){
+        $('#addLine').click(function(e){
+            e.preventDefault();
+
+            var field = $('table tr:first');
+            var field_new = field.clone();
+
+            field_new.find('input').val('');
+            $('table').append(field_new);
+
+            return false;
+        });
+    });
+</script>
+{% endblock %}

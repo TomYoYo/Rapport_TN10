@@ -1,0 +1,6 @@
+Date de saisie;Saisisseur;Valideur;Num. identifiant;Num. piece;Date comptable;Date valeur;Code operation;Code evenement;Ref. Lettrage;Ref. Analytique;Tiers;;Num mouvement;Compte;Montant;Libelle;Code budget
+{% for ope in entities %}
+{% for mvt in ope.getMouvements %}
+{{ope.dateSai|date('d/m/Y')}};{{ope.profil}};{{ope.valideur}};{{ope.numPiece}};{{ope.numPieceTech}};{{ope.dateCpt|date('d/m/Y')}};{{ope.dateVal|date('d/m/Y')}};{{ope.codeOpe}};{{ope.codeEve}};{{ope.refLet}};{{ope.refAnalytique}};{{ope.tiers}};;{{mvt.numMvmt}};{{mvt.compte}};{{mvt.montant}};{{mvt.libelle}};{{mvt.codeBudget}}
+{% endfor %}
+{% endfor %}

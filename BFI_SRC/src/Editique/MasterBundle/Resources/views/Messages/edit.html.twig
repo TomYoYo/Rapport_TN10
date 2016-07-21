@@ -1,0 +1,70 @@
+{% extends 'EditiqueMasterBundle::layoutMsg.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}    
+{% endblock %}
+
+{% block content %}
+    <h3>Modifier un message commercial</h3>
+
+    <div class="well">
+        <form action="{{ path('editique_messages_commerciaux_udpate', {'id':message.id}) }}" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputMessage" class="col-sm-2 control-label">Message</label>
+                <div class="col-sm-10">
+                    <input type="text" name="message[message]" value="{{ message.message }}" class="form-control" id="inputMessage" placeholder="Message" maxlength="110" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDateDebut" class="col-sm-2 control-label">Date de début</label>
+                <div class="col-sm-10">
+                    <input type="text" name="message[dateDebut]" value="{{ message.dateDebut|date('d/m/Y') }}" class="form-control datepicker" id="inputDateDebut" placeholder="Date de début" maxlength="10" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDateFin" class="col-sm-2 control-label">Date de fin</label>
+                <div class="col-sm-10">
+                    <input type="text" name="message[dateFin]" value="{{ message.dateFin|date('d/m/Y') }}" class="form-control datepicker" id="inputDateFin" placeholder="Date de fin" maxlength="10" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="{{ path('editique_messages_commerciaux') }}" class="btn btn-default" onclick="return(confirm('Souhaitez-vous annuler définitivement les modifications effectuées ?'));">Annuler</a>
+                    <button type="submit" class="btn btn-success" onclick="return(confirm('Souhaitez-vous enregistrer définitivement les modifications effectuées ?'));">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@FrontOfficeMainBundle/Resources/public/js/datePicker.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        
+    <script>
+        $( document ).ready( function(){
+             $( ".datepicker" ).datepicker({ 
+                 dateFormat: "dd/mm/yy",
+                 dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                 dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                 dayNamesShort: [ "Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ] ,
+                 firstDay: 1,
+                 monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+                 monthNamesShort: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec" ] 
+             });
+         });
+    </script>
+{% endblock %}

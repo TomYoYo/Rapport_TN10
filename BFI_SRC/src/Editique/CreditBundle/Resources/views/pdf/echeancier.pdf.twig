@@ -1,0 +1,22 @@
+{% set numPage = 1 %}
+{% set numPageMarginLeft = 480 %}
+{% set colorLineOpe = 'white' %}
+{% set numEch = 0 %}
+{% set capRestDu = 0 %}
+{% set margeNumClient = 144 %}
+
+<pdf>
+    {% for tpl in enchainementTpl %}
+        {% if startAndLength[loop.index - 1] is defined %}
+            {% set sliceValues = startAndLength[loop.index - 1] %}
+        {% endif %}
+        <dynamic-page document-template="{{tplArray[tpl]}}" font-size="8" margin="32">
+            <div>
+                {% include 'EditiqueCreditBundle:pdf:numPage.pdf.twig' %}
+                {% include 'EditiqueCreditBundle:pdf:'~tpl~'.pdf.twig' %}
+            </div>
+        </dynamic-page>
+        
+        {% set numPage = numPage + 1 %}
+    {% endfor %}
+</pdf>

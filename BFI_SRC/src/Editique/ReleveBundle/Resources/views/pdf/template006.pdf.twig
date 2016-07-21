@@ -1,0 +1,60 @@
+<div margin-left="95" margin-top="115">
+    {{oReleve.IdeSab ?: '-'}}
+</div>
+
+<div margin-left="130" margin-top="57">
+    {{oReleve.idClient}}
+</div>
+
+<div margin-left="130" font-size="10pt" font-style="bold">
+    {{oReleve.numCompte}}
+</div>
+
+<div margin-left="130" margin-top="1" font-size="6">
+    {{oReleve.intitule}}
+</div>
+
+<div position="absolute" top="120" left="360" height="90" font-size="9pt">
+    {% if oReleve.titulaire1 %}{{oReleve.titulaire1}}<br />{% endif %}
+    {% if oReleve.titulaire2 %}{{oReleve.titulaire2}}<br />{% endif %}
+    <br />
+    {{oReleve.adresse|nl2br}}
+</div>
+
+<div text-align="center" font-size="14pt" font-style="bold" margin-top="-68">
+    {{oReleve.libelleCompteGlobal}}<br />
+    DU {{oReleve.dateDebut}} AU {{oReleve.dateFin}} {% if oReleve.numReleve %} - N°{{oReleve.numReleve}} {% endif %}
+</div>
+
+<table margin-top="38" margin-left="220">
+    <tr>
+        <td border-type="none" width="137">{{oReleve.dateFinPrecedente}}</td>
+        <td border-type="none" width="85" text-align="right">{{ oReleve.ancienSoldeDebiteur != 0 ? oReleve.ancienSoldeDebiteur : ''}}</td>
+        <td border-type="none" text-align="right" padding-right="6">{{ oReleve.ancienSoldeDebiteur == 0 ? oReleve.ancienSoldeCrediteur : ''}}</td>
+    </tr>
+</table>
+
+<table margin-top="7" width="100%" height="377">
+    {% set numOpe = 43 %}
+    
+    {% for i,ope in oReleve.operations|slice(sliceValues['start'], sliceValues['length']) %}
+        {% include 'EditiqueReleveBundle:pdf:tabLine.pdf.twig' %}
+    
+        {% if ope is defined and ope.libelleInArray.1 is defined and ope.libelleInArray.1 %}
+            {% if ope is defined and ope.libelleInArray.2 is defined and ope.libelleInArray.2 %}
+                {% if colorLineOpe == '#F8E9EB' %}
+                    {% set colorLineOpe = 'white'%}
+                {% else %}
+                    {% set colorLineOpe = '#F8E9EB'%}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if colorLineOpe == '#F8E9EB' %}
+                {% set colorLineOpe = 'white'%}
+            {% else %}
+                {% set colorLineOpe = '#F8E9EB'%}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</table>
+

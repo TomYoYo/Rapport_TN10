@@ -1,0 +1,147 @@
+<div class="tab-pane active" id="client">
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="numDos" class="col-md-6 control-label">Numéro de dossier</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="numDos" value="{{ pret.numDos }}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="rs" class="col-md-6 control-label">Raison sociale</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="rs" value="{{client.rs1|trim}} {{client.rs2|trim}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="idCli" class="col-md-6 control-label">ID Client</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="idCli" value="{{client.id}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="adres1" class="col-md-6 control-label">Adresse</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="adres1" value="{{client.ad1}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="cp" class="col-md-6 control-label">Code Postal</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="cp" value="{{client.cp}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="adres2" class="col-md-6 control-label">Adresse 2</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="adres2" value="{{client.ad2}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="ville" class="col-md-6 control-label">Ville</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="ville" value="{{client.ville}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="adres3" class="col-md-6 control-label">Adresse 3</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="adres3" value="{{client.ad3}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    
+    {% if client.type == 'EI' %}
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="dateNai" class="col-md-6 control-label">Date de naissance</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="dateNai" value="{{naissance.date}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="villeNai" class="col-md-6 control-label required">Ville de naissance</label>
+            <div class="col-md-6">
+                <input type="text" maxlength="32" class="form-control input-sm" id="villeNai" name="villeNai" required="required" value='{{souscription and souscription.villeNaissance ? souscription.villeNaissance : naissance.ville ?: ''}}'>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="locNai" class="col-md-6 control-label">Pays/Département de naissance</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="locNai" value="{{naissance.location}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    {% endif %}
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="siren" class="col-md-6 control-label">SIREN</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="siren" value="{{client.siren}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="rcs" class="col-md-6 control-label required">Lieu RCS</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="rcs" name="rcs" maxlength='50' required="required" value='{{souscription ? souscription.rcs : ''}}'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="forme_jur" class="col-md-6 control-label">Forme Juridique</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="forme_jur" value='{{ client.forme_jur }}}' disabled="disabled">
+            </div>
+        </div>
+        {% if client.type == 'PRO' %}
+        <div class="form-group pull-right">
+            <label for="capital" class="col-md-6 control-label {% if not client.capital %}required{% endif %}">Capital (€)</label>
+            <div class="col-md-6">
+                {% if client.capital %}
+                <input type="text" class="form-control input-sm" id="capital" name="capital" value='{{client.capital}}' disabled="disabled">
+                {% else %}
+                <input type="text" class="form-control input-sm" id="capital" name="capital" value='{{souscription ? souscription.capital : ''}}' required="required">
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if client.type == 'EI' %}
+        <hr/>
+        
+        <div class="form-group">
+            <label for="descEi" class="col-md-3 control-label required">Description des Entreprises Individuelles</label>
+            <div class="col-md-9">
+                <span class="help-block">{{client.rs1}} {{client.rs2}} né le {{naissance.date}} à {{naissance.ville ?: '#Ville#'}} ({{naissance.location|trim}}),</span>
+                <textarea id="descEi" class="form-control guarantee" onkeyup="autoGrow(this);" name="descEi" placeholder="Indiquez ici la partie complète">{{souscription ? souscription.descriptionEi : ''}}</textarea>
+                <span class="help-block">, ayant pour numéro SIREN {{client.siren}} -RCS-, sise {{client.ad1 }} {{client.ad2}} {{client.ad3}}, {{client.cp}} {{client.ville}}.</span>
+            </div>
+        </div>
+    {% endif %}
+</div>

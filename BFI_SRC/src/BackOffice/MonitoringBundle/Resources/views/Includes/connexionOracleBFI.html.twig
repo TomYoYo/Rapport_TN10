@@ -1,0 +1,44 @@
+{% set altRefresh = 'Rafraîchir le statut de ce block'%}
+
+{% if statusOracleBFI == 'databaseOk' %}
+    {% set img = 'rondVert'%}
+    {% set alt = 'Les tables sont là et se remplissent'%}
+{% elseif statusOracleBFI == 'databaseUnreachable' %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Connexion impossible à la base de données'%}
+{% elseif statusOracleBFI == 'databaseEmptyTable' %}
+    {% set img = 'rondOrange'%}
+    {% set alt = 'Les tables sont là mais certaines ne se remplissent pas'%}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Connexion BDD <strong>BFI</strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le {{ "now"|date("d/m/Y") }} à
+    <strong>{{ "now"|date("H:i:s") }}</strong>
+
+    <button onclick="$('#detailOracleBFI').fadeToggle()">Détail</button>
+
+</div>
+
+<div class="formRefresh" id="detailOracleBFI">
+    <table class="table table-striped table-condensed table-hover">
+        {% for table in listeTablesBFI %}
+            <tr>
+                <td>
+                    {% if table.status == 'databaseOk' %} {% set img = 'rondVert'%}
+                    {% elseif table.status == 'databaseUnreachable' %} {% set img = 'rondRouge'%}
+                    {% elseif table.status == 'databaseEmptyTable' %} {% set img = 'rondOrange'%}
+                    {% endif %}
+                    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="" title="" />
+                </td>
+                <td>{{table.nom}}</td>
+                <td>{{table.count}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

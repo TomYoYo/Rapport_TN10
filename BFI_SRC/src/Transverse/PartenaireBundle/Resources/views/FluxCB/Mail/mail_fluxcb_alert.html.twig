@@ -1,0 +1,24 @@
+Bonjour<br /><br />
+
+Le fichier Pain <b>{{ nompain }}</b> a des BICs en erreur
+<br /><br />
+
+Veuillez-vous connecter sur le lien ci-dessous pour visualiser le fichier :
+<br />   
+<a href='{{ url('transverse_partenaire_fluxCB_consultation') }}/{{ idpain }}'>{{ nompain }} </a>
+<br />
+Liste des BICS erronés :
+{% for key,val in bicerreur %}
+    {{ val[0] }},
+{% endfor %}
+
+
+
+
+<br />       
+Vous-pouvez visualiser tous les pains en anomalie en consultant cette adresse :
+<a href='{{ url('transverse_partenaire_fluxCB_consultation') }}'>{{ url('transverse_partenaire_fluxCB_consultation') }}</a>
+
+<br /><br />
+Cordialement,<br />
+BE Banque

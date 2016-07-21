@@ -1,0 +1,15 @@
+{% if logs|length %}
+    <p>
+        {% set phrase = logs|length > 1 ? 'erreurs ont été générées' : 'erreur a été générée' %}
+        {{ logs|length }} {{ phrase }} lors de ce process : <br/>
+    </p>
+    
+    <table style='border-collapse:collapse;'>
+        {% for log in logs %}
+        <tr>
+            <td style='border:1px solid black;'>{{ log.libelle }}</td>
+            <td style='border:1px solid black;'>{{ log.datetime|date('d/m/Y H:i:s') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}

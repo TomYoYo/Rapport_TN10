@@ -1,0 +1,71 @@
+<div class="tab-pane fade" id="editique">
+    <h3 class="head text-center">Module Editique</h3>
+    <p class="narrow text-center">
+        Le module Editique vous permet de générer, classer, paramétrer et gérer l'ensemble des documents PDF à destination de vos clients.
+    </p>
+
+    <div class="list-links">
+        {% if is_granted('ROLE_AGENCE') or is_granted('ROLE_RCCI') or is_granted('ROLE_ASSISTANCE') %}
+        <div class="col-md-6">
+            <a href="{{ path('editique_homepage') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-inbox glyphicon-lg"></span>
+                    </div>
+                    <h4>Accès aux documents</h4>
+                    <p>
+                        Retrouvez, imprimez et gérez les documents PDF générés, à destination de vos clients.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        {% if is_granted('ROLE_AGENCE') %}
+        <div class="col-md-6">
+            <a href="{{ path('editique_souscription_credit') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                    </div>
+                    <h4>Souscription de crédit</h4>
+                    <p>
+                        Renseignez les données complémentaires à la souscription et générez le document associé.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        
+        {% if is_granted('ROLE_COMMERCIAL') %}
+        <div class="col-md-6">
+            <a href="{{ path('editique_messages_commerciaux') }}">
+                <div class="blockquote-box blockquote-info clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-list-alt glyphicon-lg"></span>
+                    </div>
+                    <h4>Gestion des messages commerciaux</h4>
+                    <p>
+                        Gérez et paramètrez les prochains messages commerciaux qui apparaitront sur les Relevés mensuels et quotidiens.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+        
+        {% if is_granted('ROLE_COMPTABLE') %}
+        <div class="col-md-6">
+            <a href="{{ path('editique_releves_firme') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-tasks glyphicon-lg"></span>
+                    </div>
+                    <h4>Paramètres des relevés Firme</h4>
+                    <p>
+                        Gérez et paramétrez les droits d'accès aux relevés quotidiens des clients Firme.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>

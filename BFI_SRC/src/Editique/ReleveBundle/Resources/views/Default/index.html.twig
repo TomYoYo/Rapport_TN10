@@ -1,0 +1,43 @@
+{% extends 'EditiqueMasterBundle::layout_test.html.twig' %}
+
+{% block content %}
+    <div style="margin:20px">
+        <div class="page-header">
+            <h1>Interface de test Editique Releve</h1>
+        </div>
+
+        <div class="well" style="width:50%; display: inline-block">
+            <form action="." method="post" class="form-horizontal">
+                <label for="degradee">Dégradée</label>
+                <input id="degradee" type="checkbox" {% if degradee == 1%} checked="checked"{% endif %}name="degradee" value="1"> 
+                <br>
+
+                <label for="file">Fichier de test</label>
+                <select name="file" id="file" class="form-control">
+                    {% for f in tabFileTest %}
+                    <option {% if f == fichierEntree %} selected="selected"{% endif %}>{{f}}</option>
+                    {% endfor %}
+                </select>
+
+                <br>
+                <button class="btn btn-primary">Go </button>
+            </form>
+        </div>
+        
+        <ul>
+            {% for f in filePDF %}
+            <li>
+                <a href="{{ path('editique_test_pdf', { 'fileName': f.file }) }}">{{f.file}}</a> taille : {{f.size}} B
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <ul>
+            {% for f in fileTXT %}
+            <li>
+                <a href="{{ path('editique_test_txt', { 'fileName': f.file }) }}">{{f.file}}</a> taille : {{f.size}} B 
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

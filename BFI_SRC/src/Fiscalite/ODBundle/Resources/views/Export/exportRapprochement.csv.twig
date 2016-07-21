@@ -1,0 +1,4 @@
+"=""Numero de compte""";Cumul BFI;Cumul SAB;Ecart;
+{% for operation in entities %}
+"=""{{operation.compte}}""";{{operation.0}};{% if operation.1 is defined %}{{operation.1}}{% else %}Pas en base{% endif %};{% if operation.2 is defined  %}{{ operation.2 }}{% else %}{{ operation.0|abs }}{% endif %};
+{% endfor %}

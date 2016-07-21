@@ -1,0 +1,45 @@
+<div id="tableauSaisie">
+    <div id="mvtDebit">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Mouvements au débit</h3>
+            </div>
+            <div class="panel-body">
+                {% include 'FiscaliteODBundle:Includes:tableauScrollableEdit.html.twig' with {'type': 'deb'} %}
+            </div>
+            <div class="panel-footer" id="totalTableDeb">
+                <table class="table-condensed">
+                    <tr>
+                        <td><div style="width:25px;"></div></td>
+                        <td><div style="width:100px;"></div></td>
+                        <td><div style="width:95px;"><input type="text" placeholder="Total" class="form-control input-sm" id="totalDeb" disabled="disabled" readonly="readonly" /></div></td>
+                        <td><div style="width:200px;"></div></td>
+                        <td><div style="width:51px;"></div></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mvtCrebit">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Mouvements au crédit</h3>
+            </div>
+            <div class="panel-body">     
+                {% include 'FiscaliteODBundle:Includes:tableauScrollableEdit.html.twig' with {'type': 'cre'} %}
+            </div>
+            <div class="panel-footer" id="totalTableCre">
+                <table class="table-condensed">
+                    <tr>
+                        <td><div style="width:25px;"></div></td>
+                        <td><div style="width:100px;"></div></td>
+                        <td><div style="width:95px;"><input type="text" placeholder="Total" class="form-control input-sm" id="totalCre" disabled="disabled" readonly="readonly" /></div></td>
+                        <td><div style="width:200px;"></div></td>
+                        <td><div style="width:51px;"></div></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

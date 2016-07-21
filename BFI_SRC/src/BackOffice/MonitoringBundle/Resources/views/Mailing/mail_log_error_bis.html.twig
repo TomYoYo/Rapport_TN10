@@ -1,0 +1,25 @@
+{% if logs|length %}
+    <p>
+        {% set phrase = logs|length > 1 ? 'erreurs du même type ont été générées' : 'erreur du même type a été générée' %}
+        {{ logs|length }} {{ phrase }} depuis le dernier mail ({{ lastSending|date('d-m-Y H:i:s') }}).<br/>
+        <b>Module :</b> {{ logs.0.module }}<br/>
+        <b>Action :</b> {{ logs.0.action }}<br/>
+    </p>
+    
+    <table style='border-collapse:collapse;'>
+        {% for log in logs %}
+        <tr>
+            <td style='border:1px solid black;'>{{ log.libelle }}</td>
+            <td style='border:1px solid black;'>{{ log.datetime|date('d/m/Y H:i:s') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>
+        {% if lastSending %}
+            Une erreur du même type a été générée le {{ lastSending|date('d-m-Y') }} à {{ lastSending|date('H:i:s') }}, pour la dernière fois.
+        {% else %}
+            Aucune autre erreur du même type n'a été générée auparavant.
+        {% endif %}
+    </p>
+{% endif %}

@@ -1,0 +1,91 @@
+img.logo{
+    float:left;
+    margin:-14px 28px -21px 7px;
+}
+header {
+    margin-bottom: 20px;
+}
+header .logo{
+    text-align:center;
+    padding:20px 10px;
+    border-bottom:1px solid #DDD;
+}
+header .logo a:focus{
+    outline: 0;
+}
+header .mynavbar {
+    float:left;
+}
+header .user {
+    float:right;
+}
+.menu {
+    width: 100%;
+    padding: 18px 0 16px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #fff;
+    border-bottom : 1px solid #DDD;
+}
+.menu ul {
+    margin-bottom: 0;
+    margin-left:0;
+    margin-top:0;
+}
+.menu a {
+    color: #333;
+    text-transform: uppercase;
+    text-align: left;
+    opacity: 0.6;
+}
+.menu a:hover, .menu .active a {
+    text-decoration: none;
+    opacity: 1;
+}
+.menu a:active, .menu a:visited, .menu a:link{
+    text-decoration: none;
+}
+.breadcrumb {
+    background-color:#FFF;
+    border-bottom : 1px solid #DDD;
+    border-top : 1px solid #DDD;
+    border-radius: 0;
+    padding: 5px 0 5px 10px;
+}
+footer {
+    border-top: 1px solid #DDD;
+    margin-top: 10px;
+}
+footer blockquote {
+    border-left:none;
+}
+.alert {
+    background-image:none;
+    border-radius:0;
+    margin:10px 0;
+}
+.alert.alert-danger {
+    background-color:rgba(248, 224, 224, 0.4);
+}
+.alert.alert-success {
+    background-color:rgba(223, 240, 216, 0.4);
+}
+.alert.alert-info {
+    background-color:rgba(188, 232, 241, 0.4);
+}
+.border-perso {
+    width:70%;
+    margin:0 auto 20px;
+    border:1px solid #DDD;
+    padding:10px;
+}
+.no-margin {
+    margin: 0;
+}
+
+
+.list-inline > li {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}

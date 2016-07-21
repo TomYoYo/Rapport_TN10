@@ -1,0 +1,82 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %}  Administration des spools - Affichage d'un paramètre{% endblock %}
+
+{% block content %}
+
+    
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Affichage d'un paramètre</legend>
+
+
+    <table class="table ">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ parametrage.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom du paramètre </th>
+                <td>{{ parametrage.titreparam }}</td>
+            </tr>
+            <tr>
+                <th>Préfixe du Spool </th>
+                <td>{{ parametrage.prefixeSpool }}</td>
+            </tr>
+            <tr>
+                <th>Emails </th>
+                <td>
+                    {% for tag in parametrage.tags %}
+                        {{ tag.mailTag }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>      
+                <th>Filtres - {% if parametrage.isFiltreIncluded == 0 %}(On prend){%else %}(On ne prend pas){% endif %} </th>
+                <td>
+                    {% set cpt = 0 %}
+                    {% for filtre in parametrage.filtres %}
+                        {% set cpt = cpt + 1 %}<b>{{ cpt }}</b> : {{ filtre.expressionAFiltrer }}{% if not loop.last %}<br /> {% endif %}
+                    {% endfor %}  
+                </td>
+            </tr>
+            <tr>
+                <th>Priorité </th>
+                <td>{% if parametrage.priorite == 0 %}Faible{% elseif parametrage.priorite == 1 %}Normale{% else %}Haute{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Rôles </th>
+                <td>
+                    {% for role in parametrage.roles %}
+                        {{ role.nomRole }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Commentaire </th>
+                <td>{{ parametrage.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Date de création </th>
+                <td>{% if parametrage.publishedAt %}{{ parametrage.publishedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="item-actions">
+            <a href="{{ path('transverse_partenaire_spoolalert_administration') }}" class="btn btn-sm btn-default">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Retour sur la page des Spools
+            </a>
+             <a href="{{ path('transverse_partenaire_spoolalert_administration_edit', { 'id': parametrage.id }) }}" class="btn btn-sm btn-default">Editer</a>
+             <a href="{{ path('transverse_partenaire_spoolalert_administration_delete', { 'id': parametrage.id }) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Supprimer</a>
+     <div>
+    
+    
+    
+    
+{% endblock %}
+

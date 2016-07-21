@@ -1,0 +1,47 @@
+{% extends 'FiscaliteODBundle::layout.html.twig' %}
+
+{% block title %} Interrogation d'une Opération Diverse {% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('front_office_main_homepage') }}">Accueil</a></li>
+        <li><a href="#">Module Opérations Diverses</a></li>
+        <li><a href="{{ path('od_listing') }}">Rechercher une Opération</a></li>
+        <li class="active">Consultation d'une Opération Diverse</li>
+        {% include 'FiscaliteODBundle:Includes:aide.html.twig' %}
+    </ol>
+{% endblock %}
+
+{% block content -%}
+    {% if operation.isDeleted %}
+    <div class="alert alert-warning">
+        <p><b>Attention.</b> Cette opération est actuellement supprimée. Elle peut être consultée uniquement par un administrateur.</p>
+    </div>
+    {% endif %}
+    {% include 'FiscaliteODBundle:Includes:bandeauSaisieShow.html.twig' %}
+    
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th style="width:90px;">Numéro</th>
+                <th style="width:205px;">Compte</th>
+                <th style="width:190px;">Montant</th>
+                <th style="width:420px;">Libellé</th>
+                <th style="width:185px;">Code budget</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mouvement in mouvements %}
+            <tr class="{{ mouvement.montant < 0 ? 'danger' : 'success' }}">
+                <td>{{ mouvement.numMvmt }}</td>
+                <td>{{ mouvement.compte }}</td>
+                <td class="montantShow">{{ mouvement.montant|number_format(2, ',', ' ') }}</td>
+                <td>{{ mouvement.libelle }}</td>
+                <td>{{ mouvement.codeBudget ?: '-' }}</td>
+            </tr>
+            {% else %}
+            <tr>Aucun mouvement n'est enregistré sur cette opération.</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

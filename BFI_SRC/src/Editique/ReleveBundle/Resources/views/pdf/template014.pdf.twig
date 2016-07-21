@@ -1,0 +1,25 @@
+<table margin-top="97" margin-left="215" height="68">
+    <tr>
+        <td border-type="none">{{oReleve.totalInteretDebiteur and oReleve.modeDiffusion != 'F' ? oReleve.totalInteretDebiteur : '0,00 euros'}}</td>
+    </tr>
+    <tr margin-top="1">
+        <td border-type="none">{{oReleve.txInteret and oReleve.modeDiffusion != 'F' ? oReleve.txInteret : '0,00 %'}}</td>
+    </tr>
+    <tr margin-top="1">
+        <td border-type="none">{{oReleve.TEG and oReleve.modeDiffusion != 'F' ? oReleve.TEG : '0,00 %'}}</td>
+    </tr>
+    <tr margin-top="1">
+        <td border-type="none">{{oReleve.commissionsDebiteur and oReleve.modeDiffusion != 'F' ? oReleve.commissionsDebiteur : '0,00 euros'}}</td>
+    </tr>
+    <tr>
+        <td border-type="none">{{oReleve.totalCommissions and oReleve.modeDiffusion != 'F' ? oReleve.totalCommissions : '0,00 euros'}}</td>
+    </tr>
+</table>
+
+<table margin-top="21" margin-left="4" height="104">
+    {% for msg in oReleve.messageCommerciaux %}
+    <tr>
+        <td border-type="none">{{ msg.0 }}{{ msg.1 }}</td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,17 @@
+{% set normalFontSize = "8pt" %}
+{% set marginLeft = "205px" %}
+
+<pdf>
+    {% if dat.isDATProgressif() %}
+        {% include 'EditiqueDATBundle:Default:progressif.pdf.twig' %}        
+    {% endif %}
+    {% if dat.isDATFixe() %}
+        {% include 'EditiqueDATBundle:Default:fixe.pdf.twig' %}
+    {% endif %}
+    
+    {% if templates.pageCondition is defined and templates.pageCondition %}
+    <dynamic-page document-template="{{templates.pageCondition}}">
+        <div></div>
+    </dynamic-page>
+    {% endif %}
+</pdf>

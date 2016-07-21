@@ -1,0 +1,25 @@
+parameters:
+    modules:
+        BackOffice:
+            - Action
+            - Connexion
+            - File
+            - Monitoring
+            - Parser
+            - User
+            - Nettoyage
+        Editique:
+            - Crédit
+            - DAT
+            - Livret
+            - Master
+            - RIB
+            - Relevé
+        FrontOffice:
+            - Main
+        OD:
+            - Module OD
+        Transverse:
+            - Partenaire
+    
+    

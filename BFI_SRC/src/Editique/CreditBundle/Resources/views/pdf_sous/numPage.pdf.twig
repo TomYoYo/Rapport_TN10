@@ -1,0 +1,11 @@
+{% set numPageMarginLeft = 420 %}
+
+{% if numPage < 10 %} 
+    {% set numPage = '00'~numPage%}
+{% else %}
+    {% set numPage = '0'~numPage%}
+{% endif %}
+
+<div text-align="right" margin-top="46px" >
+    Page {{numPage}} sur {{nbPage}} 
+</div>

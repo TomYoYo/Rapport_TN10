@@ -1,0 +1,78 @@
+<?php
+
+/*
+ * This file is part of the FOSUserBundle package.
+ *
+ * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace BackOffice\UserBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContext;
+use FOS\UserBundle\Controller\ResettingController as BaseController;
+
+class SecurityController extends BaseController
+{
+    public function loginAction(Request $request)
+    {
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
+        
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR) ||
+            (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR))
+        ) {
+            $this->container->get('session')->getFlashBag()->add(
+                'error',
+                'Votre nom d\'utilisateur et/ou votre mot de passe n\'est pas correct.'
+            );
+        }
+
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
+
+        $csrfToken = $this->container->has('form.csrf_provider')
+            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+        return $this->renderLogin(array(
+            'last_username' => $lastUsername,
+            'csrf_token' => $csrfToken,
+        ));
+    }
+
+    /**
+     * Renders the login template with the given parameters. Overwrite this function in
+     * an extended controller to provide additional data for the login template.
+     *
+     * @param array $data
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function renderLogin(array $data)
+    {
+        $template = sprintf(
+            'FOSUserBundle:Security:login.html.%s',
+            $this->container->getParameter('fos_user.template.engine')
+        );
+
+        return $this->container->get('templating')->renderResponse($template, $data);
+    }
+
+    public function checkAction()
+    {
+        throw new \RuntimeException(
+            'You must configure the check path to be handled by the firewall using form_login' .
+            'in your security firewall configuration.'
+        );
+    }
+
+    public function logoutAction()
+    {
+        throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
+    }
+}

@@ -1,0 +1,34 @@
+<p>
+    La récupération des taux interbancaires vient d'être lancée. En revanche, certains taux du {{ tauxJour.0 }} ne sont pas disponibles auprès de la Banque de France. Les taux du {{ tauxRecup.0 }} sont donc renseigné en lieu et place.<br/>
+    Voici la liste des taux pour la journée concernée :
+</p>
+<table style='border-collapse:collapse;'>
+    <tr>
+        <td style='border:1px solid black;'></td>
+        <td style='border:1px solid black;'>Taux du {{ tauxJour.0 }}</td>
+    </tr>
+    <tr>
+        <td style='border:1px solid black;'>EONIA</td>
+        <td style='border:1px solid black;'>{{ tauxRecup.1 }}</td>
+    </tr>
+    <tr>
+        <td style='border:1px solid black;'>EURIBOR 1M</td>
+        <td style='border:1px solid black;'>{{ tauxRecup.2 }}</td>
+    </tr>
+    <tr>
+        <td style='border:1px solid black;'>EURIBOR 3M</td>
+        <td style='border:1px solid black;'>{{ tauxRecup.3 }}</td>
+    </tr>
+    <tr>
+        <td style='border:1px solid black;'>EURIBOR 6M</td>
+        <td style='border:1px solid black;'>{{ tauxRecup.4 }}</td>
+    </tr>
+    <tr>
+        <td style='border:1px solid black;'>EURIBOR 9M</td>
+        <td style='border:1px solid black;'>{{ tauxRecup.5 }}</td>
+    </tr>
+    <tr>
+        <td style='border:1px solid black;'>EURIBOR 1A</td>
+        <td style='border:1px solid black;'>{{ tauxRecup.6 }}</td>
+    </tr>
+</table>

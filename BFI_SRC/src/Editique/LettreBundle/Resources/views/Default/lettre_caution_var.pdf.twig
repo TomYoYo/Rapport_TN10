@@ -1,0 +1,60 @@
+{% include 'EditiqueLettreBundle:Default:_caution_general.pdf.twig' %}
+
+<div margin-left="78px" margin-top="34px" width="64" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtCautionInit ?: '-' }}
+    </div>
+</div>
+
+<div margin-left="569px" margin-top="2px" width="24" text-align="center">
+    <div font-style="bold">
+        {{ caution.idDossier ?: '-' }}
+    </div>
+</div>
+
+<!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+<div height='1'></div>
+
+<div margin-left="55px" margin-top="0px" width="62" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtPretInit ?: '-' }}
+    </div>
+</div>
+
+<!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+<div height='1'></div>
+
+<table margin-top="8px" margin-left="353px">
+    <tr>
+        <td border-type="none" width="100" text-align="center" font-style="bold">{{caution.libCodeTaux ?: '-'}}</td>
+        <td border-type="none" width="85"></td>
+        <td border-type="none" width="29" text-align="right" font-style="bold">{{caution.margeTaux ?: '-'}}</td>
+        <td border-type="none"></td>
+    </tr>
+</table>
+
+<table margin-top="2px" margin-left="68px">
+    <tr>
+        <td border-type="none" width="29" font-style="bold" text-align="right">{{caution.taux ?: '-'}}</td>
+        <td border-type="none" width="26"></td>
+        <td border-type="none" font-style="bold">{{caution.dateSituation ?: '-'}}.</td>
+    </tr>
+</table>
+
+<div margin-left="132px" margin-top="9px" width="90" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtPretRestDu ?: '-' }}
+    </div>
+</div>
+
+<div margin-left="263px" margin-top="2px" width="55" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtInteret ?: '-' }}
+    </div>
+</div>
+
+<div margin-left="475px" margin-top="131px" width="60" text-align="center">
+    <div font-style="bold">
+        {{ caution.dateFin ?: '-' }}
+    </div>
+</div>

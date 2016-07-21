@@ -1,0 +1,26 @@
+<table margin-top="94" width="100%" height="154">
+    {% set colorLineOpe = '#F8E9EB'%}
+    {% set numLg = 11 %}
+    
+    {% for i,lg in oPortefeuille.categories %}
+        {% include 'EditiqueTitreBundle:portefeuille_pdf:tabCategories.pdf.twig' %}
+    
+        {% if lg is defined %}{% set numLg = numLg - 1 %}{% endif %}
+    
+        {% if colorLineOpe == '#F8E9EB' %}
+            {% set colorLineOpe = 'white'%}
+        {% else %}
+            {% set colorLineOpe = '#F8E9EB'%}
+        {% endif %}
+    {% endfor %}
+    
+    {% for i in 1..numLg %}
+        {% include 'EditiqueTitreBundle:portefeuille_pdf:tabCategories.pdf.twig' %}
+    
+        {% if colorLineOpe == '#F8E9EB' %}
+            {% set colorLineOpe = 'white'%}
+        {% else %}
+            {% set colorLineOpe = '#F8E9EB'%}
+        {% endif %}
+    {% endfor %}
+</table>

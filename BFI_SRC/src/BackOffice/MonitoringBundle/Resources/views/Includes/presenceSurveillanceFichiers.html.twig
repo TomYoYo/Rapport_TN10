@@ -1,0 +1,31 @@
+{% set altRefresh = 'Rafraîchir le statut de ce bloc'%}
+
+{% if statusSurveillanceFichiers == 'surveillanceFichiersOk' %}
+    {% set img = 'rondVert'%}
+    {% set alt = 'Surveillance des fichiers lancée 1 fois' %}
+    {% if statusSurveillanceFichiersNb != '1' %}
+        {% set img = 'rondOrange' %}
+        {% set alt = 'Surveillance des fichiers lancée '~statusSurveillanceFichiersNb~' fois' %}
+    {% endif %}
+{% else %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Surveillance des fichiers non lancée' %}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Surveillance des <strong>Fichiers</strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le {{ "now"|date("d/m/Y") }} à
+    <strong>{{ "now"|date("H:i:s") }}</strong>
+
+    <button onclick="$('#detailSurveillanceFichiers').fadeToggle()">Détail</button>
+</div>
+
+<div class="formRefresh" id="detailSurveillanceFichiers">
+    {{alt}}
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+</div>

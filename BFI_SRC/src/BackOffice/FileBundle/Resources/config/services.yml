@@ -1,0 +1,4 @@
+services:    
+    backoffice_file.fileManager:
+        class: BackOffice\FileBundle\Manager\FileManager
+        arguments: [ @backoffice_monitoring.logManager]

@@ -1,0 +1,131 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Nettoyage {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/ztree.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <h3>Nettoyage</h3>
+
+    <div class="panel panel-default" style="padding:0">
+        <div class="panel-heading">
+            <h3 class="panel-title">Rapports de nettoyage</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th>Règle</th>
+                    <th>Dernier lancement</th>
+                    <th>Résultat</th>
+                    <th style="width: 150px">Actions</th>
+                </tr>
+                <tr>
+                    <td>Nettoyage mensuel</td>
+                    <td>{{logNettoyageMensuel.datetime|date('d/m/Y à h:i')}}</td>
+                    <td>{{logNettoyageMensuel.getNiveauLibelle()}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Nettoyage annuel</td>
+                    <td>{{logNettoyageAnnuel.datetime|date('d/m/Y à h:i')}}</td>
+                    <td>{{logNettoyageAnnuel.getNiveauLibelle()}}</td>
+                    <td></td>
+                </tr>
+
+                {% for r in regles %}
+
+                    <tr>
+                        <td style="text-align: left">
+                            <strong>Règle {{r.id}}</strong>
+                            <br>
+                            {{r.action|capitalize}} les fichiers agés de plus de {{r.ageToString}}
+                            <br>
+                            De {{r.originServer}}/{{r.originDir}}/{{r.sousDossier}}
+                            vers {{r.destinationServer}}/{{r.originDir}}
+                        </td>
+                        <td>
+                            {% if r.lastLaunch is not null %}
+                                {{r.lastLaunch|date('d/m/Y à H:i')}}
+                            {% else %}
+                                Jamais lancé
+                            {% endif %}
+                        </td>
+                        <td>{{r.lastResult}}</td>
+                        <td>
+
+                            {% if reglesLancees[r.id] is defined %}
+                                <div class="alert alert-warning">
+                                    Règle relancée {{reglesLancees[r.id]|date('d/m/Y à H:i')}}
+                                </div>
+                            {% else %}
+                                <img
+                                    src="{{ asset('bundles/frontofficemain/images/retry.png') }}"
+                                    alt="Relancer" title="Relancer"
+                                    onclick="launch('{{path('reglenettoyage_launch', {'regle':r.id})}}');$(this).hide();"
+                                    />
+                            {% endif %}
+                                    <!--
+                            <a href="{{path('reglenettoyage_edit', {'id':r.id})}}">
+                                <img
+                                    src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}"
+                                    width="30"
+                                    alt="Modifier" title="Modifier"
+                                    />
+                            </a>
+-->
+                            <a href="{{path('reglenettoyage_delete', {'id':r.id})}}">
+                                <img
+                                    src="{{ asset('bundles/frontofficemain/images/delete.png') }}"
+                                    width="30"
+                                    alt="Supprimer" title="Supprimer"
+                                    onclick="return(confirm('Etes-vous sûr de vouloir supprimer cet règle ?'));"
+                                    />
+                            </a>
+
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default" style="padding:0">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ajout d'une règle de nettoyage</h3>
+        </div>
+        <div class="panel-body">
+            {% include 'BackOfficeCleanBundle:RegleNettoyage:form.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.ztree.min.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+
+
+        function launch(url){
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: url
+            });
+        }
+
+    </script>
+{% endblock %}

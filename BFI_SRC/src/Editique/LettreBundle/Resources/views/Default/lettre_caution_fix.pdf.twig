@@ -1,0 +1,54 @@
+{% include 'EditiqueLettreBundle:Default:_caution_general.pdf.twig' %}
+
+<div margin-left="78px" margin-top="24px" width="64" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtCautionInit ?: '-' }}
+    </div>
+</div>
+
+<div margin-left="569px" margin-top="2px" width="24" text-align="center">
+    <div font-style="bold">
+        {{ caution.idDossier ?: '-' }}
+    </div>
+</div>
+
+<!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+<div height='1'></div>
+
+<div margin-left="55px" margin-top="0px" width="62" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtPretInit ?: '-' }}
+    </div>
+</div>
+
+<!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+<div height='1'></div>
+
+<div margin-left="441px" margin-top="8px" width="30" text-align="right">
+    <div font-style="bold">
+        {{ caution.taux ?: '-' }}
+    </div>
+</div>
+
+<table margin-top="10px" margin-left="26px">
+    <tr>
+        <td border-type="none" width="192" font-style="bold">{{caution.dateSituation ?: '-'}}</td>
+        <td border-type="none" width="93" text-align="right" font-style="bold">{{caution.mtPretRestDu ?: '-'}}</td>
+        <td border-type="none"></td>
+    </tr>
+</table>
+
+<!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+<div height='1'></div>
+
+<div margin-left="415px" margin-top="0px" width="53" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtInteret ?: '-' }}
+    </div>
+</div>
+
+<div margin-left="475px" margin-top="132px" width="60" text-align="center">
+    <div font-style="bold">
+        {{ caution.dateFin ?: '-' }}
+    </div>
+</div>

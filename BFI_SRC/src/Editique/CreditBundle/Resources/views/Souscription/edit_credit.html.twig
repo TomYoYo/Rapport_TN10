@@ -1,0 +1,222 @@
+<div class="tab-pane" id="credit">
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="montant" class="col-md-6 control-label">Montant emprunté (€)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="montant" value="{{ pret.montantPret(false) }}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="duree" class="col-md-6 control-label">Durée (mois)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="duree" value="{{ plan.duree }}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    {% if type != "OUV" %}
+    <div class="form-group">
+        <label for="obj_fin" class="col-md-3 control-label required">Objet du financement</label>
+        <div class="col-md-9">
+            <textarea class="form-control" id="obj_fin" name="obj_fin" required="required" style="height:175px">{{souscription ? souscription.getObjetFin2 : ''}}</textarea>
+            
+            <div class="col-md-6" style="margin-top:10px;">
+                <label for="obj_fin" class="pull-left">Probabilité d'erreur</label>
+                <div class="pull-right col-md-6">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                            0%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 text-right" style="margin-top:10px;">
+                <p id="compteur"></p>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="form-group">
+        <label for="ass1" class="col-md-3 control-label required">Commission d'engagement</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" required="required" id="comeng1" name='comeng1' value="{{souscription ? souscription.comeng1 : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ass2" class="col-md-3 control-label">Commission d'engagement (suite)</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" id="comeng2" name='comeng2' value="{{souscription ? souscription.comeng2 : ''}}">
+        </div>
+    </div>
+    {% endif %}
+
+    <hr/>
+
+    {% if type != "OUV" %}
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="dtDec" class="col-md-6 control-label required">Date décaissement</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" maxlength="10" id="dtDec" name="dtDec" value='{{dtDec ? dtDec : souscription ? souscription.dtDec : ''}}' required="required">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="nbEch" class="col-md-6 control-label">Nombre échéances</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="nbEch" value="{{plan.nbEch}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="cptSup" class="col-md-6 control-label">Compte support</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="cptSup" value="{{creBis.cptSupport}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="dtDerEch" class="col-md-6 control-label">{% if type != "OUV" %}Date dernière échéance{% else %}Date butoir{% endif %}</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="dtDerEch" value="{{creBis.dtDerEch}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    {% if type != "OUV" %}
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="diffAmo" class="col-md-6 control-label required">Différé d'amortissement<br/><i>(x mois ou NEANT)</i></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" maxlength="69" id="diffAmo" name="diffAmo" value='{{souscription ? souscription.diffAmo : ''}}' required="required">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="modeAmo" class="col-md-6 control-label">Mode d'amortissement</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="modeAmo" value="{{plan.modeAmo}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="perInt" class="col-md-6 control-label">Période d'Intérêt</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="perInt" value="{{plan.perInt}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="jourPre" class="col-md-6 control-label required">Jour de prélèvement</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" maxlength="2" id="jourPre" name="jourPre" value='{{souscription ? souscription.jourPre : jourPrelvmt ?: ''}}' required="required">
+            </div>
+        </div>
+    </div>
+
+    {% if type == "TXFIXE" %}
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="txPre" class="col-md-6 control-label">Taux nominal annuel (%)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="txPre" value="{{plan.txNomAnn}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="fraisDos" class="col-md-6 control-label">Frais de dossier (€)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="fraisDos" value="{{creBis.fraisDos}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    {% elseif type == "TXVAR" %}
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="libCodTx" class="col-md-6 control-label">Libellé du code taux</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="libCodTx" value="{{plan.libCodeTx}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="margeTxPre" class="col-md-6 control-label">Marge taux pour taux variable (%)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="margeTxPre" value="{{plan.margeTx}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="typeCalcul" class="col-md-6 control-label required">Type du calcul des intérêts</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="typeCalcul" name="typeCalcul" value='{{souscription ? souscription.typeCalcul : ''}}' required="required">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="fraisDos" class="col-md-6 control-label">Frais de dossier (€)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="fraisDos" value="{{creBis.fraisDos}}" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <hr/>
+
+    <div class="form-group">
+        <label for="ass1" class="col-md-3 control-label required">Assurances</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" required="required" id="ass1" name='ass1' value="{{souscription ? souscription.ass1 : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ass2" class="col-md-3 control-label">Assurances (suite)</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" id="ass2" name='ass2' value="{{souscription ? souscription.ass2 : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ass3" class="col-md-3 control-label">Assurances (suite)</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" id="ass3" name='ass3' value="{{souscription ? souscription.ass3 : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ass4" class="col-md-3 control-label">Assurances (suite)</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" id="ass4" name='ass4' value="{{souscription ? souscription.ass4 : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ass5" class="col-md-3 control-label">Assurances (suite)</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-sm" maxlength="69" id="ass5" name='ass5' value="{{souscription ? souscription.ass5 : ''}}">
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="form-group">
+        <div class="form-group pull-left">
+            <label for="teg" class="col-md-6 control-label">TEG (%)</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="teg" value="{{creBis.teg}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <label for="nbExe" class="col-md-6 control-label required">Nombre d'exemplaire</label>
+            <div class="col-md-6">
+                <input type="text" maxlength="2" class="form-control input-sm" id="nbExe" name="nbExe" required="required" value="{{souscription ? souscription.nombreExemplaire : ''}}">
+            </div>
+        </div>
+    </div>
+</div>

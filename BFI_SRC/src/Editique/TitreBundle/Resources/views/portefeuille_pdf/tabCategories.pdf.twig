@@ -1,0 +1,9 @@
+<tr background.color="{{colorLineOpe}}">
+    {% if lg is defined %}
+    <td border-type="none" padding-left="4" width="333">{{lg.LIB}}</td>
+    <td border-type="none" width="66" text-align="right">{{lg.POIDS|number_format(2,',',' ')}} %</td>
+    <td border-type="none" padding-right="1" text-align="right">{{lg.TOTAL|number_format(2,',',' ')}}</td>
+    {% else %}
+    <td border-type="none">&#160;</td>
+    {% endif %}
+</tr>

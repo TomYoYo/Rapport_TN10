@@ -1,0 +1,14 @@
+.breadcrumb{
+    margin-bottom: 10px;
+}
+.breadcrumb >  li:not(.active):after {
+  content: " /";
+  padding:0 5px;
+}
+.breadcrumb > li + li:before {
+  content: "";
+}
+.breadcrumb > .active {
+  color: #777777;
+  font-size: 28px;
+}

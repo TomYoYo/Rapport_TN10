@@ -1,0 +1,42 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Evolutions {% endblock %}
+
+{% block content %}
+    <h3>Consultation des évolutions</h3>
+    
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Numéro de version</th>
+                <th>Date de mise en Pré-production</th>
+                <th>Date de mise en Production</th>
+                <th>Date estimée</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in entities %}
+            <tr>
+                <td>{{e.versionNumber}}</td>
+                <td>{{e.preprodRealisation ? e.preprodRealisation|date('d/m/Y') : '-'}}</td>
+                <td>{{e.prodRealisation ? e.prodRealisation|date('d/m/Y') : '-'}}</td>
+                <td>{{e.estimatedDate ? e.estimatedDate|date('d/m/Y') : '-'}}</td>
+                <td><a href="{{ path('evolution_show', {'id':e.id}) }}">Voir</a></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="9">Aucun résultat</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+
+    <div class="panel panel-default monitoFiltre">
+        <div class="panel-body">
+            <a href="{{ path('evolution_new') }}">Ajouter une nouvelle entrée</a>
+        </div>
+    </div>
+{% endblock %}

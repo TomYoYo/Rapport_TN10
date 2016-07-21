@@ -1,0 +1,19 @@
+{% set heightAdr = '16px' %}
+
+<pdf>
+    {% include 'EditiqueCompteBundle:Default:lettre_accompagnement.html.twig' %}
+    
+    {% for representant in representants %}
+        {% include 'EditiqueCompteBundle:Default:souscription_compte.html.twig' %}
+        {% include 'EditiqueCompteBundle:Default:souscription_compte.html.twig' %}
+    {% else %}
+        {% include 'EditiqueCompteBundle:Default:souscription_compte.html.twig' %}
+        {% include 'EditiqueCompteBundle:Default:souscription_compte.html.twig' %}
+    {% endfor %}
+    
+    {% for representant in representants %}
+        {% include 'EditiqueCompteBundle:Default:registre_signatures.html.twig' %}
+    {% else %}
+        {% include 'EditiqueCompteBundle:Default:registre_signatures.html.twig' %}
+    {% endfor %}
+</pdf>

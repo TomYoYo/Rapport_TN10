@@ -1,0 +1,113 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block content %}
+    <h3>Consultation des éditiques</h3>
+    <div id="monitoEditique">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_editique') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Id Client</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.idClient is defined %} value="{{ datas.idClient }}" {% endif %} autocomplete="off" name="search[idClient]" placeholder="ID Client">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Num. de compte</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.numCpt is defined %} value="{{ datas.numCpt }}" {% endif %} autocomplete="off" name="search[numCpt]" placeholder="Numéro de compte">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Type document</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[typeDoc]">
+                                            <option value="" label="Type document"></option>
+                                            <option value="dat" {% if datas.typeDoc is defined and datas.typeDoc == "dat" %} selected="selected" {% endif %}>Dépôt à Terme</option>
+                                            <option value="echeancier" {% if datas.typeDoc is defined and datas.typeDoc == "echeancier" %} selected="selected" {% endif %}>Echéancier</option>
+                                            <option value="lettre_chequier" {% if datas.typeDoc is defined and datas.typeDoc == "lettre_chequier" %} selected="selected" {% endif %}>Lettre chéquier</option>
+                                            <option value="lettre_impaye" {% if datas.typeDoc is defined and datas.typeDoc == "lettre_impaye" %} selected="selected" {% endif %}>Lettre d'impayé</option>
+                                            <option value="mdp" {% if datas.typeDoc is defined and datas.typeDoc == "mdp" %} selected="selected" {% endif %}>Lettre mot de passe</option>
+                                            <option value="livret" {% if datas.typeDoc is defined and datas.typeDoc == "livret" %} selected="selected" {% endif %}>Livret</option>
+                                            <option value="releve" {% if datas.typeDoc is defined and datas.typeDoc == "releve" %} selected="selected" {% endif %}>Relevé de compte</option>
+                                            <option value="releve_quotidien" {% if datas.typeDoc is defined and datas.typeDoc == "releve_quotidien" %} selected="selected" {% endif %}>Relevé de compte quotidien</option>
+                                            <option value="rib" {% if datas.typeDoc is defined and datas.typeDoc == "rib" %} selected="selected" {% endif %}>Relevé d'Identité Bancaire</option>
+                                            <option value="club" {% if datas.typeDoc is defined and datas.typeDoc == "club" %} selected="selected" {% endif %}>Soucription club</option>
+                                            <option value="souscription" {% if datas.typeDoc is defined and datas.typeDoc == "souscription" %} selected="selected" {% endif %}>Soucription compte courant</option>
+                                            <option value="souscription_credit" {% if datas.typeDoc is defined and datas.typeDoc == "souscription_credit" %} selected="selected" {% endif %}>Soucription crédit</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Chemin du fichier</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.filePath is defined %} value="{{ datas.filePath }}" {% endif %} autocomplete="off" name="search[filePath]" placeholder="Chemin du fichier">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date de génération</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateDu is defined %} value="{{ datas.dateDu }}" {% endif %} autocomplete="off" name="search[dateDu]" placeholder="Du" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateAu is defined %} value="{{ datas.dateAu }}" {% endif %} autocomplete="off" name="search[dateAu]" placeholder="Au">
+                                    </div>
+                                </div>    
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm" style="margin-right: 50px">Chercher</button>
+                                    <a href="{{ path('back_office_delete_filters', {'page':'editiques'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>                            
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Id Client', 'column': 'idClient'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Numéro compte', 'column': 'numCpt'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Type document', 'column': 'typeDoc'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Chemin du fichier', 'column': 'filePath'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Date de génération', 'column': 'dtGeneration'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Action', 'column': 'action', 'noSort':true} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in entities %}
+                <tr>
+                    <td>{{e.idClient}}</td>
+                    <td>{{e.numCpt}}</td>
+                    <td>{{e.typeDoc}}</td>
+                    <td>
+                        {{e.filePath}}
+                    </td>
+                    <td>{{e.dtGeneration|date('d/m/Y H:i:s')}}</td>
+                    <td>
+                        <a href="{{path('editique_pdf', {'id':e.id}) }}">
+                            <img src="{{ asset('bundles/backofficemonitoring/images/pdf.jpg') }}" width="25" alt="PDF" title="Télécharger le PDF" />
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">Aucun résultat</td>
+                </tr>
+                {% endfor %}
+            </tbody>    
+        </table>
+        
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+    </div>
+{% endblock %}

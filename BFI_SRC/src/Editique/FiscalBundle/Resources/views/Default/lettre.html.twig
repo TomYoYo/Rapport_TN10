@@ -1,0 +1,27 @@
+{% set heightAdr = '16px' %}
+
+<div margin-left="449px" margin-top="155px" height="88" font-size="11pt">
+    <div>
+        <div height='{{heightAdr}}' font-style="bold">
+            {{ foyer.admin.nom }} {{ foyer.admin.prenom }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ foyer.admin.adresse1 }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ foyer.admin.adresse2 }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ foyer.admin.adresse3 }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ foyer.admin.adresse4 }}
+        </div>
+    </div>
+</div>
+
+<div margin-top="50px" margin-left="499px">
+    <div>
+        {{ 'now'|date('d/m/Y') }}
+    </div>
+</div>

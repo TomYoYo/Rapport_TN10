@@ -1,0 +1,93 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block content %}
+    <h3>Consultation des pistes d'audit OD</h3>
+    <div id="monitoEditique">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_od_actions') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Action</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[action]">
+                                            <option value="" label="Action"></option>
+                                            <option value="Saisie" {% if datas.action is defined and datas.action == "Saisie" %} selected="selected" {% endif %}>Saisie</option>
+                                            <option value="Modification" {% if datas.action is defined and datas.action == "Modification" %} selected="selected" {% endif %}>Modification</option>
+                                            <option value="Suppression" {% if datas.action is defined and datas.action == "Suppression" %} selected="selected" {% endif %}>Suppression</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date de l'action</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateDu is defined %} value="{{ datas.dateDu }}" {% endif %} autocomplete="off" name="search[dateDu]" placeholder="Du" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateAu is defined %} value="{{ datas.dateAu }}" {% endif %} autocomplete="off" name="search[dateAu]" placeholder="Au">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Numéro de pièce</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.numPiece is defined %} value="{{ datas.numPiece }}" {% endif %} autocomplete="off" name="search[numPiece]" placeholder="Numéro de pièce">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Actionneur</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.actionneur is defined %} value="{{ datas.actionneur }}" {% endif %} autocomplete="off" name="search[actionneur]" placeholder="Actionneur">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href="{{ path('back_office_delete_filters', {'page':'od_actions'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': '#', 'column': 'idAction'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Action', 'column': 'libelleAction'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Opération concernée', 'column': 'operation'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Actionneur', 'column': 'profil'} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for action in entities %}
+                <tr>
+                    <td>{{action.idAction}}</td>
+                    <td>{{action.libelleAction}} ({{action.dateAction|date('d-m-Y')}})</td>
+                    <td>{{action.operation}}</td>
+                    <td>{{action.profil}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">Aucun résultat</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+    </div>
+{% endblock %}

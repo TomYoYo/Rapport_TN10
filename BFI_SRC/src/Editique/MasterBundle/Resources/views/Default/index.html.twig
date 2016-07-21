@@ -1,0 +1,79 @@
+{% extends 'EditiqueMasterBundle::layout.html.twig' %}
+
+{% block breadcrumbs %}
+    {% if erreur == 'file_not_exist' %}
+        <div class="panel panel-danger">
+             <div class="panel-heading">
+                <h3 class="panel-title">Erreur</h3>
+             </div>
+            <div class="panel-body">
+                Le fichier demandé n'existe pas
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+    <h1 class="specified">
+        Accès éditiques
+        {% include 'EditiqueMasterBundle:Default:aide.html.twig' %}
+    </h1>
+
+    <div class="panel panel-danger">
+         <div class="panel-heading">
+            <h3 class="panel-title">Disponibilité des documents</h3>
+         </div>
+        <div class="panel-body">
+            Attention les documents ne sont disponibles ici qu'<b>un mois après avoir été générés</b>.<br>
+            Ces documents seront toutefois disponibles sur votre serveur de fichier sur leur durée légale.
+        </div>
+    </div>
+
+    <div class="well specified">
+       <form class="form-inline" role="form" method="post" action="{{ path('editique_homepage') }}">
+            <div class="form-group">
+              <label class="sr-only" for="idClient">Id Client</label>
+              <input type="text" class="form-control" name="idClient" id="idClient" placeholder="Id Client" value="{{idClient}}">
+            </div>
+            et / ou
+            <div class="form-group">
+              <label class="sr-only" for="numCpt">Numéro de compte</label>
+              <input type="text" class="form-control" id="numCpt" name="numCpt" placeholder="Numéro de compte" value="{{numCpt}}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+       </form>
+    </div>
+
+    {% if (numCpt != '' or idClient != '') and entities is empty %}
+        <div class="panel panel-danger" style="margin:20px auto;">
+             <div class="panel-heading">
+                <h3 class="panel-title">Pas de résultat</h3>
+             </div>
+            <div class="panel-body">
+                Les informations que vous avez saisies ne correspondent à aucun document.
+            </div>
+        </div>
+    {% endif %}
+
+    <ul>
+        {% for e in entities %}
+        <li>
+            {{e.typeDoc|upper}} généré le {{e.dtGeneration|date('d/m/Y à H:i:s')}} :
+            <a href="{{ path('editique_pdf', { 'id': e.id }) }}">{{e.fileName}} </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.placeholder.js'
+        '@EditiqueMasterBundle/Resources/public/js/editique.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,3 @@
+BackOfficeEvolutionBundle_evolution:
+    resource: "@BackOfficeEvolutionBundle/Resources/config/routing/evolution.yml"
+    prefix:   /backoffice/evolution

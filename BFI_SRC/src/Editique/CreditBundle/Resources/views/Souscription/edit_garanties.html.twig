@@ -1,0 +1,78 @@
+<div class="tab-pane" id="garanties">
+    <div class="form-group">
+        <label for="ass1" class="col-md-3 control-label required">Description des garanties particulières</label>
+        <div class="col-md-9">
+            <textarea id="guarantee" class="form-control guarantee" onkeyup="autoGrow(this);" name="guarantee">{{souscription ? souscription.garanties2 : ''}}</textarea>
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="form-group">
+        <label for="fraisGar" class="col-md-3 control-label">Frais de garanties</label>
+        <div class="col-md-9">
+            <table class="table" style="width:100%">
+                <tr>
+                    <th>Libellé de la garantie</th>
+                    <th>Montant (€)</th>
+                    <th>Utilisation</th>
+                </tr>
+                {% set i = 0 %}
+                {% for gar in creBis.fraisGar %}
+                <tr>
+                    {% set i = i+1 %}
+                    <td>{{gar.LIBELLE}}</td>
+                    <td>{{gar.MONTANT}}</td>
+                    <td>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="fraisGar[{{gar.LIBELLE}}]" class="onoffswitch-checkbox" id="fraisGar{{i}}" value="{{gar.MONTANT}}" {% if souscription and gar.LIBELLE in souscription.fraisGar|keys %} checked="checked" {% endif %}>
+                            <label class="onoffswitch-label" for="fraisGar{{i}}">
+                                <span class="onoffswitch-inner">
+                                    <span class="onoffswitch-active"><span class="onoffswitch-switch">OUI</span></span>
+                                    <span class="onoffswitch-inactive"><span class="onoffswitch-switch">NON</span></span>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                    <td colspan="3">Aucun frais de garanties renseigné.</td>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="form-group">
+        <label for="gar1" class="col-md-3 control-label">Liste des garanties générales</label>
+        <div class="col-md-9">
+            <table class="table" style="width:100%">
+                <tr>
+                    <th>Nom de la garantie</th>
+                    <th>Utilisation</th>
+                    <th>Aperçu</th>
+                </tr>
+                <tr>
+                    <td>Nantissement de fonds de commerce</td>
+                    <td>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="gar1" class="onoffswitch-checkbox" id="gar1" {% if souscription and souscription.gar1 %}checked{% endif %}>
+                            <label class="onoffswitch-label" for="gar1">
+                                <span class="onoffswitch-inner">
+                                    <span class="onoffswitch-active"><span class="onoffswitch-switch">OUI</span></span>
+                                    <span class="onoffswitch-inactive"><span class="onoffswitch-switch">NON</span></span>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="{{ path('editique_show_pdf', {'name':'cre_template31'}) }}" target="_blank">
+                            <img src="{{ asset('bundles/frontofficemain/images/pdf.png') }}" width="30" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

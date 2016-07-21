@@ -1,0 +1,14 @@
+{% extends 'FiscaliteBudgetBundle::layout.html.twig' %}
+
+{% block title %}Contrôle budgétaire - Paramétrage{% endblock %}
+
+{% block content %}
+    <h3>
+        Paramétrage du module de contrôles budgétaire
+    </h3>
+
+    <div class="text-center">
+        <a href="{{ path('fiscalite_controle_budget_settings_code') }}" class="btn btn-lg btn-warning">Code budgétaire</a>
+        <a href="{{ path('fiscalite_controle_budget_settings_nature') }}" class="btn btn-lg btn-info">Nature budgétaire</a>
+    </div>
+{% endblock %}

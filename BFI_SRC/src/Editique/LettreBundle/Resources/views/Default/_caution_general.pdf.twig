@@ -1,0 +1,51 @@
+{% set heightAdr = '16px' %}
+
+<div margin-left="382px" margin-top="78px" height="88" font-size="11pt">
+    <div>
+        <div height='{{heightAdr}}' font-style="bold">
+            {{ caution.ra1ClientCaution ?: '-' }} {{ caution.ra2ClientCaution }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ caution.adresseCaution[0] }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ caution.adresseCaution[1] }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ caution.adresseCaution[2] }}
+        </div>
+        <div height='{{heightAdr}}'>
+            {{ caution.adresseCaution[3] }}
+        </div>
+    </div>
+</div>
+
+<div margin-left="444px">
+    <div>
+        {{ 'now'|date('d/m/Y') }}
+    </div>
+</div>
+
+<div margin-left="285px" margin-top="33px">
+    <div>
+        {{ caution.dateSituation ?: '-' }}
+    </div>
+</div>
+
+<div margin-top="92px" height="65" text-align="center">
+    <div height='{{heightAdr}}' font-style="bold">
+        {{ caution.ra1ClientPret ?: '-' }} {{ caution.ra2ClientPret }}
+    </div>
+    <div height='{{heightAdr}}'>
+        {{ caution.adressePret[0] }}
+    </div>
+    <div height='{{heightAdr}}'>
+        {{ caution.adressePret[1] }}
+    </div>
+    <div height='{{heightAdr}}'>
+        {{ caution.adressePret[2] }}
+    </div>
+    <div height='{{heightAdr}}'>
+        {{ caution.adressePret[3] }}
+    </div>
+</div>

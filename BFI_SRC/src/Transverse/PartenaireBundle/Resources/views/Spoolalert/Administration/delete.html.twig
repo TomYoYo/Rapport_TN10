@@ -1,0 +1,33 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %}  Administration des spools - Suppression d'un paramètrage - {{ parent() }}{% endblock %}
+
+{% block content %}
+
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>Suppression d'un paramètrage</legend>
+
+
+<p>
+    Etes-vous certain de vouloir supprimer le parametrage numéro "<b>{{ parametrage.id }}</b>", intitulé "<b>{{ parametrage.titreParam }}</b>" ?
+</p>
+
+
+<form action="{{ path('transverse_partenaire_spoolalert_administration_delete', {'id': parametrage.id}) }}" method="post">
+  <a href="{{ path('transverse_partenaire_spoolalert_administration_show', {'id': parametrage.id}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour sur le parametrage sans le supprimer
+  </a>
+  <input type="submit" value="Supprimer" class="btn btn-danger" />
+  {# Ceci va générer le champ CSRF #}
+  {{ form_rest(form) }}
+</form>
+
+    
+    
+    
+    
+{% endblock %}

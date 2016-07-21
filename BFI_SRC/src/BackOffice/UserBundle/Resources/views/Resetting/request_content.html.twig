@@ -1,0 +1,15 @@
+<div style="width:70%;margin:0 auto 30px;border:1px solid #DDD;padding:10px;">
+    <form action="{{ path("fos_user_resetting_send_email") }}" method="post" class="fos_user_resetting_request form-horizontal" role="form">
+        <div class="form-group">
+            <label for="username" class="col-sm-3 control-label">Nom d'utilisateur :</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <input type="submit" id="_submit" name="submit" value="Valider" class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+</div>

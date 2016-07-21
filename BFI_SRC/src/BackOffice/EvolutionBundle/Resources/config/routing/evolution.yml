@@ -1,0 +1,30 @@
+evolution:
+    pattern:  /
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:index" }
+
+evolution_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:show" }
+
+evolution_new:
+    pattern:  /new
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:new" }
+
+evolution_create:
+    pattern:  /create
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:create" }
+    requirements: { _method: post }
+
+evolution_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:edit" }
+
+evolution_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:update" }
+    requirements: { _method: post|put }
+
+evolution_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackOfficeEvolutionBundle:Evolution:delete" }
+    requirements: { _method: post|delete }

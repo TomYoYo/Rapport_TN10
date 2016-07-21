@@ -1,0 +1,20 @@
+<dynamic-page document-template="{{templates.pageProgressif}}">
+    <div margin-left="{{marginLeft}}" margin-top="165px" font-size="{{ normalFontSize }}">
+        {% include 'EditiqueDATBundle:Default:entete.pdf.twig' %}
+    </div>
+    
+    <div margin-left="20px" margin-top="58px" font-size="{{ normalFontSize }}">
+        <table>
+        {% for key,periode in dat.periodeTaux %}
+           <tr>
+                <td border-type="none" width="280px">Période {{ loop.index }} du {{ periode.dateDebut }} au {{ periode.dateFin }}</td>
+                <td border-type="none">Taux nominal : {{ periode.taux }} %</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div position="absolute" top="441.50" left="482" >{{ dat.tauxActuriel }}</div>
+
+    <div position="absolute" top="665.50" left="165">{{ dat.dateEditionFromSab }}</div>
+</dynamic-page>

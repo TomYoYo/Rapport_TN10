@@ -1,0 +1,135 @@
+{% extends 'BackOfficeMonitoringBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Logs {% endblock %}
+
+{% block content %}
+
+    <h3>Consultation des logs</h3>
+
+    <div id="monitoLog">
+        <div class="panel panel-default monitoFiltre">
+            <div class="panel-heading" onclick="$('#filtreLog').fadeToggle()">
+                <h3 class="panel-title">Filtres</h3>
+            </div>
+            <div class="panel-body" id="filtreLog">
+                <form id="saisieOD" action="{{ path('back_office_monitoring_log') }}" method="POST" class="form-horizontal" role="form">
+                    <table class="bandeauSaisie" style="width:95%">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Niveau</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control input-sm" name="search[niveau]">
+                                            <option value="" label="Niveau"></option>
+                                            <option value="0" {% if datas.niveau is defined and datas.niveau == "0" %} selected="selected" {% endif %}>Info</option>
+                                            <option value="1" {% if datas.niveau is defined and datas.niveau == "1" %} selected="selected" {% endif %}>Alerte</option>
+                                            <option value="2" {% if datas.niveau is defined and datas.niveau == "2" %} selected="selected" {% endif %}>Erreur</option>
+                                            <option value="3" {% if datas.niveau is defined and datas.niveau == "3" %} selected="selected" {% endif %}>Succès</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Module</label>
+                                    <div class="col-sm-6">
+                                        <select id="searchModule" class="form-control input-sm" name="search[module]">
+                                            <option value="" label="Module"></option>
+                                            {% for super_module, mod in modules %}
+                                            <option class="optionParent" value="{{super_module}}">{{super_module}}</option>
+                                                {% for module in mod %}
+                                                <option
+                                                    class="optionChild"
+                                                    value="{{super_module~' > '~module}}"
+                                                    {% if datas.module is defined and datas.module == super_module~' > '~module %}selected="selected" {% endif %}
+                                                    >{{module}}</option>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Action</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.action is defined %} value="{{ datas.action }}" {% endif %} autocomplete="off" name="search[action]" placeholder="Action">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Libellé</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control input-sm" type="text" {% if datas.libelle is defined %} value="{{ datas.libelle }}" {% endif %} autocomplete="off" name="search[libelle]" placeholder="Libellé">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateDu is defined %} value="{{ datas.dateDu }}" {% endif %} autocomplete="off" name="search[dateDu]" placeholder="Du" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control input-sm datepicker" type="text" {% if datas.dateAu is defined %} value="{{ datas.dateAu }}" {% endif %} autocomplete="off" name="search[dateAu]" placeholder="Au">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Utilisateur</label>
+                                    <div class="col-sm-6">
+                                        <select id="searchUser" class="form-control input-sm" name="search[utilisateur]">
+                                            <option value="" label="Utilisateur"></option>
+                                            {% for id, lib in users %}
+
+                                                <option
+                                                    value="{{id}}"
+                                                    {% if datas.utilisateur is defined and datas.utilisateur == id %}selected="selected" {% endif %}
+                                                    >{{lib}}</option>
+                                                {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                                </div>
+                                <div class="form-group">
+                                    <a href="{{ path('back_office_delete_filters', {'page':'logs'}) }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Niveau', 'column': 'niveau'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Module', 'column': 'module'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Action', 'column': 'action'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Libellé', 'column': 'libelle'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Date', 'column': 'datetime'} %}
+                    {% include 'BackOfficeMonitoringBundle:Includes:th_table.html.twig' with {'name': 'Utilisateur', 'column': 'utilisateur'} %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in entities %}
+                <tr class="{{l.niveauClassLibelle}}">
+                    <td>{{l.niveauLibelle}}</td>
+                    <td>{{l.module}}</td>
+                    <td>{{l.action}}</td>
+                    <td>{{l.libelle}}</td>
+                    <td>{{l.datetime|date('d/m/Y H:i:s')}}</td>
+                    <td>{{ l.utilisateur ?: '/' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">Aucun résultat</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% include 'BackOfficeMonitoringBundle:Includes:pagination.html.twig' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% set altRefresh = 'Rafraîchir le statut de ce block'%}
+
+{% if statusAngers == 'serverOk' %}
+    {% set img = 'rondVert'%}
+    {% set alt = 'Serveur atteint et dossiers présents'%}
+{% elseif statusAngers == 'serverUnreachable' %}
+    {% set img = 'rondRouge'%}
+    {% set alt = 'Serveur inaccessible'%}
+{% elseif statusAngers == 'serverPb' %}
+    {% set img = 'rondOrange'%}
+    {% set alt = 'Serveur atteint mais un ou plusieurs dossiers sont absents'%}
+{% endif %}
+
+<div class="panel-heading">
+    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="{{alt}}" title="{{alt}}" />
+    <h2 class="panel-title">Accès serveur <strong>Angers</strong></h2>
+    <img class="refresh" src="{{ asset('bundles/backofficemonitoring/images/refresh.png') }}" alt="{{altRefresh}}" title="{{altRefresh}}" />
+
+    <hr>
+
+    Dernier statut le {{ "now"|date("d/m/Y") }} à
+    <strong>{{ "now"|date("H:i:s") }}</strong>
+
+    <button onclick="$('#detailAngers').fadeToggle()">Détail</button>
+</div>
+
+<div class="formRefresh" id="detailAngers">
+    Connexion et accès au serveur Angers
+    <br>
+    <br>
+    
+    <table class="table table-striped table-condensed table-hover">
+        <tr>
+            <td>
+                {% if connexionAngers == 'serverUnreachable' %} 
+                    {% set img = 'rondRouge'%}
+                    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="" title="" />
+                {% else %}
+                    {% set img = 'rondVert'%}
+                    <img class="" src="{{ asset('bundles/backofficemonitoring/images/'~img~'.png') }}" alt="" title="" />
+                {% endif %}
+            </td>
+            <td>
+                Connexion FTP basique
+            </td>
+        </tr>
+    </table>
+</div>
+

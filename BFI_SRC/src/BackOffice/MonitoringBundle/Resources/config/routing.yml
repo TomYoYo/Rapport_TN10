@@ -1,0 +1,229 @@
+back_office_monitoring_index:
+    pattern:  /
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:index }
+
+back_office_habilitation:
+    resource: "@BackOfficeHabilitationBundle/Resources/config/routing.yml"
+
+back_office_customer:
+    resource: "@BackOfficeCustomerBundle/Resources/config/routing.yml"
+
+
+testOracleBFI :
+    pattern:  /testOracleBFI
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testOracleBFI }
+
+testOracleSAB :
+    pattern:  /testOracleSAB
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testOracleSAB }
+
+testTrigger :
+    pattern:  /testTrigger
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testTrigger }
+
+testSabCore :
+    pattern:  /testSabCore
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testSabCore }
+
+testWindows :
+    pattern:  /testWindows
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testWindows }
+
+testSIT :
+    pattern:  /testSIT
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testSIT }
+
+testSurveillanceTrigger :
+    pattern:  /testSurveillanceTrigger
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testSurveillanceTrigger }
+
+testSurveillanceFichiers :
+    pattern:  /testSurveillanceFichiers
+    defaults: { _controller: BackOfficeMonitoringBundle:Monito:testSurveillanceFichiers }
+
+back_office_monitoring_log :
+    pattern:  /logs/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:log }
+
+back_office_monitoring_action :
+    pattern:  /action/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:action }
+
+back_office_monitoring_action_retry :
+    pattern:  /action/retry/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:retryAction }
+
+back_office_monitoring_editique :
+    pattern:  /editique/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:editique }
+
+back_office_monitoring_taux :
+    pattern:  /taux-interbancaires/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:taux }
+
+back_office_monitoring_p30s :
+    pattern:  /fichiers-P30S/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:p30S }
+
+back_office_monitoring_editique_correspondance_releve :
+    pattern:  /editique/correspondance-releve/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresReleve }
+
+back_office_monitoring_editique_correspondance_releve_new :
+    pattern:  /editique/correspondance-releve/new/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresReleveNew }
+
+back_office_monitoring_editique_correspondance_releve_create :
+    pattern:  /editique/correspondance-releve/create/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresReleveCreate }
+
+back_office_monitoring_editique_correspondance_releve_edit :
+    pattern:  /editique/correspondance-releve/edit/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresReleveEdit }
+
+back_office_monitoring_editique_correspondance_releve_update :
+    pattern:  /editique/correspondance-releve/update/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresReleveUpdate }
+
+back_office_monitoring_editique_correspondance_releve_delete :
+    pattern:  /editique/correspondance-releve/delete/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresReleveDelete }
+
+back_office_monitoring_od_operations :
+    pattern:  /od/operations/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:odOperations }
+
+back_office_monitoring_od_actions :
+    pattern:  /od/actions/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:odActions }
+
+back_office_monitoring_od_correspondance_comptes :
+    pattern:  /od/correspondance-comptes/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresComptes }
+
+back_office_monitoring_od_correspondance_comptes_new :
+    pattern:  /od/correspondance-comptes/new/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresComptesNew }
+
+back_office_monitoring_od_correspondance_comptes_create :
+    pattern:  /od/correspondance-comptes/create/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresComptesCreate }
+
+back_office_monitoring_od_correspondance_comptes_edit :
+    pattern:  /od/correspondance-comptes/edit/{numCompteInterne}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresComptesEdit }
+
+back_office_monitoring_od_correspondance_comptes_update :
+    pattern:  /od/correspondance-comptes/update/{numCompteInterne}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresComptesUpdate }
+
+back_office_monitoring_od_correspondance_comptes_delete :
+    pattern:  /od/correspondance-comptes/delete/{numCompteInterne}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:corresComptesDelete }
+
+back_office_monitoring_od_change_status:
+    pattern: /od/change-status/{id}/{statusCode}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:odChangeStatus }
+
+back_office_monitoring_users :
+    pattern:  /users/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:users }
+
+back_office_monitoring_notifications :
+    pattern:  /users/notifications/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:notifications }
+
+back_office_monitoring_notifications_manage :
+    pattern:  /users/notifications/manage/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:notificationsManage }
+
+back_office_delete_filters :
+    pattern:  /delete_filters/{page}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:deleteFilters }
+
+back_office_monitoring_user_new :
+    pattern:  /user/new/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:userNew }
+
+back_office_monitoring_user_create :
+    pattern:  /user/create/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:userCreate }
+
+back_office_monitoring_user_edit :
+    pattern:  /user/edit/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:userEdit }
+
+back_office_monitoring_user_update :
+    pattern:  /user/update/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:userUpdate }
+
+back_office_monitoring_user_delete :
+    pattern:  /user/delete/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:userDelete }
+
+back_office_monitoring_user_activate :
+    pattern:  /user/activate/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:userActivate }
+
+back_office_tree_exchange :
+    pattern: /fichiers/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:tree }
+
+ajax_list_modules :
+    pattern: /ajax/list_modules/
+    defaults: { _controller: BackOfficeMonitoringBundle:Ajax:listModules }
+
+ajax_list_nodes :
+    pattern: /ajax/list_nodes/
+    defaults: { _controller: BackOfficeMonitoringBundle:Ajax:listNodes }
+
+
+sab_files:
+    resource: "@BackOfficeMonitoringBundle/Resources/config/routing/sab.yml"
+
+
+back_office_monitoring_casa_code_operation :
+    pattern:  /casa/code-operation/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:codeOperation }
+
+back_office_monitoring_casa_code_operation_new :
+    pattern:  /casa/code-operation/new/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:codeOperationNew }
+
+back_office_monitoring_casa_code_operation_create :
+    pattern:  /casa/code-operation/create/
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:codeOperationCreate }
+
+back_office_monitoring_casa_code_operation_edit :
+    pattern:  /casa/code-operation/edit/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:codeOperationEdit }
+
+back_office_monitoring_casa_code_operation_update :
+    pattern:  /casa/code-operation/update/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:codeOperationUpdate }
+
+back_office_monitoring_casa_code_operation_delete :
+    pattern:  /casa/code-operation/delete/{id}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:codeOperationDelete }
+
+back_office_monitoring_print_txt :
+    pattern:  /print/txt/{directory}
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:printTxt }
+
+
+back_office_monitoring_performance :
+    pattern:  /performance
+    defaults: { _controller: BackOfficeMonitoringBundle:Performance:index }
+
+
+back_office_monitoring_integritefonctionnelle :
+    pattern:  /integritefonctionnelle
+    defaults: { _controller: BackOfficeMonitoringBundle:IntegriteFonctionnelle:index }
+    
+back_office_monitoring_logs_symfony :
+    pattern:  /logs-symfony
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:logsSymfony }
+
+back_office_monitoring_unversioned_files :
+    pattern:  /unversioned-files
+    defaults: { _controller: BackOfficeMonitoringBundle:Default:unversionedFiles }

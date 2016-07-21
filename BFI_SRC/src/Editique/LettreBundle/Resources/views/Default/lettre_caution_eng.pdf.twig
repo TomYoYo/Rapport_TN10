@@ -1,0 +1,22 @@
+{% include 'EditiqueLettreBundle:Default:_caution_general.pdf.twig' %}
+
+<div margin-left="85px" margin-top="24px" width="80" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtCautionInit ?: '-' }}
+    </div>
+</div>
+
+<!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+<div height='1'></div>
+
+<div margin-left="108px" margin-top="18px" width="62" text-align="right">
+    <div font-style="bold">
+        {{ caution.mtEngagementInit ?: '-' }}
+    </div>
+</div>
+
+<div margin-left="475px" margin-top="88px" width="60" text-align="center">
+    <div font-style="bold">
+        {{ caution.dateFin ?: '-' }}
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="modal fade" id="listeCompteModal" tabindex="-1" role="dialog" aria-labelledby="listeCompteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="listeCompteModalLabel">Comptes disponibles sur SAB - Opérations diverses</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-condensed table-striped table-hover" style="clear: both;margin: 20px 0;" id="listeCompte">
+                    <thead>
+                        <tr>
+                            <th style="width:45%;">Compte</th>
+                            <th style="width:65%;">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in comptes %}
+                        <tr>
+                            <td>{{c.num}}</td>
+                            <td>{{c.lib}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

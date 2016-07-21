@@ -1,0 +1,67 @@
+{% extends 'FiscaliteBudgetBundle::layout.html.twig' %}
+
+{% block title %}Contrôle budgétaire - Paramétrage des natures budgétaires{% endblock %}
+
+{% block content %}
+    <h3>
+        Paramétrage du module de contrôles budgétaire - Natures budgétaires
+    </h3>
+
+    <h2>Natures à paramétrer</h2>
+    <table class="table text-center table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th class="text-center" width="40%">Nature budgétaire SAB</th>
+            <th class="text-center" width="40%">Sens de valorisation</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for nature in natures_not_set %}
+            <tr>
+                <td>{{nature}}</td>
+                <td>
+                    <div class="col-md-4 col-md-offset-4">
+                        <input type="text" class="form-control" placeholder="Renseignez !" id="value-{{ nature|trim }}" autocomplete="off" maxlength="1">
+                    </div>
+                </td>
+                <td>
+                    <span class="click-add" ref="nature" id="btn-{{ nature|trim }}" style="cursor:pointer;">Ajouter</span>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune nature à paramétrer</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Natures paramétrées</h2>
+    <table class="table text-center table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th class="text-center" width="40%">Nature budgétaire SAB</th>
+            <th class="text-center" width="40%">Sens de valorisation</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="body-list">
+        {% for nature in natures_set %}
+            <tr>
+                <td>{{nature.valueSab}}</td>
+                <td>{{nature.valueFirme}}</td>
+                <td>
+                    <a href="{{ path('fiscalite_controle_budget_settings_edit', { 'id': nature.id }) }}">
+                        <img src="{{ asset('bundles/frontofficemain/images/edit_1.png') }}" width="30" alt="Modifier" title="Modifier" />
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune nature paramétrée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

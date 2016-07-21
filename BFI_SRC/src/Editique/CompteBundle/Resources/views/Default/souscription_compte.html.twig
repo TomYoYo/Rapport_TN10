@@ -1,0 +1,142 @@
+<dynamic-page document-template="{{templates.1}}">
+    <div text-align="center" font-style="bold" margin-top="40px" font-size="10pt">
+        {{ compte.title }}
+    </div>
+
+    <div margin-left="216px" margin-top="75px" height="593px">
+        <div height="10">
+            {{ compte.raisonSociale ?: '' }}
+        </div>
+        <div margin-top="11px" height="10">
+            {{ compte.formeJuridique ?: '' }}
+        </div>
+        <div margin-top="11px" height="10">
+            {{ compte.siren ?: '' }}
+        </div>
+
+        <div margin-top="10px">
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseSiege[0] }}
+            </div>
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseSiege[1] }}
+            </div>
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseSiege[2] }}
+            </div>
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseSiege[3] }}
+            </div>
+        </div>
+
+        <div margin-top="10px">
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseCourrier[0] }}
+            </div>
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseCourrier[1] }}
+            </div>
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseCourrier[2] }}
+            </div>
+            <div height='{{heightAdr}}'>
+                {{ compte.adresseCourrier[3] }}
+            </div>
+        </div>
+
+        <div margin-top="10px" height="10">
+            {{ compte.telSociete ?: '' }}
+        </div>
+        <div margin-top="5px" height="10">
+            {{ compte.faxSociete ?: '' }}
+        </div>
+        <div margin-top="5px" height="10">
+            {{ compte.emailSociete ?: '' }}
+        </div>
+
+        <div margin-top="41px" height="10">
+            {% if representant is defined %}
+            {{ representant.civilite ?: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="11px" height="10">
+            {% if representant is defined %}
+            {{ representant.nom[0] ? representant.nom[0]~" "~representant.nom[1]: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="11px" height="10">
+            {% if representant is defined %}
+            {{ representant.prenom ?: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="11px" height="10">
+            {% if representant is defined %}
+            {{ representant.dateNai ?: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="12px" height="10">
+            {% if representant is defined %}
+            {{ representant.nationalite ?: '' }}
+            {% endif %}
+        </div>
+
+        <div margin-top="16px">
+            <div height='{{heightAdr}}'>
+            {% if representant is defined %}
+                {{ representant.adresseClient[0] ?: '' }}
+            {% endif %}
+            </div>
+            <div height='{{heightAdr}}'>
+            {% if representant is defined %}
+                {{ representant.adresseClient[1] ?: '' }}
+            {% endif %}
+            </div>
+            <div height='{{heightAdr}}'>
+            {% if representant is defined %}
+                {{ representant.adresseClient[2] ?: '' }}
+            {% endif %}
+            </div>
+            <div height='{{heightAdr}}'>
+            {% if representant is defined %}
+                {{ representant.adresseClient[3] ?: '' }}
+            {% endif %}
+            </div>
+        </div>
+
+        <div margin-top="14px" height="10">
+            {% if representant is defined %}
+            {{ representant.regimeMat ?: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="11px" height="10">
+            {% if representant is defined %}
+            {{ representant.telFixe ?: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="5px" height="10">
+            {% if representant is defined %}
+            {{ representant.telPort ?: '' }}
+            {% endif %}
+        </div>
+        <div margin-top="5px" height="10">
+            {% if representant is defined %}
+            {{ representant.email ?: '' }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div margin-left="148px" margin-top="41px">
+        <div>
+            {{ compte.idClient }}
+        </div>
+    </div>
+
+    <div position="absolute" left="365" top="613">
+        {{ compte.numCompte }}
+    </div>
+    <div position="absolute" left="418" top="425" height="10">
+        {% if representant is defined %}
+        {{ representant.villeNai ?: '' }}
+        {% endif %}
+    </div>
+</dynamic-page>

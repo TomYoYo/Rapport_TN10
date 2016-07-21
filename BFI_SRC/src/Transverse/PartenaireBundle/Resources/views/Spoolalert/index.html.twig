@@ -1,0 +1,34 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %} Accès aux spools {% endblock %}
+
+{% block content %}
+
+    <h3>
+        Etats de gestion
+    </h3>
+    <br />
+    <br />
+    <p>
+        <a href="{{ path('transverse_partenaire_spoolalert_consultation') }}"  class="btn btn-primary btn-lg">Consultation</a>
+        {% if is_granted('ROLE_ADMIN')  %}
+            <a href="{{ path('transverse_partenaire_spoolalert_administration') }}" class="btn btn-danger btn-lg">Administration</a>
+        {% endif %}
+    </p>
+        
+    
+
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+ 
+
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

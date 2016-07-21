@@ -1,0 +1,16 @@
+{% extends 'FiscaliteODBundle::layout.html.twig' %}
+
+{% block title %} Export des Opérations Diverses {% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('front_office_main_homepage') }}">Accueil</a></li>
+        <li><a href="#">Module Opérations Diverses</a></li>
+        <li class="active">Exporter des Opérations</li>
+        {% include 'FiscaliteODBundle:Includes:aide.html.twig' %}
+    </ol>
+{% endblock %}
+
+{% block content -%}
+    {% include 'FiscaliteODBundle:Includes:bandeauExport.html.twig' %}
+{% endblock %}

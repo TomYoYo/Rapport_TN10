@@ -1,0 +1,72 @@
+<div class="well">
+     <form id="saisieOD" action="{{ path('od_rapprochement_search') }}" method="POST" class="form-horizontal" role="form">
+        <input type="hidden" name="search[isDeleted]" value="non">
+        <input type="hidden" name="search[statut]" value="ENV">
+        <table class="bandeauSaisie">
+            <tr>
+                <td width="50%">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date comptable :</label>
+                        <div class="col-sm-4">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateCptDu is defined %} value="{{ datas.dateCptDu }}" {% endif %} autocomplete="off" name="search[dateCptDu]" placeholder="Du">
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateCptAu is defined %} value="{{ datas.dateCptAu }}" {% endif %} autocomplete="off" name="search[dateCptAu]" placeholder="Au">
+                        </div>
+                    </div>
+                </td>
+                <td width="35%">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Code opération :</label>
+                        <div class="col-sm-4">
+                            <select class="form-control input-sm" name="search[codeOpe]">
+                                {% for co in listCodeOpe %}
+                                    <option value="{{co}}" {% if datas.codeOpe is defined and datas.codeOpe == co %}selected = "selected"
+                                            {% endif %} >{{co}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </td>
+                <td width="15%">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                    </div>
+                </td>
+            </tr>
+        </table>   
+    </form> 
+    <div class="row"> 
+    <div class="form-group col-xs-3">
+    <form  action="{{ path('od_rapprochement_search') }}" method="POST" class="form-horizontal" role="form">                      
+        {% if datas.dateCptDu is defined and datas.dateCptAu is defined and datas.codeOpe is defined and  app.request.attributes.get('_route') == 'od_rapprochement_search'  %}
+            <input type="hidden" name="search[isDeleted]" value="non">
+            <input type="hidden" name="search[statut]" value="ENV">
+            <input  type="hidden" value="{{ datas.dateCptDu }}"  name="search[dateCptDu]">
+            <input  type="hidden" value="{{ datas.dateCptAu }}"  name="search[dateCptAu]">
+            <input  type="hidden" value="{{datas.codeOpe}}"  name="search[codeOpe]">
+            
+            <div class="btn-group" role="group" aria-label="">
+                <button name="search[trie]" value="compte" type="submit" class="btn btn-default">Trier par compte</button>
+                <button name="search[trie]" value="ecart" type="submit" class="btn btn-default">Trier par écart</button>
+                
+            </div>
+
+        {% endif %}
+    </form> 
+    </div>
+    <div class="form-group col-xs-4">
+    <form id="exportOD" action="{{ path('od_rapprochement_exporting') }}" method="POST" class="form-horizontal" role="form">
+        {% if datas.dateCptDu is defined and datas.dateCptAu is defined and datas.codeOpe is defined and   app.request.attributes.get('_route') == 'od_rapprochement_search'   %}
+            <input type="hidden" name="search[isDeleted]" value="non">
+            <input type="hidden" name="search[statut]" value="ENV">
+            <input  type="hidden" value="{{ datas.dateCptDu }}"  name="search[dateCptDu]">
+            <input  type="hidden" value="{{ datas.dateCptAu }}"  name="search[dateCptAu]">
+            <input  type="hidden" value="{{datas.codeOpe}}"  name="search[codeOpe]">
+
+            <button type="submit" class="btn btn-default">Exporter un .CSV</button>
+        {% endif %}
+    </form>    
+    </div>
+    </div>
+</div>

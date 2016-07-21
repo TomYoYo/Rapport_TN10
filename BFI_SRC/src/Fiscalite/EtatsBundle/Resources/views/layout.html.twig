@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Fiscalité - Etats réglementaires{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@FrontOfficeMainBundle/Resources/public/css/jquery-ui-1.10.4.custom.min.css'
+        '@FrontOfficeMainBundle/Resources/public/css/logo.css'
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}    
+{% endblock %}
+        
+        
+{% block body %}
+    {{ parent() }}
+    {% block content %}{% endblock %}
+{% endblock %}
+        
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-2.1.0.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery-ui-1.10.4.custom.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/bootstrap.min.js'
+        '@FrontOfficeMainBundle/Resources/public/js/jquery.ztree.min.js'
+        '@BackOfficeMonitoringBundle/Resources/public/js/treeSAB.js'
+        '@FrontOfficeMainBundle/Resources/public/js/ie8.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    
+{% endblock %}

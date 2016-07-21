@@ -1,0 +1,41 @@
+{% extends 'FiscaliteBudgetBundle::layout.html.twig' %}
+
+{% block title %}Contrôle budgétaire - Paramétrage{% endblock %}
+    
+{% block content %}
+    <h3>
+        Edition d'un paramétrage / {{ setting.type|lower }} budgétaire
+    </h3>
+
+    <div class="well">
+        <form action="{{ path('fiscalite_controle_budget_settings_update', {'id':setting.id}) }}" method="POST" class="form-horizontal" role="form">
+            <table class="bandeauSaisie">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ setting.type|capitalize }} budgétaire SAB</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" type="text" autocomplete="off" value="{{ setting.valueSab }}" readonly="readonly">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ setting.type|capitalize }} budgétaire Firme</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm" id="value-cb" ref="{{ setting.type }}" type="text" maxlength="5" autocomplete="off" value="{{ setting.valueFirme }}" name="valueFirme">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success click-edit">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

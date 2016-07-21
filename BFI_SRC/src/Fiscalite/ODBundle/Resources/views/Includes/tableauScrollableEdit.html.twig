@@ -1,0 +1,89 @@
+{% if type is defined and type == 'deb' %}
+    {% set classMontant = "montantDeb" %}
+    {% set valueType = "deb" %}
+{% else %}
+    {% set classMontant = "montantCre" %}
+    {% set valueType = "cre" %}
+{% endif %}
+
+<div class="tableauScrollable" id="{{ classMontant }}">
+    <table class="table table-condensed table-striped table-hover">
+        <thead>
+            <tr>
+                <th style="width:25px;">N°</th>
+                <th style="width:110px;">Compte</th>
+                <th style="width:95px;">Montant</th>
+                <th>Libellé</th>
+                <th style="width:65px;">Code budget</th>                
+            </tr>
+        </thead>
+        <tbody>
+            {% set i = 1 %}
+            
+            {% for mouvement in entity.mouvements %}
+                {% if type is defined and type == 'deb' and mouvement.montant < 0 %}
+                    <tr>
+                        <td>
+                            <input type="hidden" name="idOpe[]" value="{{ mouvement.idOpe }}" />
+                            <input type="text" rel="{{ i }}" value="{{ i }}" class="form-control input-sm false-field" readonly="readonly" disabled="disabled" />
+                        </td>
+                        <td>
+                            <input type="text" rel="{{ i }}" value="{{ mouvement.compte }}" placeholder="Compte" class="form-control input-sm accountField" maxlength="20" name="compte[]" autocomplete="off" />
+                        </td>
+                        <td>
+                            <input type="hidden" rel="{{ i }}" name="type[]" value="deb" />
+                            {% set length = mouvement.montant|length - 1 %}
+                            <input type="text" rel="{{ i }}"  value="{{ mouvement.montant[1:length] }}" placeholder="Montant" class="form-control input-sm montantDeb" maxlength="10" name="montant[]" autocomplete="off" />
+                        </td>
+                        <td>
+                            <input type="text" rel="{{ i }}"  value="{{ mouvement.libelle }}" placeholder="Libellé" class="form-control input-sm libelleField" maxlength="30" name="libelle[]" autocomplete="off" />
+                        </td>
+                        <td>
+                            <input type="text" rel="{{ i }}"  value="{{ mouvement.codeBudget }}" placeholder="Cde bud." class="form-control input-sm" maxlength="4" name="codeBudget[]" autocomplete="off" />
+                        </td>
+                    </tr>
+                {% elseif type is defined and type == 'cre' and mouvement.montant > 0 %}
+                    <tr>
+                        <td>
+                            <input type="hidden" name="idOpe[]" value="{{ mouvement.idOpe }}" />
+                            <input type="text" rel="{{ i }}" value="{{ i }}" class="form-control input-sm false-field" readonly="readonly" disabled="disabled" />
+                        </td>
+                        <td>
+                            <input type="text" rel="{{ i }}" value="{{ mouvement.compte }}" placeholder="Compte" class="form-control input-sm accountField" maxlength="20" name="compte[]" autocomplete="off" />
+                        </td>
+                        <td>
+                            <input type="hidden" rel="{{ i }}" name="type[]" value="cre" />
+                            <input type="text" rel="{{ i }}"  value="{{ mouvement.montant }}" placeholder="Montant" class="form-control input-sm montantCre" maxlength="10" name="montant[]" autocomplete="off" />
+                        </td>
+                        <td>
+                            <input type="text" rel="{{ i }}"  value="{{ mouvement.libelle }}" placeholder="Libellé" class="form-control input-sm libelleField" maxlength="30" name="libelle[]" autocomplete="off" />
+                        </td>
+                        <td>
+                            <input type="text" rel="{{ i }}"  value="{{ mouvement.codeBudget }}" placeholder="Cde bud." class="form-control input-sm" maxlength="4" name="codeBudget[]" autocomplete="off" />
+                        </td>
+                    </tr>
+                {% endif %}
+                {% set i = i + 1 %}
+            {% endfor %}
+            <tr>
+                <td>
+                    <input type="hidden" name="idOpe[]" value="" />
+                    <input type="text" rel="{{ i }}" value="{{ i }}" class="form-control input-sm false-field" readonly="readonly" disabled="disabled" />
+                </td>
+                <td>
+                    <input type="text" rel="{{ i }}" placeholder="Compte" class="form-control input-sm accountField" maxlength="12" name="compte[]" autocomplete="off" />
+                </td>
+                <td>
+                    <input type="hidden" rel="{{ i }}" name="type[]" value="{{ valueType }}" />
+                    <input type="text" rel="{{ i }}" placeholder="Montant" class="form-control input-sm {{ classMontant }}" maxlength="10" name="montant[]" autocomplete="off" />
+                </td>
+                <td>
+                    <input type="text" rel="{{ i }}" placeholder="Libellé" class="form-control input-sm libelleField" maxlength="30" name="libelle[]" autocomplete="off" />
+                </td>
+                <td>
+                    <input type="text" rel="{{ i }}" placeholder="Cde bud." class="form-control input-sm" maxlength="4" name="codeBudget[]" autocomplete="off" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

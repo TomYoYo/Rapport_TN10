@@ -1,0 +1,14 @@
+{% extends 'FiscaliteODBundle::layout.html.twig' %}
+
+{% block title %} Demande de génération du fichier CRE JC {% endblock %}
+
+{% block content -%}
+    <h3>
+        Génération fichier CRE Journée Complémentaire
+        {% include 'FiscaliteODBundle:Includes:aide.html.twig' %}
+    </h3>
+    <div class="well">
+        <p>Vous vous apprêtez à générer le fichier CRE de la Journée complémentaire. Pour confirmer la génération, cliquez sur le bouton suivant.</p>
+        <a href="{{path('od_generate_cre_jc')}}" class="btn btn-info">Générer le fichier CRE de la Journée Complémentaire</a>
+    </div>
+{% endblock %}

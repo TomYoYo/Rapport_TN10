@@ -1,0 +1,222 @@
+<div class="tab-pane fade" id="backoffice">
+    <h3 class="head text-center">Administration</h3>
+    <p class="narrow text-center">
+        La partie Administration de l'outil vous permet de suivre l'activité BFI, de paramétrer ou de retrouver certaines configurations et d'accéder à l'ensemble des données BFI.
+    </p>
+
+    <div class="list-links">
+        <div class="col-md-6">
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ASSISTANCE') %}
+            <a href="{{ path('back_office_monitoring_index') }}">
+                <div class="blockquote-box blockquote-danger clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-dashboard glyphicon-lg"></span>
+                    </div>
+                    <h4>Monitoring</h4>
+                    <p>
+                        Vérifiez et controllez l'état des services et des outils utiles au bon fonctionnement de BFI.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_performance') }}">
+                <div class="blockquote-box blockquote-danger clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-time glyphicon-lg"></span>
+                    </div>
+                    <h4>Performance Sab</h4>
+                    <p>
+                        Controllez la performance de SAB.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_clean_index') }}">
+                <div class="blockquote-box blockquote-danger clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-trash glyphicon-lg"></span>
+                    </div>
+                    <h4>Nettoyage Sab</h4>
+                    <p>
+                        Nettoyer l'arborescence de SAB core.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_od_correspondance_comptes') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-retweet glyphicon-lg"></span>
+                    </div>
+                    <h4>Paramètres des comptes externes</h4>
+                    <p>
+                        Paramétrez les comptes externes pour l'importation des fichiers "Paie" dans le module OD.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_editique_correspondance_releve') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-briefcase glyphicon-lg"></span>
+                    </div>
+                    <h4>Paramètres des types de compte</h4>
+                    <p>
+                        Paramétrez les types de compte pour le choix du jeu de maquettes adéquat pour les relevés de compte.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_casa_code_operation') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-search glyphicon-lg"></span>
+                    </div>
+                    <h4>Paramètres des codes opérations surveillés</h4>
+                    <p>
+                        Paramétrez les codes opérations surveillés, pour recevoir une notification SIT.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_users') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-user glyphicon-lg"></span>
+                    </div>
+                    <h4>Liste des utilisateurs</h4>
+                    <p>
+                        Accédez et modifiez les utilisateurs de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_notifications') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-envelope glyphicon-lg"></span>
+                    </div>
+                    <h4>Gestion des abonnements</h4>
+                    <p>
+                        Gérez les abonnements (notifications mail) des utilisateurs.
+                    </p>
+                </div>
+            </a>
+            {% endif %}
+            {% if is_granted('ROLE_RCCI') or is_granted('ROLE_ASSISTANCE') %}
+            <a href="{{ path('back_office_habilitation') }}">
+                <div class="blockquote-box blockquote-warning clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-fire glyphicon-lg"></span>
+                    </div>
+                    <h4>Habilitations SAB</h4>
+                    <p>
+                        Creez, modifiez et visualisez les habilitations des utilsateurs SAB
+                    </p>
+                </div>
+            </a>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ASSISTANCE') %}
+
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ASSISTANCE') %}
+            <a href="{{ path('back_office_tree_exchange') }}">
+                <div class="blockquote-box blockquote-info clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-folder-open glyphicon-lg"></span>
+                    </div>
+                    <h4>Arborescence Exchange</h4>
+                    <p>
+                        Accédez à l'arborescence du répertoire "exchange" disponible sur BFI.
+                    </p>
+                </div>
+            </a>
+            {% endif %}
+            <a href="{{ path('back_office_sab_arbo') }}">
+                <div class="blockquote-box blockquote-info clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-folder-open glyphicon-lg"></span>
+                    </div>
+                    <h4>Arborescence Sab Core</h4>
+                    <p>
+                        Accédez à l'arborescence fichiers externes de sab core.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ASSISTANCE') %}
+        <div class="col-md-6">
+            <a href="{{ path('back_office_monitoring_log') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-print glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi des logs</h4>
+                    <p>
+                        Contrôlez et analyser l'ensemble des logs de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_action') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-cog glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi des actions</h4>
+                    <p>
+                        Contrôlez et analyser l'ensemble des actions de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_editique') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-book glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi des éditiques</h4>
+                    <p>
+                        Contrôlez et analyser l'ensemble des éditiques de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_taux') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-flash glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi des taux interbancaires</h4>
+                    <p>
+                        Contrôlez et analyser l'ensemble des taux interbancaires de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_od_operations') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-usd glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi des Opérations Diverses</h4>
+                    <p>
+                        Contrôlez et analyser l'ensemble des Opérations Diverses de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('back_office_monitoring_od_actions') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-bell glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi de la piste d'audit OD</h4>
+                    <p>
+                        Contrôlez et analyser l'ensemble des actions sur OD de l'application.
+                    </p>
+                </div>
+            </a>
+            <a href="{{ path('evolution') }}">
+                <div class="blockquote-box blockquote-primary clearfix">
+                    <div class="square pull-left">
+                        <span class="glyphicon glyphicon-globe glyphicon-lg"></span>
+                    </div>
+                    <h4>Suivi des évolutions BFI</h4>
+                    <p>
+                        Retrouvez les fonctionnalités embarquées dans chacune des évolutions et suivez l'avancement de ces dernières.
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>

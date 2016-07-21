@@ -1,0 +1,7 @@
+services:
+    backoffice_monitoring.logManager:
+        class: BackOffice\MonitoringBundle\Manager\LogManager
+        arguments: [@doctrine.orm.entity_manager, @security.context, @templating, %logBFI.enabled%, %logBFI.mail.enabled%, %logBFI.mail.intertime%]
+    back_office_connexion.performanceManager:
+        class: BackOffice\MonitoringBundle\Manager\PerformanceManager
+        arguments: [@back_office_connexion.sabDb, @back_office_connexion.SabSFTP, %unijob.nomProcessJour%, %unijob.nomProcessJourBD%]

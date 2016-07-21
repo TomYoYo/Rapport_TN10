@@ -1,0 +1,67 @@
+{% extends 'BackOfficeCustomerBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Clients {% endblock %}
+
+{% block content %}
+<h1 style="text-align: center">Liste des clients{% if statut == 1 %} à compléter{% elseif statut == 4 %} envoyé{% elseif statut == 3 %} en cours d'envoi{% elseif statut == 5 %} en anomalies{% endif %}</h1>
+    {% if info != '' %}
+        <div class="alert alert-success" style="text-align: center">{{ info }}</div>{% endif  %}
+    {% if error != '' %}
+        <div class="alert alert-danger" style="text-align: center">{{ error }}</div>{% endif  %}
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Désignation</th>
+            {% if statut != 4 %}
+            <th>date d'entrée en relation</th>{% else %}<th>IDSAB</th>{% endif %}
+            {% if statut == 1 %}
+                <th>siren</th>
+                <th>Nic</th>
+                <th>action</th>
+            {% elseif statut == 3 %}
+                <th>statut</th><th>Action</th>
+            {% elseif statut == 4 %}
+                <th>action</th>
+                {% else %}
+                <th>commentaires</th>
+                <th>action</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.idCustomer }}</td>
+                <td>{{ customer.designation }}</td>
+                {% if customer.statut != 4 %}
+                <td>{{ customer.datecreation|date('d/m/Y') }}</td>{% else %}<td>{{ customer.idsab }}</td>{% endif %}
+                {% if customer.statut == 1%}
+                <td>{{ customer.siren }}</td>
+                <td>{{ customer.codeNic }}</td>
+                {% elseif customer.statut == 3 %} <td>En cours d'envoi : {% if customer.exist %}Modification{% else %}Création{% endif %}</td>                <td style="width: 150px">
+                    <a href="{{ path('back_office_customer_send',{id : customer.id}) }}">
+                        <img src="{{ asset('bundles/frontofficemain/images/activate.png') }}" width="30" alt="Envoyer" title="Envoyer"  />
+                    </a>
+                </td>{% elseif customer.statut == 4 %}
+                    {% else %}
+                <td>{{ customer.anomaliescomments }}</td>{% endif %}
+                {% if customer.statut == 1  or customer.statut == 5 or customer.statut == 4 %}
+                <td style="width: 150px">
+                        <a href="{{ path('back_office_customer_detail',{id : customer.id}) }}">
+                            <img src="{{ asset('bundles/frontofficemain/images/edit.png') }}" width="30" alt="Modifier" title="Modifier"  />
+                            </a>
+                    <a href="{{ path('back_office_customer_send',{id : customer.id}) }}">
+                        <img src="{{ asset('bundles/frontofficemain/images/activate.png') }}" width="30" alt="Envoyer" title="Envoyer"  />
+                    </a>
+                </td>{% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% if pager %}
+            {% if pager.haveToPaginate %}
+                {{ pagerfanta(pager,'twitter_bootstrap3', {'prev_message':'&larr; Précédente', 'next_message':'Suivante &rarr;'}) }}
+            {% endif %}{% endif %}
+
+{% endblock %}

@@ -1,0 +1,104 @@
+<div class="well">
+    <form id="saisieOD" action="{{ path('od_listing') }}" method="POST" class="form-horizontal" role="form">
+        <input type="hidden" name="search[isDeleted]" value="non">
+        <table class="bandeauSaisie">
+            <tr>
+                <td width="45%">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Date de saisie</label>
+                        <div class="col-sm-3">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateSaiDu is defined %} value="{{ datas.dateSaiDu }}" {% endif %} autocomplete="off" name="search[dateSaiDu]" placeholder="Du">
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateSaiAu is defined %} value="{{ datas.dateSaiAu }}" {% endif %} autocomplete="off" name="search[dateSaiAu]" placeholder="Au">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Date compta.</label>
+                        <div class="col-sm-3">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateCptDu is defined %} value="{{ datas.dateCptDu }}" {% endif %} autocomplete="off" name="search[dateCptDu]" placeholder="Du">
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control input-sm datepicker" type="text" {% if datas.dateCptAu is defined %} value="{{ datas.dateCptAu }}" {% endif %} autocomplete="off" name="search[dateCptAu]" placeholder="Au">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Identifiant</label>
+                        <div class="col-sm-6">
+                            <input class="form-control input-sm" type="text" {% if datas.id is defined %} value="{{ datas.id }}" {% endif %} autocomplete="off" maxlength="6" name="search[id]" placeholder="Identifiant">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Num. de pièce</label>
+                        <div class="col-sm-6">
+                            <input class="form-control input-sm" type="text" {% if datas.numPiece is defined %} value="{{ datas.numPiece }}" {% endif %} autocomplete="off" maxlength="6" name="search[numPiece]" placeholder="Numéro de pièce">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Saisisseur</label>
+                        <div class="col-sm-6">
+                            <input class="form-control input-sm" type="text" {% if datas.saisisseur is defined %} value="{{ datas.saisisseur }}" {% endif %} autocomplete="off" maxlength="10" name="search[saisisseur]" placeholder="Saisisseur">
+                        </div>
+                    </div>
+                </td>
+
+                <td width="45%">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Code opération</label>
+                        <div class="col-sm-6">
+                            <select class="form-control input-sm" name="search[codeOpe]">
+                                <option value="" label=""></option>
+                                {% for co in listCodeOpe %}
+                                <option value="{{co}}" {% if datas.codeOpe is defined and datas.codeOpe == "{{co}}" %} selected="selected" {% endif %}>{{co}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Code évèmt.</label>
+                        <div class="col-sm-6">
+                            <input class="form-control input-sm" type="text" {% if datas.codeEve is defined %} value="{{ datas.codeEve }}" {% endif %} autocomplete="off" maxlength="3" name="search[codeEve]" placeholder="Code évènement">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Tiers</label>
+                        <div class="col-sm-6">
+                            <input class="form-control input-sm" type="text" {% if datas.tiers is defined %} value="{{ datas.tiers }}" {% endif %} autocomplete="off" maxlength="7" name="search[tiers]" placeholder="Tiers">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Statut</label>
+                        <div class="col-sm-6">
+                            <select class="form-control input-sm" name="search[statut]">
+                                <option value="" label="Statut"></option>
+                                <option value="SAI" {% if datas.statut is defined and datas.statut == "SAI" %} selected="selected" {% endif %}>Pré-saisie</option>
+                                <option value="VAL" {% if datas.statut is defined and datas.statut == "VAL" %} selected="selected" {% endif %}>En attente de validation</option>
+                                <option value="ENR" {% if datas.statut is defined and datas.statut == "ENR" %} selected="selected" {% endif %}>Enregistrée</option>
+                                <option value="ENV" {% if datas.statut is defined and datas.statut == "ENV" %} selected="selected" {% endif %}>Envoyée</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Journée complémentaire</label>
+                        <div class="col-sm-6">
+                            <select class="form-control input-sm" name="search[isComplementaryDay]">
+                                <option value="" label="Statut"></option>
+                                <option value="0" {% if datas.isComplementaryDay is defined and datas.isComplementaryDay == "0" %} selected="selected" {% endif %}>Non</option>
+                                <option value="1" {% if datas.isComplementaryDay is defined and datas.isComplementaryDay == "1" %} selected="selected" {% endif %}>Oui</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+
+                <td width="10%">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-sm">Chercher</button>
+                    </div>
+                    <div class="form-group">
+                        <a href="{{ path('od_delete_filters') }}" class="btn btn-warning btn-sm">Réinitialiser les filtres</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

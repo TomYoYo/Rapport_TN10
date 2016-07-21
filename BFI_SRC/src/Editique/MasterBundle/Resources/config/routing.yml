@@ -1,0 +1,119 @@
+editique_homepage:
+    pattern:  /editique/
+    defaults: { _controller: EditiqueMasterBundle:Default:index }
+    
+editique_messages_commerciaux:
+    pattern:  /editique/messages
+    defaults: { _controller: EditiqueMasterBundle:Messages:list }
+    
+editique_messages_commerciaux_new:
+    pattern:  /editique/messages/new
+    defaults: { _controller: EditiqueMasterBundle:Messages:new }
+    
+editique_messages_commerciaux_show:
+    pattern:  /editique/messages/show/{id}
+    defaults: { _controller: EditiqueMasterBundle:Messages:show }
+    
+editique_messages_commerciaux_create:
+    pattern:  /editique/messages/create
+    defaults: { _controller: EditiqueMasterBundle:Messages:create }
+    
+editique_messages_commerciaux_edit:
+    pattern:  /editique/messages/edit/{id}
+    defaults: { _controller: EditiqueMasterBundle:Messages:edit }
+    
+editique_messages_commerciaux_udpate:
+    pattern:  /editique/messages/update/{id}
+    defaults: { _controller: EditiqueMasterBundle:Messages:update }
+    
+editique_releves_firme:
+    pattern:  /editique/releves-firmes/
+    defaults: { _controller: EditiqueMasterBundle:Firme:index }
+    
+editique_releves_firme_search:
+    pattern:  /editique/documents/
+    defaults: { _controller: EditiqueMasterBundle:Firme:search }
+    
+editique_releves_firme_new:
+    pattern:  /editique/releves-firmes/new/
+    defaults: { _controller: EditiqueMasterBundle:Firme:new }
+    
+editique_releves_firme_create:
+    pattern:  /editique/releves-firmes/create/
+    defaults: { _controller: EditiqueMasterBundle:Firme:create }
+    
+editique_releves_firme_edit:
+    pattern:  /editique/releves-firmes/edit/{id}
+    defaults: { _controller: EditiqueMasterBundle:Firme:edit }
+    
+editique_releves_firme_update:
+    pattern:  /editique/releves-firmes/update/{id}
+    defaults: { _controller: EditiqueMasterBundle:Firme:update }
+    
+editique_releves_firme_delete:
+    pattern:  /editique/releves-firmes/delete/{id}
+    defaults: { _controller: EditiqueMasterBundle:Firme:delete }
+    
+editique_souscription_credit:
+    pattern:  /editique/souscription-credit/
+    defaults: { _controller: EditiqueCreditBundle:Souscription:index }
+    
+editique_souscription_edit:
+    pattern:  /editique/souscription-credit/edition/{id}
+    defaults: { _controller: EditiqueCreditBundle:Souscription:edit }
+    
+editique_souscription_do_edit:
+    pattern:  /editique/souscription-credit/do-edition/{id}
+    defaults: { _controller: EditiqueCreditBundle:Souscription:doEdit }
+
+editique_test:
+    pattern:  /editique_test/
+    defaults: { _controller: EditiqueMasterBundle:Default:test }
+
+editique_rib:
+    pattern:  /editique_test/rib/
+    defaults: { _controller: EditiqueRIBBundle:Default:index }
+
+editique_releve:
+    pattern:  /editique_test/releve/
+    defaults: { _controller: EditiqueReleveBundle:Default:index }
+
+editique_dat:
+    pattern:  /editique_test/dat/
+    defaults: { _controller: EditiqueDATBundle:Default:index }
+
+editique_livret:
+    pattern:  /editique_test/livret/
+    defaults: { _controller: EditiqueLivretBundle:Default:index }
+
+editique_credit:
+    pattern:  /editique_test/credit/
+    defaults: { _controller: EditiqueCreditBundle:Default:index }
+
+editique_compte:
+    pattern:  /editique_test/compte/
+    defaults: { _controller: EditiqueCompteBundle:Default:index }
+
+editique_lettre:
+    pattern:  /editique_test/lettre/
+    defaults: { _controller: EditiqueLettreBundle:Default:index }
+
+editique_titre:
+    pattern:  /editique_test/titre/
+    defaults: { _controller: EditiqueTitreBundle:Default:index }
+
+editique_pdf:
+    pattern:  /editique/pdf/{id}
+    defaults: { _controller: EditiqueMasterBundle:Default:print }
+    
+editique_test_pdf:
+    pattern:  /editique/test_pdf/{fileName}
+    defaults: { _controller: EditiqueMasterBundle:Default:printTest }
+
+editique_test_txt:
+    pattern:  /editique/test_txt/{fileName}
+    defaults: { _controller: EditiqueMasterBundle:Default:printTXTTest }
+
+editique_show_pdf:
+    pattern: /editique/pdf/template/{name}
+    defaults: { _controller: EditiqueMasterBundle:Default:showPDF }

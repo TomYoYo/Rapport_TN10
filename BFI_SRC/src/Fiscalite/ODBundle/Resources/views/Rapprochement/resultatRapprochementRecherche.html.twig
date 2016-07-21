@@ -1,0 +1,46 @@
+<table class="table table-condensed  table-hover">
+    <thead>
+        <tr>
+            <th>Numéro de compte</th>
+            <th>Cumul BFI</th>
+            <th>Cumul SAB</th>
+            <th>Ecart</th>
+            <th>Detail</th>
+
+        </tr>
+    </thead>
+    
+
+    
+    <tbody>
+        
+
+        {% for operation in entities %}
+            <tr  {% if (operation.2 is not defined) or (operation.2 != 0) %} class="danger" {% endif %} >
+                
+                <td>{{ operation.compte }}</td>
+                <td>{{ operation.0 }}</td>
+                <td> {% if operation.1 is defined  %}{{ operation.1 }}{% else %} Pas en base {% endif %} </td>
+               <td> 
+               {% if operation.2 is defined  %}{{ operation.2 }}{% else %}{{ operation.0|abs }}  {% endif %} 
+               </td>
+                <td>
+                    <form target="_blank" id="voirdetail" action="{{ path('od_rapprochement_detail') }}" method="POST" class="form-horizontal" role="form">
+                        <input type="hidden" name="detail[compte]" value="{{ operation.compte }}">
+                        <input type="hidden" name="detail[dateCptDu]" {% if datas.dateCptDu is defined %} value="{{ datas.dateCptDu }}" {% endif %} >  
+                        <input type="hidden" name="detail[dateCptAu]" {% if datas.dateCptAu is defined %} value="{{ datas.dateCptAu }}" {% endif %} > 
+                        <input type="hidden" name="detail[codeOpe]" value="{{ datas.codeOpe }}">
+                        <input type="hidden" name="detail[isDeleted]" value="non">
+                        <input type="hidden" name="detail[statut]" value="ENV">
+                        <button type="submit" class="btn btn-default btn-sm">Voir détail</button>
+                    </form>
+                </td>
+            </tr>
+            
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+fiscalite_etats:
+    path:  /
+    defaults: { _controller: FiscaliteEtatsBundle:Default:liste }
+
+fiscalite_etats_synchro:
+    path:  /synchro/
+    defaults: { _controller: FiscaliteEtatsBundle:Default:synchro }
+
+fiscalite_etats_nodes:
+    path:  /nodes/
+    defaults: { _controller: FiscaliteEtatsBundle:Default:nodes }

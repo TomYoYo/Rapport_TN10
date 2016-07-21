@@ -1,0 +1,65 @@
+{% extends 'FiscaliteBudgetBundle::layout.html.twig' %}
+
+{% block title %}Contrôle budgétaire{% endblock %}
+
+{% block content %}
+    <h3>
+        Génération des contrôles budgétaire
+    </h3>
+    
+    <div class="well">
+        <form id="controleBudgetaire" action="{{ path('fiscalite_controle_budget_submit') }}" method="POST" class="form-horizontal" role="form">
+            <table class="bandeauSaisie">
+                <tr>
+                    <td width="65%">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Date de génération</label>
+                            <div class="col-sm-6">
+                                <input class="form-control input-sm datepicker" type="text" autocomplete="off" name="form[dateGene]" {% if datas is defined %} value="{{datas.dateGene}}" {% endif %} placeholder="Date de génération">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Type de contrôle</label>
+                            <div class="col-sm-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="form[cb_civ]" id="checkboxSuccess" value="1" {% if datas is defined and datas.cb_civ is defined %} checked="checked" {% endif %}>
+                                        Civil
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="form[cb_cpt]" id="checkboxSuccess" value="1" {% if datas is defined and datas.cb_cpt is defined %} checked="checked" {% endif %}>
+                                        Comptable
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info btn-sm" name="form[extract]" value="SIM">Simulation de l'extraction</button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-lg" name="form[extract]" value="GEN">Génération de l'extraction</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+        
+    {% if display %}
+        <h3>
+            Affichage des documents générés
+        </h3>
+        
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <a class="btn btn-default btn-lg btn-block" target="_blank" href="{{path('front_office_print_file', {"filePath": refPath})}}">Référentiel</a>
+                <a class="btn btn-default btn-lg btn-block" target="_blank" href="{{path('front_office_print_file', {"filePath": reaPath})}}">Réalisé</a>
+            </div>
+        </div>
+        
+    {% endif %}
+{% endblock %}

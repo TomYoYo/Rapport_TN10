@@ -1,0 +1,12 @@
+parameters:
+    #example.class: Example
+
+services:
+    backoffice.util.user_manipulator:
+        class: BackOffice\UserBundle\Util\UserManipulator
+        arguments: ["@fos_user.user_manager"]
+    authentication_listener:
+        class: BackOffice\UserBundle\Listener\AuthenticationListener
+        arguments: [@security.context, @doctrine, @backoffice_monitoring.logManager]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }

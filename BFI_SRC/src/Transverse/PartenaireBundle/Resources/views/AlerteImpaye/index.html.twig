@@ -1,0 +1,37 @@
+{% extends 'TransversePartenaireBundle::layout.html.twig' %}
+
+{% block title %} Alertes impayés - fichiers OI25 {% endblock %}
+
+{% block content %}
+
+    <h3>
+        Gestion des alertes des fichiers OI25 envoyés par le CMCIC
+    </h3>
+    <br />
+    <br />
+    <p>
+
+        {% if is_granted('ROLE_ADMIN')  %}
+            <a href="{{ path('transverse_partenaire_alerteImpaye_administration') }}" class="btn btn-danger btn-lg">Administrations des alertes sur les OI25</a>
+        {% endif %}
+        {% if  is_granted('ROLE_BACKOFFICE')  %}
+            <a href="{{ path('transverse_partenaire_alerteImpaye_consultation') }}" class="btn btn-primary btn-lg">Historique des fichiers OI25</a>
+        {% endif %}
+    </p>
+        
+    
+
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+ 
+
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

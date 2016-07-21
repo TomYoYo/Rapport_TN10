@@ -1,0 +1,179 @@
+parameters:
+    
+    router.request_context.host: dev-jc.dev.bfiweb.fiducial.dom/web/app_dev.php
+
+    
+    ######################################################
+    #                   Accès à base ORACLE
+    ######################################################
+    database_driver: oci8
+    database_host: TEST56
+    database_port: '1521'
+    database_service:  true
+    database_bfi_name: SABDEV
+    database_bfi_user: BFI
+    database_bfi_password: uAlW>sJ0W7q356
+
+    ######################################################
+    #                   Param EMAIL
+    # Le jour ou le flux email sera mis en place,
+    # il sera parametré ici pour symfony
+    ######################################################
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+
+    ######################################################
+    #                   Accès à sabCore
+    ######################################################
+    sabCore.user: trfbfisab01
+    sabCore.server: lxlyosab32
+    sabCore.viaKey: true
+    sabCore.clePrivee: /home/bfi/.ssh/id_dsa.bfi_sabcore
+    sabCore.clePublic: /home/bfi/.ssh/id_dsa.bfi_sabcore.pub
+    sabCore.dirPathPrint: /sab/sab139u/prints/PRT01/
+    sabCore.dirPathPrintTop: /sab/sab139u/prints/
+    sabCore.dirSortie: /app/sabfid/editique/
+    sabCore.dirSortie2: /sab/sab139u/SAB139/fichiers_externes/
+    sabCore.dirPathXML: /sab/sab139u/SAB139/fichiers_externes/XML_Reports/
+    sabCore.subDirXML: /XTR/
+    sabCore.exempleFichier: EICED063P1_11402211430194326965.txt
+    # Dossier A Nettoyer
+    sabCore.DAN.fichiers_externes: /sab/sab139u/SAB139/fichiers_externes
+    sabCore.DAN.PRT01: /sab/sab139u/prints/PRT01
+    sabCore.DAN.f_interface: /sab/sab139u/SAB139/f_interface
+    # Dossier pour report unijob
+    sabCore.unijob : /var/opt/ORSYP/unijob/LXLYOSAB32/
+    # Accès au info de unijob
+    unijob.nomProcessJour : BQE_JOUR
+    unijob.nomProcessJourBD : BQE_JOURBD_DWH
+    # Ajout 27/01/2016 jc forest - module Transverse
+    sabCore.dirPathPrintTop: /sab/sab139u/prints/
+    sabCore.clePriveeApache: /var/www/.ssh/id_dsa.apache_sabcore
+    sabCore.clePublicApache: /var/www/.ssh/id_dsa.apache_sabcore.pub
+    # Ajout 24/05/2016 jc forest - module Transverse - FluxCB
+    sabCore.PainFiles: /sab/sab139u/SAB139/fichiers_externes/SEPA/PAIN/
+
+
+    ######################################################
+    #                   Accès serveur windows
+    ######################################################
+    svWin.user: bfiftpdev
+    svWin.pass: sab1Bfi12FTP
+    svWin.server: svlyobfi21
+    svWin.dirBanqueClient : 01-Banque/011-Dossiers clients/
+    svWin.maskNonClasse : '00-'
+    svWin.dirDepotPDF : 03-Editions client/
+    svWin.dirDepotPDFPerdu : 01-Editions Client sans affectation/
+    svWin.dirDepotReleve : 08-DSI/03-Angers/01-Releve/
+    svWin.dirDepotEsab : 08-DSI/03-Angers/02-Esab/
+    svWin.dirDepotImpaye : 08-DSI/03-Angers/03-Impayes/
+    svWin.dirDepotCaution : 08-DSI/03-Angers/04-Cautions/
+    # Dossier d'Archive sab
+    svWin.DA.fichiers_externes: 06-Etats de gestion SAB/06-Archives SAB/02-Fichiers externes
+    svWin.DA.PRT01: 06-Etats de gestion SAB/06-Archives SAB/01-PRT01
+    svWin.DA.f_interface: 06-Etats de gestion SAB/06-Archives SAB/03-F interfaces
+    # Ajout 31/05/2016 jc forest - module Transverse - AlerteImpaye
+    svWin.dirBanqueFluxCB : 01-Banque/017-Flux CB/
+
+    ######################################################
+    #                   Accès serveur Angers
+    ######################################################
+    svAng.user: fiducial\ftp_banqueEDT
+    svAng.pass: mU9NwE6c
+    svAng.server: SVANGFIC10
+    svAng.port: 2121
+    svAng.dirToPrint: A Imprimer
+    svAng.dirGeneratedFiles: Fichiers generes
+    svAng.dirRawFiles: Fichiers bruts
+    
+    ######################################################
+    #                   Accès serveur MR
+    ######################################################
+    dwm.user: trfbfi01
+    dwm.server: lxlyodwm30
+    dwm.viaKey: true
+    dwm.clePrivee: /home/bfi/.ssh/id_dsa.bfi_dwm
+    dwm.clePublic: /home/bfi/.ssh/id_dsa.bfi_dwm.pub
+    dwm.dirDepot: /home/ctl/data/
+    
+    dwm.nameRea: ctl_bdg_rea_BNQ.txt
+    dwm.nameRef: ctl_bdg_ref_an2_BNQ.txt
+
+    ######################################################
+    #    Heure de génération des CRE (Module Operation Diverse)
+    ######################################################
+    cre_generation_hour: '17'
+    cre_generation_minute: '30'
+
+    ######################################################
+    #        Déclaration des repertoires d'echange
+    ######################################################
+    dirExchange : /app/exchange/
+
+    dirSortieEditique : /app/exchange/editique/out/
+    dirEntreeEditique : /app/exchange/editique/in/
+    dirErrorEditique : /app/exchange/editique/error/
+    dirTreatedEditique : /app/exchange/editique/treated/
+
+    dirSortieSIRH : /app/exchange/SIRH_compta/out/
+    dirEntreeSIRH : /app/exchange/SIRH_compta/in/
+    dirErrorSIRH : /app/exchange/SIRH_compta/error/
+    dirTreatedSIRH : /app/exchange/SIRH_compta/treated/
+
+    dirEntreeFIDINF : /app/exchange/SI_FIDINFO/in/
+    dirSortieFIDINF : /app/exchange/SI_FIDINFO/out/
+    dirTreatedFIDINF : /app/exchange/SI_FIDINFO/treated/
+
+    dirSortieModuleODAudit : /app/exchange/moduleOD/Audit/out/
+    dirSortieModuleODCRE : /app/exchange/moduleOD/CRE/out/
+
+    dirSortieModuleOD : /app/exchange/moduleOD/Audit/out/
+    dirSortieDivers : /app/exchange/divers/out/
+    dirSortieCRC : /app/exchange/etats-reglementaires/crc/
+    dirSortieCrosseling: /app/exchange/Crosseling_Expertise/
+
+    dirCASA : /app/exchange/CASA/out/
+    
+    # Ajout 28/01/2016 jc forest - module Transverse
+    dirSpools : /app/exchange/spool/
+    # Ajout 26/05/2016 jc forest - module Transverse fluxCB
+    dirPains : /app/exchange/fluxcb/
+    # Ajout 31/05/2016 jc forest - module Transverse alerteImpaye
+    dirOI25 : /app/exchange/OI25/
+
+    ######################################################
+    #        Autres parametres du framework
+    ######################################################
+    locale: en
+    secret: f09d16bac03a30059391dc4effc9f091897815ae
+    environment: 'développement'
+
+    ######################################################
+    #        Accès aux infos de versions
+    ######################################################
+    pathGit: ../.git/logs/HEAD
+    pathVersion: ../version.txt
+
+    ######################################################
+    #   Parametrage du systeme de log interne a l'appli
+    ######################################################
+    logBFI.enabled : true
+    logBFI.mail.enabled: true
+    logBFI.mail.intertime: 15 #minutes
+    logBFI.purgeNbJour : 90
+
+    ######################################################
+    #         Parametrage du script de synchro
+    ######################################################
+    scriptSyncLogSAB : /app/bfi/syncSab2Bfi_3.sh
+    scriptSyncArboSAB : /app/bfi/syncArboSab2Bfi.sh
+    scriptSyncEtatsSAB : /app/bfi/syncEtatsSab2Bfi.sh
+
+    ######################################################
+    #   Accès serveur windows CHEQUIER (données PREPROD)
+    ######################################################
+    svChq.user: bfiftpbfi21
+    svChq.pass: FTP2sab248
+    svChq.server: SVLYOBFI21

@@ -1,0 +1,39 @@
+<tr background.color="{{colorLineOpe}}">
+    {% if ope is defined %}
+    <td padding-left="4" border-type="none" width="77">{{ope.dateOperation}}</td>
+    <td border-type="none" width="68">{{ope.dateValeur}}</td>
+    <td border-type="none" width="213" padding-bottom="">{{ope.libelleInArray.0}}</td>
+    <td border-type="none" width="85" text-align="right">{{ ope.debit != 0 ? ope.debit|number_format(2, ',', ' ') : '' }}</td>
+    <td border-type="none" text-align="right" padding-right="6">{{ ope.credit != 0 ? ope.credit|number_format(2, ',', ' ') : '' }}</td>
+    {% else %}
+    <td border-type="none">&#160;</td>
+    {% endif %}
+</tr>
+{% if ope is defined and ope.libelleInArray.1 is defined and ope.libelleInArray.1 %}
+    {% if colorLineOpe == '#F8E9EB' %}
+        {% set colorLineOpe = 'white'%}
+    {% else %}
+        {% set colorLineOpe = '#F8E9EB'%}
+    {% endif %}
+    <tr background.color="{{colorLineOpe}}">
+        <td padding-left="4" border-type="none" width="77">&#160;</td>
+        <td border-type="none" width="68">&#160;</td>
+        <td border-type="none" width="213" padding-bottom="">{{ope.libelleInArray.1}}</td>
+        <td border-type="none" width="85" text-align="right">&#160;</td>
+        <td border-type="none" text-align="right">&#160;</td>
+    </tr>
+{% endif %}
+{% if ope is defined and ope.libelleInArray.2 is defined and ope.libelleInArray.2 %}
+    {% if colorLineOpe == '#F8E9EB' %}
+        {% set colorLineOpe = 'white'%}
+    {% else %}
+        {% set colorLineOpe = '#F8E9EB'%}
+    {% endif %}
+    <tr background.color="{{colorLineOpe}}">
+        <td padding-left="4" border-type="none" width="77">&#160;</td>
+        <td border-type="none" width="68">&#160;</td>
+        <td border-type="none" width="213" padding-bottom="">{{ope.libelleInArray.2}}</td>
+        <td border-type="none" width="85" text-align="right">&#160;</td>
+        <td border-type="none" text-align="right">&#160;</td>
+    </tr>
+{% endif %}

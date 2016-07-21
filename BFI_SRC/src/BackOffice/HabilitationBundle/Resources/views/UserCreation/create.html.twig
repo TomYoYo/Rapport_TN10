@@ -1,0 +1,394 @@
+{% extends 'BackOfficeHabilitationBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} - Creation {% endblock %}
+
+{% block content %}
+                <h2 style="text-align: center">
+               {% if loginmodif == '' %} Création d'un utilisateur {% if login != '' %}( Duplication de l'utilisateur : {{ login }} ){% endif %}{% else %}Modification de l'utilisateur : {{ loginmodif }}{% endif %}
+                </h2>
+        <a href="{{ path('back_office_habilitation') }}">Retour à la liste des utilisateurs</a>
+<form id="saisieHabilitation" {% if loginmodif == '' %}action="{{ path('back_office_habilitation_new_user') }}"{% else %}action="{{ path('back_office_habilitation_new_user',{'login_modif':loginmodif}) }}"{% endif %} method="POST" class="form-horizontal" role="form">
+<h1>Informations générales</h1>
+        <div class="well">
+
+                <table class="bandeauSaisie">
+                        <tbody id="us">
+
+                        <tr>{% if error != '' %}
+                                <div class="alert alert-danger">{{ error }}</div>{% endif  %}
+                                {{ form_errors(form) }}
+                                <td>
+                                <div class="form-group" >
+                                                {{ form_label(form.name,"Nom",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                        {{ form_errors(form.name) }}
+                                        <div class="col-sm-6">
+                                                {{ form_widget(form.name,{'attr':{'class':'form-control'}}) }}
+                                        </div>
+                                </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.firstName,"Prenom",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.firstName) }}
+                                                <div class="col-sm-6">
+                                                        {{ form_widget(form.firstName,{'attr':{'class':'form-control'}}) }}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.agences,"Agence",{'label_attr':{'class':'col-sm-4 control-label required','id':'agences'}}) }}
+                                                {{ form_errors(form.agences) }}
+                                                <div class="col-sm-6">
+                                                        {% if rcci %}
+                                                                {{ form_widget(form.agences,{'attr':{'class':'form-control', 'data-path' : "{{ path('back_office_habilitation_services') }}",'disabled':'true'}}) }}
+                                                        {% else %}
+                                                                {{ form_widget(form.agences,{'attr':{'class':'form-control', 'data-path' : "{{ path('back_office_habilitation_services') }}"}}) }}
+                                                        {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_errors(form.servicess.services) }}
+                                                {{ form_label(form.servicess.services,"Service",{'label_attr':{'class':'col-sm-4 control-label','id':'services'}}) }}
+                                                <div class="col-sm-6">
+                                                        {% if rcci %}
+                                                                {{ form_widget(form.servicess.services,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                        {% else %}
+                                                                {{ form_widget(form.servicess.services,{'attr':{'class':'form-control'}}) }}
+                                                        {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_errors(form.servicess.sous_services) }}
+                                                {{ form_label(form.servicess.sous_services,"Sous-Service",{'label_attr':{'class':'col-sm-4 control-label','id':'sous-services'}}) }}
+                                                <div class="col-sm-6">
+                                                        {% if rcci %}
+                                                                {{ form_widget(form.servicess.sous_services,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                        {% else %}
+                                                                {{ form_widget(form.servicess.sous_services,{'attr':{'class':'form-control'}}) }}
+                                                        {% endif %}
+                                                </div>
+                                        </div>
+
+                                </td>
+                                <td>
+                                        <div class="form-group">
+                                                {{ form_label(form.metiers,"Habilitation métier",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.metiers) }}
+                                                <div class="col-sm-6">
+                                                        {% if rcci %}
+                                                                {{ form_widget(form.metiers,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                        {% else %}
+                                                                {{ form_widget(form.metiers,{'attr':{'class':'form-control'}}) }}
+                                                        {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.menu,"Habilitation Menu",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.menu) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.menu,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.menu,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.donnees,"Habilitation données",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.donnees) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.donnees,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.donnees,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.file,"File d'attente",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.file) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.file,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.file,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}
+                                                </div>
+                                        </div>
+                                        <div class="form-group" style="display: none;">
+                                                {{ form_label(form.isCode,"",{'label_attr':{'class':'col-sm-4 control-label'}}) }}
+                                                {{ form_errors(form.isCode) }}
+                                                <div class="col-sm-1">
+                                                        {{ form_widget(form.isCode,{'attr':{'class':'form-control'}}) }}
+                                                </div>
+                                        </div>
+                                        <div class="form-group" style="display: none">
+                                                {{ form_label(form.collateraux) }}
+                                                {{ form_errors(form.collateraux) }}
+
+                                                <ul id="collateraux-fields-list" data-prototype="{{ form_widget(form.collateraux.vars.prototype) | e }}" >
+                                                        {% for collateralField in form.collateraux %}
+                                                                <li>
+                                                                        {{ form_errors(collateralField) }}
+                                                                        {{ form_widget(collateralField) }}
+                                                                </li>
+                                                        {% endfor %}
+                                                </ul>
+
+
+                                        </div>
+                                        <div class="form-group" style="display: none">
+                                                {{ form_label(form.collaterauxother) }}
+                                                {{ form_errors(form.collaterauxother) }}
+
+                                                <ul id="collaterauxother-fields-list" data-prototype="{{ form_widget(form.collaterauxother.vars.prototype) | e }}" >
+                                                        {% for collateralField in form.collaterauxother %}
+                                                                <li>
+                                                                        {{ form_errors(collateralField) }}
+                                                                        {{ form_widget(collateralField) }}
+                                                                </li>
+                                                        {% endfor %}
+                                                </ul>
+
+
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_errors(form.service) }}
+                                                <div class="col-sm-6">
+                                                        {{ form_widget(form.service,{'attr':{'class':'form-control'}}) }}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_errors(form.sservice) }}
+                                                <div class="col-sm-6">
+                                                        {{ form_widget(form.sservice,{'attr':{'class':'form-control'}}) }}
+                                                </div>
+                                        </div>
+                                        <div class="form-group" style="padding-left: 15px">
+                                                {{ form_errors(form.correspondant) }}
+                                                {{ form_label(form.correspondant,"Gestion des données libres") }}
+                                                {% for crc in form.correspondant %}
+                                                        <div class="checkbox">
+                                                                {{ form_widget(crc) }}
+                                                                {{ form_label(crc) }}
+                                                        </div>
+                                                {% endfor %}
+                                        </div>
+                                </td>
+                        </tr>
+                        </tbody>
+
+
+                </table>
+        </div>{% if button %}
+        <a class="btn btn-success" id="codeResponsable">Créer Code responsable</a>
+        <a style="display: none;" class="btn btn-danger" id="codeResponsableCancel">Annuler création code responsable</a>{% endif %}
+
+        <div id="col" style="display: none">
+        <h1>Code Reponsable</h1>
+        <div class="well">
+
+                <table class="bandeauSaisie">
+                        <tbody><tr>
+                                <td style="width: 50%">
+                                        <div class="form-group">
+                                                {% set label = 'Code Responsable ' %}
+                                                {% if not coderes %}{% set label = label ~ '(Prochain Code : '~code~')' %}{% endif %}
+                                                {{ form_label(form.codeRes,label,{'label_attr':{'class':'col-sm-5 control-label'}}) }}
+                                                {{ form_errors(form.codeRes) }}
+                                                <div class="col-sm-5">
+
+                                                        {{ form_widget(form.codeRes,{'attr':{'class':'form-control'}}) }}
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.abbr,"Abrégé",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.abbr) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.abbr,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.abbr,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}                                                 </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.lib,"libellé",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.lib) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.lib,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.lib,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}                                                  </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.profil,"Profil",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.profil) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.profil,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.profil,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}                                                 </div>
+                                        </div>
+
+                                </td>
+                                <td>
+                                        <div class="form-group" id="contentieux">
+                                                {{ form_label(form.contentieux,"Contentieux",{'label_attr':{'class':'col-sm-4 control-label required'}}) }}
+                                                {{ form_errors(form.contentieux) }}
+                                                <div class="col-sm-6">
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.contentieux,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.contentieux,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}                                                   </div>
+                                        </div>
+                                        <div class="form-group" id="superieur">
+                                                {{ form_label(form.superieur,"Supérieur",{'label_attr':{'class':'col-sm-4 control-label'}}) }}
+                                                {{ form_errors(form.superieur) }}
+                                                <div class="col-sm-6">
+
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.superieur,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.superieur,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}                                                 </div>
+                                        </div>
+                                        <div class="form-group" id="dossier">
+                                                {{ form_label(form.dossier,"Mise à jour dossier",{'label_attr':{'class':'col-sm-4 control-label'}}) }}
+                                                {{ form_errors(form.dossier) }}
+                                                <div class="col-sm-6">
+
+                                                    {% if rcci %}
+                                                        {{ form_widget(form.dossier,{'attr':{'class':'form-control','disabled' : 'true'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(form.dossier,{'attr':{'class':'form-control'}}) }}
+                                                    {% endif %}                                                    </div>
+                                        </div>
+                                        <div class="form-group">
+                                                {{ form_label(form.compteRendu,"Habilité à saisir les comptes rendus",{'label_attr':{'class':'col-sm-4 control-label'}}) }}
+                                                {{ form_errors(form.compteRendu) }}
+                                                <div class="col-sm-1">
+                                                        {{ form_widget(form.compteRendu,{'attr':{'class':'form-control'}}) }}
+                                                </div>
+                                        </div>
+                                </td>
+                        </tr></tbody>
+                </table>
+        </div>
+
+        <h1>Collatéraux</h1>
+<div id="tableauSaisie">
+        <div>
+        <div class="panel panel-danger">
+                <div class="panel-heading">
+                      <h3 class="panel-title">
+                              Utilisateurs étant Collatéraux de l'utilisateur en cours<br /> (Tous ceux que l'utilisateur peut voir)<br />
+                              <a class="btn btn-link" onclick="{% if not rcci %}duplicate(true){% endif %}">Dupliquer à droite</a>
+
+                      </h3>
+                </div>
+                <div class="panel-body">
+                        <div class="tableauScrollable" tabindex="30000000">
+                                <table class="table table-condensed table-striped table-hover">
+                                        <thead>
+                                                <tr>
+                                                        <td>Prenom Nom</td>
+                                                        <td>Date Fin</td>
+                                                        <td>Action</td>
+                                                </tr>
+                                        </thead>
+                                        <tbody id="tableBody">
+
+                                        </tbody>
+                                </table>
+                        </div>
+                </div>
+                <div class="panel-footer">
+                        <div class="form-group">
+                        <label for="recherche">Utilisateur : </label>
+                        <input type="text" id="recherche">   </div>                        <div class="form-group">
+
+                        <label for="recherche">Date Fin (optionnelle) : </label>
+                        <input type="text" id="endDate" class="input-sm datepicker"></div>
+                        <a class="btn btn-primary" {% if rcci %}disabled="true"{% endif %} id="ajout">Ajouter</a>
+
+                </div>
+                </div>
+        </div>
+        <div>
+                <div>
+                        <div class="panel panel-success">
+                                <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                                Utilisateurs ayant pour collatéral l'utilisateur en cours<br /> (Tous ceux qui peuvent voir l'utilisateur)<br />
+                                                <a class="btn btn-link" onclick="{% if not rcci %}duplicate(false){% endif %}">Dupliquer à gauche</a>
+
+
+                                        </h3>
+                                </div>
+                                <div class="panel-body">
+                                        <div class="tableauScrollable" tabindex="30000000">
+                                                <table class="table table-condensed table-striped table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                                <td>Prenom Nom</td>
+                                                                <td>Date Fin</td>
+                                                                <td>Action</td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="tableBody2">
+
+                                                        </tbody>
+                                                </table>
+                                        </div>
+                                </div>
+                                <div class="panel-footer">
+                                        <div class="form-group">
+                                                <label for="recherche2">Utilisateur : </label>
+                                                <input type="text" id="recherche2">   </div>                        <div class="form-group">
+
+                                                <label for="endDate2">Date Fin (optionnelle) : </label>
+                                                <input type="text" id="endDate2" class="input-sm datepicker"></div>
+                                        <a  class="btn btn-primary" {% if rcci %}disabled="true"{% endif %} id="ajout2">Ajouter</a>
+
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+        </div>
+        <h1>Workflow</h1>
+        <div class="well">
+                <table class="bandeauSaisie">
+                        <tbody>
+                        <tr>
+                                <td width="65%">
+                                        <div class="col-sm-6">
+                                                {{ form_errors(form.workflow) }}
+                                                {{ form_label(form.workflow,"Choisissez les groupes de travail de l'utilisateur") }}
+                                                {% for work in form.workflow %}
+                                                <div class="checkbox">
+                                                {{ form_widget(work) }}
+                                                        {{ form_label(work) }}
+                                                </div>
+                                                {% endfor %}
+                                        </div>
+                                </td>
+                        </tr>
+                        </tbody>
+                </table>
+        </div>
+        {% if not modification %}
+        <div class="form-group">
+                {{ form_label(form.repertoire,"",{'label_attr':{'class':'col-sm-4 control-label'}}) }}
+                {{ form_errors(form.repertoire) }}
+                <div class="col-sm-1">
+                        {{ form_widget(form.repertoire,{'attr':{'class':'form-control'}}) }}
+                </div>
+        </div>
+                {% endif %}
+        <div style="text-align: center">
+        {% if is_granted('ROLE_ASSISTANCE') %}   <input type="submit" class="btn btn-primary" id="submit" value="Envoyer" data-code = "{{ code }}" onclick="return(confirm('Etes vous sur de vouloir envoyer ces informations (cette action est irréversible) ? '))">{% endif %}
+        <a href="{{ path('back_office_habilitation') }}" class="btn btn-danger">Annuler</a>
+        </div>
+        {{ form_row(form._token) }}</form>
+{% endblock %}

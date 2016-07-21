@@ -1,0 +1,58 @@
+{% set codeRupture = 1 %}
+{% set codeAlim = 8 %}
+
+<pdf>
+    {# On parse le tableau pour récupérer, l'id client ainsi que le tableau de ses cautions #}
+    {% for idClient, tabCaution in tab_caution_global %}
+        {% set nbFeuille = tabCaution|length %}
+        {% set numFeuille = 0 %}
+
+        {# On parse le tableau des cautions pour un client donné #}
+        {% for caution in tabCaution %}
+            {% set numFeuille = numFeuille + 1 %}
+
+            {% if caution.type == "CRE_FIX" %}
+                {% set template = templates.0 %}
+                {% set twig = 'EditiqueLettreBundle:Default:lettre_caution_fix.pdf.twig' %}
+            {% elseif caution.type == "CRE_VAR" %}
+                {% set template = templates.1 %}
+                {% set twig = 'EditiqueLettreBundle:Default:lettre_caution_var.pdf.twig' %}
+            {% elseif caution.type == "OUV" %}
+                {% set template = templates.2 %}
+                {% set twig = 'EditiqueLettreBundle:Default:lettre_caution_ouv.pdf.twig' %}
+            {% elseif caution.type == "ENG" %}
+                {% set template = templates.3 %}
+                {% set twig = 'EditiqueLettreBundle:Default:lettre_caution_eng.pdf.twig' %}
+            {% endif %}
+
+            <dynamic-page document-template="{{template}}" font-size="10" margin='0'>
+                {% if numFeuille == nbFeuille %}
+                    {% set numImg = codeRupture %}
+                {% else %}
+                    {% set numImg = codeAlim %}
+                {% endif %}
+
+                {% if codeRupture == 7 %}
+                    {% set codeRupture = 1 %}
+                {% else %}
+                    {% set codeRupture = codeRupture +1 %}
+                {% endif %}
+
+                {% if codeAlim == 14 %}
+                    {% set codeAlim = 8 %}
+                {% else %}
+                    {% set codeAlim = codeAlim +1 %}
+                {% endif %}
+
+                <img src="{{ pdf_image('EditiqueReleveBundle:OMR/Code' ~ numImg ~'.jpg') }}" width="15mm" margin-left="1mm" margin-top="8mm"/>
+
+                <!-- CECI EST UNE VERRUE NECESSAIRE, SINON CE N'EST PAS ALIGNE. D. -->
+                <div height='1'></div>
+
+                <div margin-top="-132px" margin-left="51px">
+                    {% include twig %}
+                </div>
+            </dynamic-page>
+        {% endfor %}
+    {% endfor %}
+</pdf>
